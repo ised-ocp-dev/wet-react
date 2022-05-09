@@ -7,9 +7,15 @@ import { Toggle } from '../../';
 
 export const Template = (args) => (
   <ToggleGroup {...args}>
-    <Toggle name='orientationToggles' id='id-1' value='1'>Toggle 1</Toggle>
-    <Toggle name='orientationToggles' id='id-2' value='2'>Toggle 2</Toggle>
-    <Toggle name='orientationToggles' id='id-3' value='3'>Toggle 3</Toggle>
+    <Toggle name="orientationToggles" id="id-1" value="1">
+      Toggle 1
+    </Toggle>
+    <Toggle name="orientationToggles" id="id-2" value="2">
+      Toggle 2
+    </Toggle>
+    <Toggle name="orientationToggles" id="id-3" value="3">
+      Toggle 3
+    </Toggle>
   </ToggleGroup>
 );
 
@@ -22,13 +28,18 @@ Make a set of toggles appear vertically stacked rather than horizontally, by add
 ### Default orientation
 
 <Canvas>
-  <Story name="Default" args={{ type:'radio', name:'orientationToggles' }}>{Template.bind({})}</Story>
+  <Story name="Default" args={{ type: 'radio', name: 'orientationToggles' }}>
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
 ### Vertical orientation
 
 <Canvas>
-  <Story name="Vertical" args={{ type:'radio', name:'orientationToggles', isVertical: true }}>
+  <Story
+    name="Vertical"
+    args={{ type: 'radio', name: 'orientationToggles', isVertical: true }}
+  >
     {Template.bind({})}
   </Story>
 </Canvas>

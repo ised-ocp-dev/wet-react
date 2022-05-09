@@ -7,9 +7,15 @@ import { Toggle } from '../../';
 
 export const Template = (args) => (
   <ToggleGroup {...args}>
-    <Toggle name='sizeToggles' id='id-1' value='1'>Toggle 1</Toggle>
-    <Toggle name='sizeToggles' id='id-2' value='2'>Toggle 2</Toggle>
-    <Toggle name='sizeToggles' id='id-3' value='3'>Toggle 3</Toggle>
+    <Toggle name="sizeToggles" id="id-1" value="1">
+      Toggle 1
+    </Toggle>
+    <Toggle name="sizeToggles" id="id-2" value="2">
+      Toggle 2
+    </Toggle>
+    <Toggle name="sizeToggles" id="id-3" value="3">
+      Toggle 3
+    </Toggle>
   </ToggleGroup>
 );
 
@@ -20,13 +26,15 @@ export const Template = (args) => (
 ### Default size
 
 <Canvas>
-  <Story name="Default" args={{ type:'radio', name:'sizeToggles' }}>{Template.bind({})}</Story>
+  <Story name="Default" args={{ type: 'radio', name: 'sizeToggles' }}>
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
 ### Large size
 
 <Canvas>
-  <Story name="Large" args={{ type:'radio', name:'sizeToggles', size: 'lg' }}>
+  <Story name="Large" args={{ type: 'radio', name: 'sizeToggles', size: 'lg' }}>
     {Template.bind({})}
   </Story>
 </Canvas>
@@ -34,7 +42,7 @@ export const Template = (args) => (
 ### Small size
 
 <Canvas>
-  <Story name="Small" args={{ type:'radio', name:'sizeToggles', size: 'sm' }}>
+  <Story name="Small" args={{ type: 'radio', name: 'sizeToggles', size: 'sm' }}>
     {Template.bind({})}
   </Story>
 </Canvas>
