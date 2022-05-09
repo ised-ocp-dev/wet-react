@@ -1,0 +1,24 @@
+import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+
+import ToggleGroup from '../ToggleGroup';
+import { Toggle } from '../../';
+
+<Meta title="Components/ToggleGroup/Intro" component={ToggleGroup} />
+
+# ToggleGroup
+
+Use to group a series of toggles together on a single line with the toggle group.
+
+## Example
+
+<Canvas>
+  <ToggleGroup name='toggles'>
+    <Toggle name='toggles' id='id-1' value='1'>Toggle 1</Toggle>
+    <Toggle name='toggles' id='id-2' value='2'>Toggle 2</Toggle>
+    <Toggle name='toggles' id='id-3' value='3'>Toggle 3</Toggle>
+  </ToggleGroup>
+</Canvas>
+
+## Available Props
+
+<ArgsTable />

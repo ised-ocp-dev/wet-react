@@ -1,0 +1,34 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import ToggleGroup from '../ToggleGroup';
+import { Toggle } from '../../';
+
+<Meta title="Components/ToggleGroup/Orientation" component={ToggleGroup} />
+
+export const Template = (args) => (
+  <ToggleGroup {...args}>
+    <Toggle name='orientationToggles' id='id-1' value='1'>Toggle 1</Toggle>
+    <Toggle name='orientationToggles' id='id-2' value='2'>Toggle 2</Toggle>
+    <Toggle name='orientationToggles' id='id-3' value='3'>Toggle 3</Toggle>
+  </ToggleGroup>
+);
+
+# Toggle Group
+
+## Toggle orientation variants
+
+Make a set of toggles appear vertically stacked rather than horizontally, by adding `vertical` to the `<ToggleGroup>`.
+
+### Default orientation
+
+<Canvas>
+  <Story name="Default" args={{ type:'radio', name:'orientationToggles' }}>{Template.bind({})}</Story>
+</Canvas>
+
+### Vertical orientation
+
+<Canvas>
+  <Story name="Vertical" args={{ type:'radio', name:'orientationToggles', isVertical: true }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
