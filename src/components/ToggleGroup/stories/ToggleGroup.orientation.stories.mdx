@@ -23,7 +23,7 @@ export const Template = (args) => (
 
 ## Toggle orientation variants
 
-Make a set of toggles appear vertically stacked rather than horizontally, by adding `vertical` to the `<ToggleGroup>`.
+Make a set of toggles appear vertically stacked rather than horizontally by adding `vertical` to the `<ToggleGroup>`.
 
 ### Default orientation
 
@@ -38,7 +38,7 @@ Make a set of toggles appear vertically stacked rather than horizontally, by add
 <Canvas>
   <Story
     name="Vertical"
-    args={{ type: 'radio', name: 'orientationToggles', isVertical: true }}
+    args={{ type: 'radio', name: 'orientationToggles', vertical: true }}
   >
     {Template.bind({})}
   </Story>

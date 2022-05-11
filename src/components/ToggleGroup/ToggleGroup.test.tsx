@@ -32,7 +32,7 @@ describe('Toggle Group', () => {
 
     test('Horizontal ToggleGroup orientation', () => {
       render(
-        <ToggleGroup name="toggles" isVertical={false}>
+        <ToggleGroup name="toggles" vertical={false}>
           <Toggle name="toggles" value={1}>
             {toggleText1}
           </Toggle>
@@ -53,7 +53,7 @@ describe('Toggle Group', () => {
 
     test('Vertical ToggleGroup orientation', () => {
       render(
-        <ToggleGroup name="toggles" isVertical>
+        <ToggleGroup name="toggles" vertical>
           <Toggle name="toggles" value={1}>
             {toggleText1}
           </Toggle>
