@@ -1,0 +1,26 @@
+import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+
+import { Heading } from '../..';
+
+<Meta title="Components/Heading/Intro" component={Heading} />
+
+# Heading
+
+Use a heading to title content that is immediately below it. Headings are large, bold, concise text that are hierarchical in nature
+
+## Example
+
+<Canvas>
+  <span>
+    <Heading size="h1" text="h1 heading" />
+    <Heading size="h2" text="h2 heading" />
+    <Heading size="h3" text="h3 heading" />
+    <Heading size="h4" text="h4 heading" />
+    <Heading size="h5" text="h5 heading" />
+    <Heading size="h6" text="h6 heading" />
+  </span>
+</Canvas>
+
+## Available Props
+
+<ArgsTable />
