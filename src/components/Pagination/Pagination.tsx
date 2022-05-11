@@ -12,7 +12,7 @@ export interface PaginationProps {
   size?: sizingType;
 }
 
-const Pagination = ({ children, size }: PaginationProps) => {
+const Pagination = ({ children, size = undefined }: PaginationProps) => {
   const sizeName =
     size === 'lg' ? 'pagination-lg' : size === 'sm' ? 'pagination-sm' : '';
   return (
