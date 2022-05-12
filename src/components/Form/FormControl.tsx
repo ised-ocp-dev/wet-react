@@ -74,7 +74,7 @@ const FormControl = React.forwardRef(
   (
     {
       placeholder,
-      value = '',
+      value,
       defaultValue,
       as,
       type = 'text',
