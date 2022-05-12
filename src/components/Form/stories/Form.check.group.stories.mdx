@@ -32,8 +32,8 @@ For the non-textual checkbox and radio controls, FormCheck provides a single com
     <Form>
       <Form.Group>
         <Form.CheckGroup label="Sample question">
-          <Form.Check type="radio" label={`checkbox 1`} />
-          <Form.Check type="radio" label={`checkbox 2`} />
+          <Form.Check type="radio" label={`checkbox 1`} name="sameName" />
+          <Form.Check type="radio" label={`checkbox 2`} name="sameName" />
         </Form.CheckGroup>
       </Form.Group>
     </Form>
@@ -65,8 +65,8 @@ You can set a checkbox or radio as required using the `isRequired` prop.
     <Form>
       <Form.Group isRequired>
         <Form.CheckGroup label="Sample question">
-          <Form.Check type="radio" label={`checkbox 1`} />
-          <Form.Check type="radio" label={`checkbox 2`} />
+          <Form.Check type="radio" label={`checkbox 1`} name="sameName" />
+          <Form.Check type="radio" label={`checkbox 2`} name="sameName" />
         </Form.CheckGroup>
       </Form.Group>
     </Form>
@@ -82,8 +82,8 @@ You can set a custom "required" text
     <Form>
       <Form.Group isRequired>
         <Form.CheckGroup label="Sample question" requiredText="custom">
-          <Form.Check type="radio" label={`checkbox 1`} />
-          <Form.Check type="radio" label={`checkbox 2`} />
+          <Form.Check type="radio" label={`checkbox 1`} name="sameName" />
+          <Form.Check type="radio" label={`checkbox 2`} name="sameName" />
         </Form.CheckGroup>
       </Form.Group>
     </Form>
@@ -115,8 +115,8 @@ You can set a custom "required" text
     <Form>
       <Form.Group isRequired isInvalid>
         <Form.CheckGroup label="Sample question" requiredText="custom">
-          <Form.Check type="radio" label={`checkbox 1`} />
-          <Form.Check type="radio" label={`checkbox 2`} />
+          <Form.Check type="radio" label={`checkbox 1`} name="sameName" />
+          <Form.Check type="radio" label={`checkbox 2`} name="sameName" />
         </Form.CheckGroup>
       </Form.Group>
     </Form>

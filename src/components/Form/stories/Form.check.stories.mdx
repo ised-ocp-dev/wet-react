@@ -19,16 +19,77 @@ For the non-textual checkbox and radio controls, FormCheck provides a single com
         type="checkbox"
         label={`default checkbox 1`}
         value="checkbox-1"
+        name="group0"
       />
       <Form.Check
         type="checkbox"
         label={`default checkbox 2`}
         value="checkbox-1"
+        name="group0"
       />
     </Form>
     <Form>
-      <Form.Check type="radio" label={`default radio 1`} value="radio-1" />
-      <Form.Check type="radio" label={`default radio 2`} value="radio-1" />
+      <Form.Check
+        type="radio"
+        label={`default radio 1`}
+        value="radio-1"
+        name="group1"
+      />
+      <Form.Check
+        type="radio"
+        label={`default radio 2`}
+        value="radio-1"
+        name="group1"
+      />
+    </Form>
+  </Story>
+</Canvas>
+
+### Name
+
+You can give checkboxes a `name` attribute to group them by name. Use one name for every group of buttons
+
+**IMPORTANT:** You **MUST** give a `name` attribute to radio buttons, otherwise checking one won't uncheck the others
+
+Note: radio buttons only group by name with other radio buttons in the same `<form>` block
+
+<Canvas>
+  <Story name="Name">
+    <p>
+      These radio buttons share the same name, so you can only select one at a
+      time. This is the correct method.
+    </p>
+    <Form>
+      <Form.Check type="radio" label={`this is correct`} name="group2" />
+      <Form.Check type="radio" label={`this is correct`} name="group2" />
+    </Form>
+    <p>
+      <br />
+      These radio buttons have no name (or have different names), so you can select
+      them all simultaneously and can't deselect any of them.
+    </p>
+    <Form>
+      <Form.Check type="radio" label={`this is bad`} value="this is bad" />
+      <Form.Check type="radio" label={`this is bad`} value="this is bad" />
+      <Form.Check
+        type="radio"
+        label={`this is bad`}
+        value="this is bad"
+        name="uniqueName"
+      />
+    </Form>
+    <p>
+      <br />
+      This is multiple radio buttons with two different names, creating two groups
+      within the same form block
+    </p>
+    <Form>
+      <Form.Check type="radio" label={`red`} name="red" />
+      <Form.Check type="radio" label={`red`} name="red" />
+      <Form.Check type="radio" label={`red`} name="red" />
+      <Form.Check type="radio" label={`blue`} name="blue" />
+      <Form.Check type="radio" label={`blue`} name="blue" />
+      <Form.Check type="radio" label={`blue`} name="blue" />
     </Form>
   </Story>
 </Canvas>
@@ -40,12 +101,22 @@ You can choose to disable a checkbox or a radio controls
 <Canvas>
   <Story name="Disabled">
     <Form>
-      <Form.Check type="checkbox" label={`default checkbox 1`} />
-      <Form.Check isDisabled type="checkbox" label={`disabled checkbox 2`} />
+      <Form.Check type="checkbox" label={`default checkbox 1`} name="group3" />
+      <Form.Check
+        isDisabled
+        type="checkbox"
+        label={`disabled checkbox 2`}
+        name="group3"
+      />
     </Form>
     <Form>
-      <Form.Check type="radio" label={`default radio 1`} />
-      <Form.Check isDisabled type="radio" label={`disabled default radio 2`} />
+      <Form.Check type="radio" label={`default radio 1`} name="group3" />
+      <Form.Check
+        isDisabled
+        type="radio"
+        label={`disabled default radio 2`}
+        name="group3"
+      />
     </Form>
   </Story>
 </Canvas>
@@ -64,6 +135,7 @@ You can also customize the required message using the `requiredText` prop
       <Form.Check
         type="checkbox"
         label="required field with visible styling"
+        name="group4"
         isRequired
       />
       <Form.Check
@@ -71,6 +143,7 @@ You can also customize the required message using the `requiredText` prop
         isRequired
         type="checkbox"
         label="required field with visible styling"
+        name="group4"
         requiredText="custom message"
       />
       <Form.Check
@@ -78,11 +151,13 @@ You can also customize the required message using the `requiredText` prop
         isRequired
         type="checkbox"
         label="required field with hidden styling"
+        name="group4"
       />
       <Form.Check
         isRequired
         type="radio"
         label={`radios do not show styling`}
+        name="group4"
       />
     </Form>
   </Story>
@@ -96,13 +171,18 @@ You can set a checkbox or radio as "invalid" using the `isInvalid` prop.
   <Story name="Invalid">
     <Form>
       <Form.Group isInvalid>
-        <Form.Check type="checkbox" label="invalid checkbox" />
-        <Form.Check type="radio" label="invalid radio" />
+        <Form.Check type="checkbox" label="invalid checkbox" name="group5" />
+        <Form.Check type="radio" label="invalid radio" name="group5" />
       </Form.Group>
     </Form>
     <Form>
-      <Form.Check type="checkbox" label="invalid checkbox" isInvalid />
-      <Form.Check type="radio" label="invalid radio" isInvalid />
+      <Form.Check
+        type="checkbox"
+        label="invalid checkbox"
+        isInvalid
+        name="group7"
+      />
+      <Form.Check type="radio" label="invalid radio" isInvalid name="group7" />
     </Form>
   </Story>
 </Canvas>
@@ -124,12 +204,18 @@ Group checkboxes or radios on the same horizontal row by adding the `isInline` p
       />
     </Form>
     <Form>
-      <Form.Check isInline type="radio" label={`default radio 1`} />
+      <Form.Check
+        isInline
+        type="radio"
+        label={`default radio 1`}
+        name="group6"
+      />
       <Form.Check
         isInline
         isDisabled
         type="radio"
         label={`disabled default radio 3`}
+        name="group6"
       />
     </Form>
   </Story>
