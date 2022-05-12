@@ -1,6 +1,6 @@
 import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
 
-import { Pagination, PaginationButton } from '../..';
+import { Pagination } from '../..';
 
 <Meta
   title="Components/Pagination/Intro"
@@ -17,36 +17,12 @@ A user can select a specific page within a document through either the "Next", "
 
 <Canvas>
   <Pagination>
-    <li>
-      <a href="#" rel="prev">
-        Previous
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        1 <span class="wb-inv">Go to Page 1</span>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        2 <span class="wb-inv">Go to Page 2</span>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        ... <span class="wb-inv">Go to Page ...</span>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        7 <span class="wb-inv">Go to Page 7</span>
-      </a>
-    </li>
-    <li>
-      <a href="#" rel="next">
-        Next
-      </a>
-    </li>
+    <Pagination.Button value="prev" />
+    <Pagination.Button value="1" />
+    <Pagination.Button value="2" />
+    <Pagination.Button value="..." />
+    <Pagination.Button value="7" />
+    <Pagination.Button value="next" />
   </Pagination>
 </Canvas>
 

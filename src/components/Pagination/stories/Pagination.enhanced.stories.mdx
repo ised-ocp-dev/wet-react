@@ -11,47 +11,23 @@ import { PaginationButton } from '../..';
 
 export const PaginationActiveTemplate = (args) => {
   return (
-    <ul class="pagination">
-      <li>
-        <a href="#" rel="prev">
-          Previous
-        </a>
-      </li>
-      <Pagination.Button {...args}></Pagination.Button>
-      <li>
-        <a href="#">
-          2 <span class="wb-inv">Go to Page 2</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" rel="next">
-          Next
-        </a>
-      </li>
-    </ul>
+    <Pagination>
+      <Pagination.Button value="prev" />
+      <Pagination.Button {...args} />
+      <Pagination.Button value="2" />
+      <Pagination.Button value="next" />
+    </Pagination>
   );
 };
 
 export const PaginationDisabledTemplate = (args) => {
   return (
-    <ul class="pagination">
-      <Pagination.Button {...args}></Pagination.Button>
-      <li>
-        <a href="#">
-          1 <span class="wb-inv">Go to Page 1</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          2 <span class="wb-inv">Go to Page 2</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" rel="next">
-          Next
-        </a>
-      </li>
-    </ul>
+    <Pagination>
+      <Pagination.Button {...args} />
+      <Pagination.Button value="1" />
+      <Pagination.Button value="2" />
+      <Pagination.Button value="next" />
+    </Pagination>
   );
 };
 
