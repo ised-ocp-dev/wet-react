@@ -1,0 +1,47 @@
+import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+
+import { FootnoteLink } from '../..';
+import { FootnoteSection, Footnote } from '../..';
+
+<Meta
+  title="Components/Footnote/Intro"
+  component={FootnoteSection}
+  subcomponents={{ FootnoteLink, Footnote }}
+/>
+
+# Footnote
+
+This plugin allows developers to easily embed footnotes into their Web pages, and helps to achieve WCAG 2.0 compliance when providing such footnotes
+
+Use when the end of a page's content contains a footnotes section
+
+## Example
+
+<Canvas>
+  <span>
+    <sup id="fn1-rf">
+      <a class="fn-lnk" href="#fn1">
+        <span class="wb-inv">Footnote </span>1
+      </a>
+    </sup>
+    <aside class="wb-fnote" role="note">
+      <h2 id="fn">Footnotes</h2>
+      <dl>
+        <dt>Footnote 1</dt>
+        <dd id="fn1">
+          <p>Example of a standard footnote.</p>
+          <p class="fn-rtn">
+            <a href="#fn1-rf">
+              <span class="wb-inv">Return to footnote </span>1
+              <span class="wb-inv"> referrer</span>
+            </a>
+          </p>
+        </dd>
+      </dl>
+    </aside>
+  </span>
+</Canvas>
+
+## Available Props
+
+<ArgsTable />
