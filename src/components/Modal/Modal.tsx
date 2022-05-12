@@ -33,6 +33,8 @@ export interface ModalProps {
   keyboard?: boolean;
   /** The content of the modal */
   children?: React.ReactNode;
+  /** A callback fired when the header closeButton or non-static backdrop is clicked. Required if either are specified. */
+  onHide?: () => void;
 }
 
 const Modal = ({
@@ -46,18 +48,20 @@ const Modal = ({
   keyboard = true,
   scrollable,
   centered,
+  onHide,
   ...rest
 }: ModalProps) => (
   <ModalRB
     size={size}
-    fullScreen={fullScreen}
+    fullscreen={fullScreen}
     scrollable={scrollable}
     centered={centered}
     keyboard={keyboard}
     autoFocus={autoFocus}
-    restorefocus={restorefocus}
+    restoreFocus={restorefocus}
     animation={animation}
     show={show}
+    onHide={onHide}
     {...rest}
   >
     {React.Children.toArray(children)}
