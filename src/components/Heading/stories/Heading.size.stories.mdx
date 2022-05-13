@@ -9,9 +9,9 @@ export const HeadingTemplate = (args) => <Heading {...args} />;
 
 Use headings so the search engine can properly rank your content. Headings are ranked more important than regular text. Choose headings strategically.
 
-The `<h1>` is the most important; the `<h6>` is the least important.
+The `<h1>` is the most important; the `<h6>` is the least important. 'h1' is the default level
 
-Use the `size` attribute to set it.
+Use the `level` attribute to set it.
 
 ## Example
 
@@ -19,7 +19,7 @@ Use the `size` attribute to set it.
   <Story
     name="h1"
     args={{
-      size: 'h1',
+      level: 'h1',
       text: 'Heading content',
     }}
   >
@@ -28,7 +28,7 @@ Use the `size` attribute to set it.
   <Story
     name="h2"
     args={{
-      size: 'h2',
+      level: 'h2',
       text: 'Heading content',
     }}
   >
@@ -37,7 +37,7 @@ Use the `size` attribute to set it.
   <Story
     name="h3"
     args={{
-      size: 'h3',
+      level: 'h3',
       text: 'Heading content',
     }}
   >
@@ -46,7 +46,7 @@ Use the `size` attribute to set it.
   <Story
     name="h4"
     args={{
-      size: 'h4',
+      level: 'h4',
       text: 'Heading content',
     }}
   >
@@ -55,7 +55,7 @@ Use the `size` attribute to set it.
   <Story
     name="h5"
     args={{
-      size: 'h5',
+      level: 'h5',
       text: 'Heading content',
     }}
   >
@@ -64,7 +64,7 @@ Use the `size` attribute to set it.
   <Story
     name="h6"
     args={{
-      size: 'h6',
+      level: 'h6',
       text: 'Heading content',
     }}
   >
