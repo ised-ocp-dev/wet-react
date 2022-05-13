@@ -43,6 +43,5 @@ const PaginationButton = ({
     </a>
   </li>
 );
-PaginationButton.displayName = 'PaginationButton';
 
 export default PaginationButton;
