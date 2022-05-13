@@ -1,82 +1,60 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-describe('Footnote', () => {
-  const FootnoteContent = 'Quote this';
-  const FootnoteFooter = 'Foot';
-  const FootnoteCite = 'Cit';
+import FootnoteLink from '@components/Footnote/FootnoteLink';
+import FootnoteSection from '@components/Footnote/FootnoteSection';
 
-  describe('Test Footnote with/without sources', () => {
-    test('renders the basic Footnote component', () => {
-      render(<blockquote>{FootnoteContent}</blockquote>);
-      expect(screen.getByText(FootnoteContent)).toBeInTheDocument();
-    });
-    test('renders the Footnote component with footer', () => {
-      render(
-        <blockquote>
-          {FootnoteContent}
-          <footer>{FootnoteFooter}</footer>
-        </blockquote>
-      );
-      expect(screen.getByText(FootnoteContent)).toBeInTheDocument();
-      expect(screen.getByText(FootnoteFooter)).toBeInTheDocument();
-    });
-    test('renders the Footnote component with citation', () => {
-      render(
-        <blockquote>
-          {FootnoteContent}
-          <footer>
-            <cite>{FootnoteCite}</cite>
-          </footer>
-        </blockquote>
-      );
-      expect(screen.getByText(FootnoteContent)).toBeInTheDocument();
-      expect(screen.getByText(FootnoteCite)).toBeInTheDocument();
-    });
-    test('renders the Footnote component with footer and citation', () => {
-      render(
-        <blockquote>
-          {FootnoteContent}
-          <footer>
-            {FootnoteFooter}
-            <br />
-            <cite>{FootnoteCite}</cite>
-          </footer>
-        </blockquote>
-      );
-      expect(screen.getByText(FootnoteContent)).toBeInTheDocument();
-      expect(screen.getByText(FootnoteFooter)).toBeInTheDocument();
-      expect(screen.getByText(FootnoteCite)).toBeInTheDocument();
-    });
+describe('Footnote tests', () => {
+  const val = '5';
+  const subVal = 3;
+  const ind = 'hi';
+  const content = 'this is content';
+
+  test('renders the default FootnoteLink component', () => {
+    render(<FootnoteLink />);
   });
-  describe('Test justification', () => {
-    test('source justified', () => {
-      render(
-        <blockquote>
-          {FootnoteContent}
-          <footer className="text-right">
-            {FootnoteFooter}
-            <br />
-            <cite>{FootnoteCite}</cite>
-          </footer>
-        </blockquote>
-      );
-      expect(screen.getByText(FootnoteFooter)).toHaveClass('text-right');
-    });
-    test('block quote justified', () => {
-      render(
-        <blockquote className="blockquote-reverse">
-          {FootnoteContent}
-          <footer>
-            {FootnoteFooter}
-            <br />
-            <cite>{FootnoteCite}</cite>
-          </footer>
-        </blockquote>
-      );
-      expect(screen.getByText(FootnoteContent)).toHaveClass(
-        'blockquote-reverse'
-      );
-    });
+  test('renders the basic FootnoteLink component', () => {
+    render(<FootnoteLink value={val} />);
+    expect(screen.getByText(val)).toBeInTheDocument();
+  });
+  test('renders the basic FootnoteLink component with subValue', () => {
+    render(<FootnoteLink value={val} subValue={subVal} />);
+    expect(screen.getByText(val)).toBeInTheDocument();
+    // expect(screen.getByText('fn5-3-rf')).toBeInTheDocument();
+  });
+  test('renders the basic FootnoteLink component with indicator', () => {
+    render(<FootnoteLink value={val} indicator={ind} />);
+    expect(screen.getByText(ind)).toBeInTheDocument();
+  });
+
+  test('renders the basic FootnoteSection component', () => {
+    render(<FootnoteSection />);
+  });
+  test('renders the basic FootnoteSection.Footnote component', () => {
+    render(
+      <FootnoteSection>
+        <FootnoteSection.Footnote value={val} />{' '}
+      </FootnoteSection>
+    );
+    expect(screen.getByText(val)).toBeInTheDocument();
+  });
+  test('renders the FootnoteSection.Footnote component with disableDefaultPoint', () => {
+    render(
+      <FootnoteSection>
+        <FootnoteSection.Footnote value={val} disableDefaultPoint />
+      </FootnoteSection>
+    );
+    expect(screen.getByText(val)).toBeInTheDocument();
+  });
+  test('renders the FootnoteSection.Footnote component with children', () => {
+    render(
+      <FootnoteSection>
+        <FootnoteSection.Footnote value={val}>
+          {content}
+        </FootnoteSection.Footnote>
+      </FootnoteSection>
+    );
+    expect(screen.getByText(val)).toBeInTheDocument();
+    expect(screen.getByText(content)).toBeInTheDocument();
   });
 });

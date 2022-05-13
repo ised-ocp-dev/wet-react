@@ -16,9 +16,9 @@ const FootnoteLink = ({
   indicator = '',
 }: FootnoteLinkProps) => {
   const footnoteId =
-    subValue === 0 ? `fn${{ value }}-rf` : `fn${{ value }}-${{ subValue }}-rf`;
-  const footnoteHref = `#fn${{ value }}`;
-  const footnoteName = indicator === '' ? { value } : { indicator };
+    subValue === 0 ? `fn${value}-rf` : `fn${value}-${subValue}-rf`;
+  const footnoteHref = `#fn${value}`;
+  const footnoteName = indicator === '' ? value : indicator;
   return value === '' ? (
     <a href="#fn">Footnotes</a>
   ) : (
@@ -30,6 +30,5 @@ const FootnoteLink = ({
     </sup>
   );
 };
-FootnoteLink.displayName = 'Footnote';
 
 export default FootnoteLink;

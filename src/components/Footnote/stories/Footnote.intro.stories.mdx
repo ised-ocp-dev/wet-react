@@ -1,12 +1,15 @@
 import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
 
 import { FootnoteLink } from '../..';
-import { FootnoteSection, Footnote } from '../..';
+import { FootnoteSection } from '../..';
 
 <Meta
   title="Components/Footnote/Intro"
   component={FootnoteSection}
-  subcomponents={{ FootnoteLink, Footnote }}
+  subcomponents={{
+    FootnoteLink,
+    'FootnoteSection.Footnote': FootnoteSection.Footnote,
+  }}
 />
 
 # Footnote
@@ -19,26 +22,19 @@ Use when the end of a page's content contains a footnotes section
 
 <Canvas>
   <span>
-    <sup id="fn1-rf">
-      <a class="fn-lnk" href="#fn1">
-        <span class="wb-inv">Footnote </span>1
-      </a>
-    </sup>
-    <aside class="wb-fnote" role="note">
-      <h2 id="fn">Footnotes</h2>
-      <dl>
-        <dt>Footnote 1</dt>
-        <dd id="fn1">
-          <p>Example of a standard footnote.</p>
-          <p class="fn-rtn">
-            <a href="#fn1-rf">
-              <span class="wb-inv">Return to footnote </span>1
-              <span class="wb-inv"> referrer</span>
-            </a>
+    <FootnoteLink value="1" />
+    <p>And here, we can see the elusive footnote in its natural habitat</p>
+    <FootnoteSection>
+      <FootnoteSection.Footnote
+        value="1"
+        children={
+          <p>
+            footnote stuff for footnote #1. Note that the `children` argument
+            contains HTML blocks, for modularity and formatting
           </p>
-        </dd>
-      </dl>
-    </aside>
+        }
+      />
+    </FootnoteSection>
   </span>
 </Canvas>
 

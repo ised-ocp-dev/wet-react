@@ -15,7 +15,7 @@ const Footnote = ({
   disableDefaultPoint = false,
   children,
 }: FootnoteProps) => {
-  const footnoteId = `fn${{ value }}-rf`;
+  const footnoteId = `fn${value}-rf`;
   return disableDefaultPoint ? (
     <span>
       <dt>Footnote {value}</dt>
@@ -48,27 +48,5 @@ const Footnote = ({
     </span>
   );
 };
-Footnote.displayName = 'Footnote';
 
 export default Footnote;
-
-/*
-
-<Canvas>
-  <span>
-    <FootnoteLink value="1" subValue="1" />
-    <FootnoteLink value="1" subValue="2" />
-    <aside class="wb-fnote" role="note">
-      <h2 id="fn">Footnotes</h2>
-      <dl>
-        <FootnoteSection.Footnote
-          children="This is a foot"
-          value="1"
-          disableDefaultPoint
-        />
-      </dl>
-    </aside>
-  </span>
-</Canvas>
-
-*/

@@ -13,6 +13,5 @@ const FootnoteSection = ({ children }: FootnoteSectionProps) => (
     <dl>{children}</dl>
   </aside>
 );
-FootnoteSection.displayName = 'FootnoteSection';
 
 export default FootnoteSection;
