@@ -38,14 +38,6 @@ describe('Footnote tests', () => {
     );
     expect(screen.getByText(val)).toBeInTheDocument();
   });
-  test('renders the FootnoteSection.Footnote component with disableDefaultPoint', () => {
-    render(
-      <FootnoteSection>
-        <FootnoteSection.Footnote value={val} disableDefaultPoint />
-      </FootnoteSection>
-    );
-    expect(screen.getByText(val)).toBeInTheDocument();
-  });
   test('renders the FootnoteSection.Footnote component with children', () => {
     render(
       <FootnoteSection>

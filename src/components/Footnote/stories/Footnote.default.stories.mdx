@@ -30,28 +30,3 @@ Make a default FootnoteLink to link to the FootnoteSection itself by leaving val
     </FootnoteSection>
   </span>
 </Canvas>
-
-## Default Point
-
-A workaround was implemented to ensure the footer items always refer to the first instance where the footnote is refered in the content.
-
-It is a best practice that the footers are property coded where their reference is pointing initially to the first instance.
-
-When this is not the case, it will show a warning like: `wb-fnote - Relink first reference of #myfoootnote for #fn4-1-rf`.
-
-This best practice can be disabled by setting the `disableDefaultPoint` attribute of a given `Footnote` to true.
-
-## Example
-
-<Canvas>
-  <FootnoteSection>
-    <FootnoteSection.Footnote
-      children={<p>"This is a foot"</p>}
-      value="1"
-      disableDefaultPoint
-    />
-  </FootnoteSection>
-</Canvas>
-
-note: by including `disableDefaultPoint` in the arguments, the attribute is automatically
-set to true
