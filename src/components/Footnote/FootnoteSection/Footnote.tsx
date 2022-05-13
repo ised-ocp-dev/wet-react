@@ -2,10 +2,10 @@ import React from 'react';
 import '../../../style.css';
 
 export interface FootnoteProps extends React.HTMLAttributes<HTMLElement> {
-  /** The content of the Footer */
-  children?: React.ReactNode;
   /** What footnote it links to */
   value?: string;
+  /** The content of the Footer */
+  children?: React.ReactNode;
 }
 
 const Footnote = ({ value = '', children }: FootnoteProps) => {

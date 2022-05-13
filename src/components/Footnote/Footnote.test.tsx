@@ -33,7 +33,7 @@ describe('Footnote tests', () => {
   test('renders the basic FootnoteSection.Footnote component', () => {
     render(
       <FootnoteSection>
-        <FootnoteSection.Footnote value={val} />{' '}
+        <FootnoteSection.Footnote value={val} />
       </FootnoteSection>
     );
     expect(screen.getByText(val)).toBeInTheDocument();
@@ -44,6 +44,7 @@ describe('Footnote tests', () => {
         <FootnoteSection.Footnote value={val}>
           {content}
         </FootnoteSection.Footnote>
+        <FootnoteSection.Footnote />
       </FootnoteSection>
     );
     expect(screen.getByText(val)).toBeInTheDocument();
