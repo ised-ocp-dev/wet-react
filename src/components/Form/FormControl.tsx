@@ -123,6 +123,4 @@ const FormControl = React.forwardRef(
   }
 );
 
-FormControl.displayName = 'Form.Control';
-
 export default FormControl;

@@ -31,6 +31,4 @@ const TableHeader = ({
   </thead>
 );
 
-TableHeader.displayName = 'Table.Header';
-
 export default TableHeader;

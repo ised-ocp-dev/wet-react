@@ -2,7 +2,19 @@ import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
 
 import { Form, Button } from '../..';
 
-<Meta title="Components/Form/Intro" component={Form} />
+<Meta
+  title="Components/Form/Intro"
+  component={Form}
+  subcomponents={{
+    'Form.Check': Form.Check,
+    'Form.CheckGroup': Form.CheckGroup,
+    'Form.Control': Form.Control,
+    'Form.Group': Form.Group,
+    'Form.Label': Form.Label,
+    'Form.Select': Form.Select,
+    'Form.Text': Form.Text,
+  }}
+/>
 
 # Forms
 
@@ -37,8 +49,6 @@ The `<Form>` component accepts all of the default props for the `form` HTML elem
 More info about the HTML element:<br/>
 https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement
 
-<ArgsTable />
-
 ## Form Props
 
 Form elements can be wrapped with a `<Form.Group>` component. This allows us to group the `label` with the form controls.
@@ -47,17 +57,4 @@ Form elements can be wrapped with a `<Form.Group>` component. This allows us to 
 
 Available props can be seen below.
 
-````
-{
-  /** Content of group */
-  children?: React.ReactNode;
-  /** Unique Id of form group elements */
-  controlId?: string;
-  /** Additional custom classNames */
-  className?: string;
-  /** Applies 'required' styling to form group elements */
-  isRequired?: boolean;
-  /** Sets whether form input is valid */
-  isInvalid?: boolean;
-}```
-````
+<ArgsTable />

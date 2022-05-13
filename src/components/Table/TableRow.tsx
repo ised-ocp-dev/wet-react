@@ -31,6 +31,4 @@ const TableRow = ({
   </tr>
 );
 
-TableRow.displayName = 'Table.Row';
-
 export default TableRow;

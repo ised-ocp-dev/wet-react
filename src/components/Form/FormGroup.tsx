@@ -42,6 +42,4 @@ const FormGroup = ({
   );
 };
 
-FormGroup.displayName = 'Form.Group';
-
 export default FormGroup;

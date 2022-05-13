@@ -13,6 +13,4 @@ const AlertBody = ({ children, className = '', ...rest }: AlertBodyProps) => (
   </div>
 );
 
-AlertBody.displayName = 'Alert.Body';
-
 export default AlertBody;

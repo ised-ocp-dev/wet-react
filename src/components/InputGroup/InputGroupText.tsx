@@ -23,6 +23,4 @@ const InputGroupText = ({
   </span>
 );
 
-InputGroupText.displayName = 'InputGroup.Text';
-
 export default InputGroupText;
