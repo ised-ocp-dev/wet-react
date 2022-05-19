@@ -13,17 +13,10 @@ describe('ShareWidget Tests', () => {
           show
         />
       );
+
       expect(
         result.container.querySelectorAll('.btn-lg .btn .btn-default')
       ).toHaveLength(0);
-
-      // render(
-      //   <ShareWidget
-      //     shareLinkText="Share this page"
-      //     modalTitle="Share this page"
-      //   />
-      // );
-      // fireEvent.click(screen.getByText(/Share this page/i));
     });
     test('Default ShareWidget filter', () => {
       const result = render(

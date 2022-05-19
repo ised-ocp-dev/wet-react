@@ -1,4 +1,6 @@
 import React from 'react';
+import Modal from '@components/Modal';
+import Button from '@components/Button';
 import ContainerRB from 'react-bootstrap/Container';
 import RowRB from 'react-bootstrap/Row';
 import ColRB from 'react-bootstrap/Col';
@@ -19,8 +21,6 @@ import {
   faWhatsappSquare as whatsappIcon,
   faYahoo as yahooIcon,
 } from '@fortawesome/free-brands-svg-icons';
-import Button from '../Button';
-import Modal from '../Modal';
 import '../../style.css';
 
 interface ShareButtonProps {
@@ -168,7 +168,7 @@ const ShareWidget = ({
   const disclaimer = french
     ? 'Aucun appui n’est accordé, soit de façon expresse ou tacite, à aucun produit ou service.'
     : 'No endorsement of any products or services is expressed or implied.';
-  const closeLabel = french ? 'Proche' : 'Close';
+  const closeLabel = french ? 'Fermer' : 'Close';
 
   return (
     <>
