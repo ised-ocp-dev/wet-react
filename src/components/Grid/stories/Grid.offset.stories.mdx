@@ -11,10 +11,12 @@ import { Grid } from '../..';
 export const Template = (args) => (
   <Grid fluid>
     <Grid.Row>
-      <Grid.Cell xsWidth={1} smWidth={1} mdWidth={1} lgWidth={1}>
-        Cell 1
+      <Grid.Cell xsWidth={2} smWidth={2} mdWidth={2} lgWidth={2}>
+        <div class="well well-sm brdr-rds-0">Cell 1</div>
       </Grid.Cell>
-      <Grid.Cell {...args}>Edit my offset!</Grid.Cell>
+      <Grid.Cell {...args}>
+        <div class="well well-sm brdr-rds-0">Edit my offset!</div>
+      </Grid.Cell>
     </Grid.Row>
   </Grid>
 );

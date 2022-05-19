@@ -20,5 +20,21 @@ invisible and visible classes</a>
 ## Example
 
 <Canvas>
-  <p>hi</p>
+  <Grid fluid>
+    <Grid.Row>
+      <Grid.Cell xsWidth={6} smWidth={3}>
+        <div class="well well-sm brdr-rds-0">Cell 1</div>
+      </Grid.Cell>
+      <Grid.Cell xsWidth={6} smWidth={3}>
+        <div class="well well-sm brdr-rds-0">Cell2</div>
+      </Grid.Cell>
+      <Grid.Cell clearfix />
+      <Grid.Cell xsWidth={6} smWidth={3}>
+        <div class="well well-sm brdr-rds-0">Cell 1</div>
+      </Grid.Cell>
+      <Grid.Cell xsWidth={6} smWidth={3}>
+        <div class="well well-sm brdr-rds-0">Cell2</div>
+      </Grid.Cell>
+    </Grid.Row>
+  </Grid>
 </Canvas>

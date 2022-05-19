@@ -12,10 +12,12 @@ export const Template = (args) => (
   <Grid fluid>
     <Grid.Row>
       <Grid.Cell {...args}>
-        Edit my width to see Cell 2 change position!
+        <div class="well well-sm brdr-rds-0">
+          Edit my width and see Cell 2 change position!
+        </div>
       </Grid.Cell>
       <Grid.Cell xsWidth={1} smWidth={1} mdWidth={1} lgWidth={1}>
-        Cell 2
+        <div class="well well-sm brdr-rds-0">Cell 2</div>
       </Grid.Cell>
     </Grid.Row>
   </Grid>
