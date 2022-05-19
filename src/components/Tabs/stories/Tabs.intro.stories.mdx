@@ -1,0 +1,28 @@
+import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+
+import { Tabs } from '../..';
+
+<Meta
+  title="Components/Tabs/Intro"
+  component={Tabs}
+  subcomponents={{ 'Tabs.Item': Tabs.Item }}
+/>
+
+# Tabs
+
+Use a heading to title content that is immediately below it. Headings are large, bold, concise text that are hierarchical in nature
+
+## Example
+
+<Canvas>
+  <div>
+    <Tabs>
+      <Tabs.Item id="hi" summary="tab one" children={<p>hello there</p>} />
+      <Tabs.Item id="higar" summary="tab two" children={<p>obi-wan!</p>} open />
+    </Tabs>
+  </div>
+</Canvas>
+
+## Available Props
+
+<ArgsTable />
