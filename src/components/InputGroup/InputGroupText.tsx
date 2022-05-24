@@ -1,5 +1,4 @@
 import React from 'react';
-// import InputGroupRB from 'react-bootstrap/InputGroup';
 import '../../style.css';
 
 export interface InputGroupTextProps
