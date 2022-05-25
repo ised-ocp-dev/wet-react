@@ -1,86 +1,72 @@
 import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
-import { Lightbox } from '../../';
 
-<Meta title="Components/Lightbox/Source" component={Lightbox} />
+import { Lightbox } from '../..';
 
-export const QuoteTemplate = (args) => <Lightbox {...args} />;
+<Meta
+  title="Components/Lightbox/Attributes"
+  component={Lightbox}
+  subcomponents={{
+    'Lightbox.Gallery': Lightbox.Gallery,
+  }}
+/>
+
+export const Template = (args) => <Lightbox {...args} />;
 
 # Lightbox
 
-Using the `footer` and `cite` props it is possible to add, alter and omit footers (author) and citations
+## Title
 
-## Omitting Both
+Use the `title` attribute to set the text under the lightbox, and the tooltip popup on mouseover
 
-If both the `footer` and `cite` attributes are left empty, they will be omitted
+## Example
 
 <Canvas>
   <Story
-    name="NoSource"
+    name="Title"
     args={{
-      children: 'Yeah, I said it, and you can quote me on that!',
-      reverseQuote: false,
-      reverseSource: false,
-      footer: '',
-      cite: '',
+      title: 'Example lightbox',
+      src: 'https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg',
+      children: <p>Alter my title!</p>,
     }}
   >
-    {QuoteTemplate.bind({})}
+    {Template.bind({})}
   </Story>
 </Canvas>
 
-## Omitting Citation
+## Src
 
-If the `cite` attribute is left empty, it will be omitted
+Use the `src` attribute to set the link to the image you want to display in the lightbox
+
+## Example
 
 <Canvas>
   <Story
-    name="NoCite"
+    name="Src"
     args={{
-      children: 'Yeah, I said it, and you can quote me on that!',
-      reverseQuote: false,
-      reverseSource: false,
-      footer: 'quote from man quoted',
-      cite: '',
+      title: 'Example lightbox',
+      src: 'https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg',
+      children: <p>Alter my src!</p>,
     }}
   >
-    {QuoteTemplate.bind({})}
+    {Template.bind({})}
   </Story>
 </Canvas>
 
-## Omitting Footer
+## Children
 
-If the `footer` attribute is left empty, it will be omitted
+Use the `children` attribute to set the text in the link
 
-<Canvas>
-  <Story
-    name="NoFooter"
-    args={{
-      children: 'Yeah, I said it, and you can quote me on that!',
-      reverseQuote: false,
-      reverseSource: false,
-      footer: '',
-      cite: 'journal',
-    }}
-  >
-    {QuoteTemplate.bind({})}
-  </Story>
-</Canvas>
-
-## Adding both
-
-If both the `footer` and `cite` attributes are provided, they will both be added
+## Example
 
 <Canvas>
   <Story
-    name="Source"
+    name="Children"
     args={{
-      children: 'Yeah, I said it, and you can quote me on that!',
-      reverseQuote: false,
-      reverseSource: false,
-      footer: 'quote from man quoted',
-      cite: 'journal',
+      title: 'Example lightbox',
+      src: 'https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg',
+      children: <p>Alter this element!</p>,
     }}
   >
-    {QuoteTemplate.bind({})}
+    {Template.bind({})}
   </Story>
 </Canvas>

@@ -1,67 +1,68 @@
 import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
-import { Lightbox } from '../../';
 
-<Meta title="Components/Lightbox/Justification" component={Lightbox} />
+import { Lightbox } from '../..';
 
-export const QuoteTemplate = (args) => <Lightbox {...args} />;
+<Meta
+  title="Components/Lightbox/Gallery"
+  component={Lightbox}
+  subcomponents={{
+    'Lightbox.Gallery': Lightbox.Gallery,
+  }}
+/>
+
+export const Template = (args) => (
+  <Lightbox.Gallery {...args}>
+    <Lightbox
+      gallery
+      title="Example lightbox"
+      src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
+      children={<p>First Picture</p>}
+    />
+    <Lightbox
+      gallery
+      title="Example lightbox"
+      src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
+      children={<p>Second Picture</p>}
+    />
+  </Lightbox.Gallery>
+);
 
 # Lightbox
 
-Using the `reverseSource` and `reverseQuote` props it is possible to right-justify the source or the entire block quote, respectively
+## Gallery
 
-## Default
+Use the `Lightbox.Gallery` element to make a gallery for displaying multiple lightboxes
 
-default quote format
+Make sure to set the `gallery` attribute of each lightbox in the gallery to true
+
+## Example
 
 <Canvas>
-  <Story
-    name="Default"
-    args={{
-      children: 'Yeah, I said it, and you can quote me on that!',
-      reverseQuote: false,
-      reverseSource: false,
-      footer: 'quote from man quoted',
-      cite: 'journal',
-    }}
-  >
-    {QuoteTemplate.bind({})}
+  <Story name="Default" args={{}}>
+    {Template.bind({})}
   </Story>
 </Canvas>
 
-## reverseSource
+## Tag
 
-If this boolean is set to true, the footer and citation will be right-justified
+Use the `tag` attribute to set the HTML element that will act as the gallery (default is `'section'`)
+
+## Example
 
 <Canvas>
-  <Story
-    name="reverseQuote"
-    args={{
-      children: 'Yeah, I said it, and you can quote me on that!',
-      reverseQuote: false,
-      reverseSource: true,
-      footer: 'quote from man quoted',
-      cite: 'journal',
-    }}
-  >
-    {QuoteTemplate.bind({})}
+  <Story name="Tag" args={{ tag: 'ul' }}>
+    {Template.bind({})}
   </Story>
 </Canvas>
 
-## reverseQuote
+## Hide
 
-If this boolean is set to true, the entire block quote (quote, footer, citation) will be right-justified
+Use the `hide` attribute to hide all but the first lightbox in the gallery
+
+## Example
 
 <Canvas>
-  <Story
-    name="reverseSource"
-    args={{
-      children: 'Yeah, I said it, and you can quote me on that!',
-      reverseQuote: true,
-      reverseSource: false,
-      footer: 'quote from man quoted',
-      cite: 'journal',
-    }}
-  >
-    {QuoteTemplate.bind({})}
+  <Story name="Hide" args={{ hide }}>
+    {Template.bind({})}
   </Story>
 </Canvas>

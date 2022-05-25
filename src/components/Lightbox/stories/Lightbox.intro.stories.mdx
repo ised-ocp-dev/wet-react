@@ -6,37 +6,24 @@ import { Lightbox } from '../..';
   title="Components/Lightbox/Intro"
   component={Lightbox}
   subcomponents={{
-    'Lightbox.Content': Lightbox.Content,
     'Lightbox.Gallery': Lightbox.Gallery,
   }}
 />
 
 # Lightbox
 
-Display images and other content in a dialog box, either individually or as part of a gallery.
+Display images in a popup box, either individually or as part of a gallery.
 Implements the <a href="https://www.w3.org/TR/wai-aria-practices/#dialog_modal" target="_blank">
 WAI-ARIA Dialog (Modal) design pattern</a>
 
 ## Example Lightbox
 
 <Canvas>
-  <span>
-    <Lightbox
-      title="Example lightbox"
-      link="#link"
-      children={<p>Example Lightbox Link</p>}
-    />
-    <Lightbox.Content id="link" children={<p>display</p>} />
-    <a class="wb-lbx" title="Example of inline content" href="#inline_content">
-      Inline content
-    </a>
-    <section
-      id="inline_content"
-      class="mfp-hide modal-dialog modal-content overlay-def"
-    >
-      <p>hello</p>
-    </section>
-  </span>
+  <Lightbox
+    title="Example lightbox"
+    src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
+    children={<p>Example Lightbox Link</p>}
+  />
 </Canvas>
 
 ## Available Props

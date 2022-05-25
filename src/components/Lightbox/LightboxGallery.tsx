@@ -5,7 +5,7 @@ export interface LightboxGalleryProps
   extends React.HTMLAttributes<HTMLElement> {
   /** contents of LightboxGallery */
   children?: React.ReactNode;
-  /** type of HTML element the gallery will be based on */
+  /** HTML tag the gallery will be based on */
   tag?: string;
   /** hides all but the first item in the gallery */
   hide?: boolean;
@@ -13,10 +13,12 @@ export interface LightboxGalleryProps
 
 const LightboxGallery = ({
   children,
-  tag = '',
+  tag = 'section',
   hide = false,
 }: LightboxGalleryProps) => {
-  const name = hide ? 'lbx-gal' : 'lbx-hide-gal';
+  const name = hide
+    ? 'lbx-hide-gal wb-init wb-lbx-inited'
+    : 'lbx-gal wb-init wb-lbx-inited';
   return React.createElement(tag, { class: name }, children);
 };
 
