@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface TabsItemProps extends React.HTMLAttributes<HTMLElement> {
+export interface TabPanelItemProps extends React.HTMLAttributes<HTMLElement> {
   /** Content of TabsItem body */
   children?: React.ReactNode;
   /** identification value */
@@ -11,16 +11,16 @@ export interface TabsItemProps extends React.HTMLAttributes<HTMLElement> {
   open?: boolean;
 }
 
-const TabsItem = ({
+const TabPanelItem = ({
   children,
   id = '',
   summary = '',
   open = false,
-}: TabsItemProps) => (
+}: TabPanelItemProps) => (
   <details id={id} open={open}>
     <summary>{summary}</summary>
     {children}
   </details>
 );
 
-export default TabsItem;
+export default TabPanelItem;

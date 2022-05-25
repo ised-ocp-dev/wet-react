@@ -1,12 +1,18 @@
 import OriginTabs from './Tabs';
-import TabsItem from './TabsItem';
+import TabListItem from './TabListItem';
+import TabPanelItem from './TabPanelItem';
+import TabList from './TabList';
 
 export type TabsProps = typeof OriginTabs & {
-  Item: typeof TabsItem;
+  ListItem: typeof TabListItem;
+  PanelItem: typeof TabPanelItem;
+  List: typeof TabList;
 };
 
 const Tabs = OriginTabs as TabsProps;
 
-Tabs.Item = TabsItem;
+Tabs.ListItem = TabListItem;
+Tabs.PanelItem = TabPanelItem;
+Tabs.List = TabList;
 
 export default Tabs;

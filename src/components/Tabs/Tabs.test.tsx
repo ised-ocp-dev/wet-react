@@ -1,132 +1,220 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import Alert from '@components/Alert';
+import Tabs from '@components/Tabs';
 
-describe('Alert', () => {
-  const alertBodyContent = 'Body: Hello world!';
-  const alertHeaderContent = 'Header: Hello world!';
-  const alertSecondHeader = 'This is a second header';
-
-  describe('Test Alert Variants', () => {
-    test('Default Panel', () => {
-      const result = render(<Alert>{alertBodyContent}</Alert>);
-      expect(screen.getByText(alertBodyContent)).toBeInTheDocument();
-      expect(result.container.querySelector('.alert')).toHaveClass(
-        'alert-info'
+describe('Tabs', () => {
+  describe('Tabs component tests', () => {
+    test('general tabs', () => {
+      render(
+        <Tabs
+          list={
+            <Tabs.List>
+              <Tabs.ListItem href="hi">panel 1</Tabs.ListItem>
+              <Tabs.ListItem active href="higar">
+                panel 2
+              </Tabs.ListItem>
+            </Tabs.List>
+          }
+        >
+          <Tabs.PanelItem id="hi" summary="tab one">
+            <p>hello there</p>
+          </Tabs.PanelItem>
+          <Tabs.PanelItem id="higar" summary="tab two" open>
+            <p>obi-wan!</p>
+          </Tabs.PanelItem>
+        </Tabs>
+      );
+      expect(screen.getByText('panel 1').closest('div')).toHaveClass('wb-tabs');
+      expect(screen.getByText('panel 1').closest('div')).toHaveClass('wb-init');
+      expect(screen.getByText('panel 1').closest('div')).toHaveClass(
+        'wb-tabs-inited'
+      );
+      expect(screen.getByText('panel 1').closest('div')).toHaveClass(
+        'tabs-acc'
       );
     });
 
-    test('Success Alert', () => {
-      const result = render(
-        <Alert variant="success">{alertBodyContent}</Alert>
+    test('ignoreSession', () => {
+      render(
+        <Tabs
+          ignoreSession
+          list={
+            <Tabs.List>
+              <Tabs.ListItem href="hi">panel 1</Tabs.ListItem>
+            </Tabs.List>
+          }
+        >
+          hello
+        </Tabs>
       );
-      expect(screen.getByText(alertBodyContent)).toBeInTheDocument();
-      expect(result.container.querySelector('.alert')).toHaveClass(
-        'alert-success'
-      );
-    });
-
-    test('Info Alert', () => {
-      const result = render(<Alert variant="info">{alertBodyContent}</Alert>);
-      expect(screen.getByText(alertBodyContent)).toBeInTheDocument();
-      expect(result.container.querySelector('.alert')).toHaveClass(
-        'alert-info'
-      );
-    });
-
-    test('Warning Alert', () => {
-      const result = render(
-        <Alert variant="warning">{alertBodyContent}</Alert>
-      );
-      expect(screen.getByText(alertBodyContent)).toBeInTheDocument();
-      expect(result.container.querySelector('.alert')).toHaveClass(
-        'alert-warning'
-      );
-    });
-
-    test('Danger Alert', () => {
-      const result = render(<Alert variant="danger">{alertBodyContent}</Alert>);
-      expect(screen.getByText(alertBodyContent)).toBeInTheDocument();
-      expect(result.container.querySelector('.alert')).toHaveClass(
-        'alert-danger'
-      );
-    });
-
-    test('Invalid Alert variant', () => {
-      const result = render(<Alert variant="zzzzzz">{alertBodyContent}</Alert>);
-      expect(screen.getByText(alertBodyContent)).toBeInTheDocument();
-      expect(result.container.querySelector('.alert')).toHaveClass(
-        'alert-info'
+      expect(screen.getByText('hello')).toHaveClass('tabpanels');
+      expect(screen.getByText('hello').closest('div')).toHaveClass('tabpanels');
+      expect(screen.getByText('panel 1').closest('div')).toHaveClass(
+        'ignore-session'
       );
     });
   });
-
-  describe('Test Alert components', () => {
-    test('renders the Alert component', () => {
-      render(<Alert>{alertBodyContent}</Alert>);
-      expect(screen.getByText(alertBodyContent)).toBeInTheDocument();
-    });
-
-    test('renders the Alert component - with body', () => {
+  describe('Tabs List components', () => {
+    test('general List components', () => {
       render(
-        <Alert>
-          <Alert.Body className="test">{alertBodyContent}</Alert.Body>
-        </Alert>
+        <Tabs
+          list={
+            <Tabs.List>
+              <Tabs.ListItem href="hi">panel 1</Tabs.ListItem>
+              <Tabs.ListItem active href="higar">
+                panel 2
+              </Tabs.ListItem>
+            </Tabs.List>
+          }
+        />
       );
-      expect(screen.getByText(alertBodyContent)).toBeInTheDocument();
-      expect(screen.getByText(alertBodyContent)).toHaveClass('test');
+      expect(screen.getByText('panel 1')).toBeInTheDocument();
+      expect(screen.getByText('panel 2')).toBeInTheDocument();
+      expect(screen.getByText('panel 1')).toHaveAttribute('href', '#hi');
+      expect(screen.getByText('panel 1').closest('ul')).toHaveAttribute(
+        'role',
+        'tablist'
+      );
+      expect(screen.getByText('panel 1').closest('ul')).toHaveClass(
+        'generated'
+      );
+      expect(screen.getByText('panel 2')).toHaveAttribute('href', '#higar');
+      expect(screen.getByText('panel 2').closest('li')).toHaveClass('active');
     });
-
-    test('renders the Alert component - with default header', () => {
+    test('list exceptions', () => {
       render(
-        <Alert>
-          <Alert.Header>{alertHeaderContent}</Alert.Header>
-          <Alert.Body>{alertBodyContent}</Alert.Body>
-        </Alert>
+        <Tabs
+          list={
+            <Tabs.List>
+              <Tabs.ListItem href="#hi">panel 1</Tabs.ListItem>
+              <Tabs.ListItem active>panel 2</Tabs.ListItem>
+            </Tabs.List>
+          }
+        />
       );
-      expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
-        alertHeaderContent
-      );
-    });
-
-    test('renders the Alert component - with multiple headers', () => {
-      render(
-        <Alert>
-          <Alert.Header level="h1">{alertHeaderContent}</Alert.Header>
-          <Alert.Header level="h3">{alertSecondHeader}</Alert.Header>
-          <Alert.Body>{alertBodyContent}</Alert.Body>
-        </Alert>
-      );
-      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-        alertHeaderContent
-      );
-      expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent(
-        alertSecondHeader
-      );
-    });
-
-    test('renders the Alert component - with link', () => {
-      const alertLinkContent = 'Link: Hello World!';
-      const alertLink = 'Link: Hello World!';
-      render(
-        <Alert>
-          <Alert.Header>{alertHeaderContent}</Alert.Header>
-          <Alert.Link href={alertLink}>{alertLinkContent}</Alert.Link>
-        </Alert>
-      );
-      expect(screen.getByRole('link')).toHaveTextContent(alertLinkContent);
-      expect(screen.getByRole('link')).toHaveAttribute('href', alertLink);
+      expect(screen.getByText('panel 1')).toBeInTheDocument();
+      expect(screen.getByText('panel 2')).toBeInTheDocument();
+      expect(screen.getByText('panel 1')).toHaveAttribute('href', '#hi');
+      expect(screen.getByText('panel 2')).toHaveAttribute('href', '#');
     });
   });
-
-  describe('Alert visibility', () => {
-    test('Hidden Alert', () => {
-      const result = render(
-        <Alert isVisible={false}>{alertBodyContent}</Alert>
+  describe('Tabs Panel tests', () => {
+    test('general Panel components', () => {
+      render(
+        <Tabs>
+          <Tabs.PanelItem id="hi" summary="tab one">
+            <p>hello there</p>
+          </Tabs.PanelItem>
+          <Tabs.PanelItem id="higar" summary="tab two" open>
+            <p>obi-wan!</p>
+          </Tabs.PanelItem>
+        </Tabs>
       );
-      expect(result.container.querySelector('.alert')).not.toBeInTheDocument();
-      expect(screen.queryByText(alertBodyContent)).not.toBeInTheDocument();
+      expect(screen.getByText('hello there')).toBeInTheDocument();
+      expect(screen.getByText('obi-wan!')).toBeInTheDocument();
+      expect(
+        screen.getByText('hello there').closest('details')
+      ).toHaveAttribute('id', 'hi');
+      expect(screen.getByText('obi-wan!').closest('details')).toHaveAttribute(
+        'id',
+        'higar'
+      );
+      expect(screen.getByText('obi-wan!').closest('details')).toHaveAttribute(
+        'open'
+      );
+    });
+
+    test('Panel exceptions', () => {
+      render(
+        <Tabs>
+          <Tabs.PanelItem>
+            <p>hello there</p>
+          </Tabs.PanelItem>
+        </Tabs>
+      );
+      expect(screen.getByText('hello there')).toBeInTheDocument();
+      expect(
+        screen.getByText('hello there').closest('details')
+      ).toHaveAttribute('id', '');
+      expect(
+        screen.getByText('hello there').closest('details')
+      ).not.toHaveAttribute('summary');
+    });
+  });
+  describe('overall tests', () => {
+    test('general tabs', () => {
+      render(
+        <Tabs
+          list={
+            <Tabs.List>
+              <Tabs.ListItem href="hi">panel 1</Tabs.ListItem>
+              <Tabs.ListItem active href="higar">
+                panel 2
+              </Tabs.ListItem>
+            </Tabs.List>
+          }
+        >
+          <Tabs.PanelItem id="hi" summary="tab one">
+            <p>hello there</p>
+          </Tabs.PanelItem>
+          <Tabs.PanelItem id="higar" summary="tab two" open>
+            <p>obi-wan!</p>
+          </Tabs.PanelItem>
+        </Tabs>
+      );
+      expect(screen.getByText('panel 1')).toBeInTheDocument();
+      expect(screen.getByText('panel 2')).toBeInTheDocument();
+      expect(screen.getByText('hello there')).toBeInTheDocument();
+      expect(screen.getByText('obi-wan!')).toBeInTheDocument();
+      expect(screen.getByText('panel 1')).toHaveAttribute('href', '#hi');
+      expect(screen.getByText('panel 1').closest('ul')).toHaveAttribute(
+        'role',
+        'tablist'
+      );
+      expect(screen.getByText('panel 1').closest('ul')).toHaveClass(
+        'generated'
+      );
+      expect(screen.getByText('panel 1').closest('div')).toHaveClass('wb-tabs');
+      expect(screen.getByText('panel 1').closest('div')).toHaveClass('wb-init');
+      expect(screen.getByText('panel 1').closest('div')).toHaveClass(
+        'wb-tabs-inited'
+      );
+      expect(screen.getByText('panel 1').closest('div')).toHaveClass(
+        'tabs-acc'
+      );
+      expect(screen.getByText('panel 2')).toHaveAttribute('href', '#higar');
+      expect(screen.getByText('panel 2').closest('li')).toHaveClass('active');
+      expect(
+        screen.getByText('hello there').closest('details')
+      ).toHaveAttribute('id', 'hi');
+      expect(screen.getByText('obi-wan!').closest('details')).toHaveAttribute(
+        'id',
+        'higar'
+      );
+      expect(screen.getByText('obi-wan!').closest('details')).toHaveAttribute(
+        'open'
+      );
+    });
+
+    test('ignoreSession', () => {
+      render(
+        <Tabs
+          ignoreSession
+          list={
+            <Tabs.List>
+              <Tabs.ListItem href="hi">panel 1</Tabs.ListItem>
+            </Tabs.List>
+          }
+        >
+          hello
+        </Tabs>
+      );
+      expect(screen.getByText('hello')).toHaveClass('tabpanels');
+      expect(screen.getByText('hello').closest('div')).toHaveClass('tabpanels');
+      expect(screen.getByText('panel 1').closest('div')).toHaveClass(
+        'ignore-session'
+      );
     });
   });
 });

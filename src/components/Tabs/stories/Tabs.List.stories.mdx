@@ -3,7 +3,7 @@ import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
 import { Tabs } from '../..';
 
 <Meta
-  title="Components/Tabs/Intro"
+  title="Components/Tabs/List"
   component={Tabs}
   subcomponents={{
     'Tabs.List': Tabs.List,
@@ -14,7 +14,19 @@ import { Tabs } from '../..';
 
 # Tabs
 
-Display images and other content in a dialog box, either individually or as part of a gallery. Implements the<a href="https://www.w3.org/TR/wai-aria-practices/#dialog_modal" target="_blank"> WAI-ARIA Dialog (Modal) design pattern</a>
+## Tab List
+
+on browsers with width>992px the tabs will default to a larger view mode
+
+To handle this larger mode you must add a `Tabs.List` with a `Tabs.ListItem` for each tab
+
+Each `Tabs.ListItem` should have similar values to its relevant `Tabs.PanelItem`:
+
+<ul>
+  <li>Same order</li>
+  <li>Tabs.ListItem.href = Tabs.PanelItem.id</li>
+  <li>Tabs.ListItem.active = Tabs.PanelItem.open</li>
+</ul>
 
 ## Example
 
@@ -38,7 +50,3 @@ Display images and other content in a dialog box, either individually or as part
     />
   </Tabs>
 </Canvas>
-
-## Available Props
-
-<ArgsTable />
