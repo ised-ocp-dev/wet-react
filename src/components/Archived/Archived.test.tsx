@@ -5,7 +5,7 @@ import Archived from '@components/Archived';
 
 describe('Archived', () => {
   const ArchivedContent = 'Hello world!';
-  const ArchivedAdditionalContent = 'addon';
+  const ArchivedAdditionalContent = 'addon content';
   test('renders default english Archived component', () => {
     render(
       <Archived content="">
