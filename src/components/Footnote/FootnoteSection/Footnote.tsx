@@ -14,7 +14,17 @@ const Footnote = ({ value = '', children }: FootnoteProps) => (
     <dd id={`fn${value}`}>
       {children}
       <p className="fn-rtn">
-        <a href={`#fn${value}-rf`}>
+        <a
+          href={`#fn${value}-rf`}
+          onClick={(e) => {
+            const temp = e.currentTarget.getAttribute('href');
+            if (temp) {
+              if (document.getElementById(temp.substring(1)) === null) {
+                e.currentTarget.setAttribute('href', `#fn${value}-1-rf`);
+              }
+            }
+          }}
+        >
           <span className="wb-inv">
             Return to <span>first</span> footnote
           </span>

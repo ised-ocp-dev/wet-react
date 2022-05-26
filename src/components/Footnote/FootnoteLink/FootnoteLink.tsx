@@ -21,9 +21,28 @@ const FootnoteLink = ({
   const footnoteName = indicator === '' ? value : indicator;
   return value === '' ? (
     <a href="#fn">Footnotes</a>
-  ) : (
+  ) : subValue === 0 ? (
     <sup id={footnoteId}>
       <a className="fn-lnk" href={footnoteHref}>
+        <span className="wb-inv">Footnote </span>
+        {footnoteName}
+      </a>
+    </sup>
+  ) : (
+    <sup id={footnoteId}>
+      <a
+        className="fn-lnk"
+        href={footnoteHref}
+        // onClick={() => sessionStorage.setItem(value, subValue.toString())}
+        onClick={() => {
+          const temp = document
+            ?.getElementById(`fn${value}`)
+            ?.querySelector('.fn-rtn');
+          if (temp) {
+            temp.children[0].setAttribute('href', `#${footnoteId}`);
+          }
+        }}
+      >
         <span className="wb-inv">Footnote </span>
         {footnoteName}
       </a>
