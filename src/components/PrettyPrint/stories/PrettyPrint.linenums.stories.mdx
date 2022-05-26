@@ -6,13 +6,14 @@ import { PrettyPrint } from '../..';
 
 export const Template = (args) => (
   <span>
-    <PrettyPrint initialize />
-    <PrettyPrint {...args}>
-      <p>line 1</p>
-      <p>line 2</p>
-      <p>line 3</p>
-      <p>line 4</p>
-      <p>line 5</p>
+    <PrettyPrint {...args} prettyprinted>
+      <ol>
+        <li>line 1</li>
+        <li>line 2</li>
+        <li>line 3</li>
+        <li>line 4</li>
+        <li>line 5</li>
+      </ol>
     </PrettyPrint>
   </span>
 );
@@ -21,7 +22,7 @@ export const Template = (args) => (
 
 ## Line Numbers
 
-Use the `lineNums` attribute to add line numbers to code
+Use the `lineNums` attribute to add line numbers to code. Note you need to put your code in an ordered list `<ol>`
 
 ## Example
 
@@ -51,5 +52,9 @@ Use the `wholePage` and `lineNums` attributes to add line numbers to all `<pre>`
 
 <Canvas>
   <PrettyPrint wholePage lineNums />
-  <PrettyPrint>Hey, this code was numbered!</PrettyPrint>
+  <PrettyPrint>
+    <ol>
+      <li>Hey, this code was numbered!</li>
+    </ol>
+  </PrettyPrint>
 </Canvas>
