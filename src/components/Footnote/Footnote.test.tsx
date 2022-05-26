@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 
 import FootnoteLink from '@components/Footnote/FootnoteLink';
 import FootnoteSection from '@components/Footnote/FootnoteSection';
@@ -49,5 +49,68 @@ describe('Footnote tests', () => {
     );
     expect(screen.getByText(val)).toBeInTheDocument();
     expect(screen.getByText(content)).toBeInTheDocument();
+  });
+  it('test valid return link', () => {
+    render(
+      <span>
+        <FootnoteLink value={val} />
+        <FootnoteSection>
+          <FootnoteSection.Footnote value={val}>hi</FootnoteSection.Footnote>
+        </FootnoteSection>
+      </span>
+    );
+    fireEvent.click(screen.getAllByText(val)[1]);
+    expect(screen.getAllByText(val)[1].closest('a')).toHaveAttribute(
+      'href',
+      '#fn5-rf'
+    );
+  });
+  it('test invalid return link', () => {
+    render(
+      <FootnoteSection>
+        <FootnoteSection.Footnote value={val}>hi</FootnoteSection.Footnote>
+      </FootnoteSection>
+    );
+    fireEvent.click(screen.getByText(val));
+    expect(screen.getByText(val).closest('a')).toHaveAttribute(
+      'href',
+      '#fn5-1-rf'
+    );
+  });
+  it('"test" null href (shouldn\'t ever happen, if it does then give error', () => {
+    render(
+      <FootnoteSection>
+        <FootnoteSection.Footnote value={val}>hi</FootnoteSection.Footnote>
+      </FootnoteSection>
+    );
+    const hold = screen.getByText(val).closest('a');
+    if (hold) {
+      hold.removeAttribute('href');
+    }
+    fireEvent.click(screen.getByText(val));
+    expect(screen.getByText(val).closest('a')).not.toHaveAttribute('href');
+  });
+  it('test valid link', () => {
+    render(
+      <span>
+        <FootnoteLink value={val} subValue={2} />
+        <FootnoteSection>
+          <FootnoteSection.Footnote value={val}>hi</FootnoteSection.Footnote>
+        </FootnoteSection>
+      </span>
+    );
+    fireEvent.click(screen.getAllByText(val)[0]);
+    expect(screen.getAllByText(val)[1].closest('a')).toHaveAttribute(
+      'href',
+      '#fn5-2-rf'
+    );
+  });
+  it('test invalid link', () => {
+    render(
+      <span>
+        <FootnoteLink value={val} subValue={2} />
+      </span>
+    );
+    fireEvent.click(screen.getAllByText(val)[0]);
   });
 });

@@ -33,7 +33,6 @@ const FootnoteLink = ({
       <a
         className="fn-lnk"
         href={footnoteHref}
-        // onClick={() => sessionStorage.setItem(value, subValue.toString())}
         onClick={() => {
           const temp = document
             ?.getElementById(`fn${value}`)
