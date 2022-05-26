@@ -10,8 +10,6 @@ export interface LightboxProps extends React.HTMLAttributes<HTMLElement> {
   gallery?: boolean;
   /** title of lightbox */
   title?: string;
-  /** the selector to filter content */
-  filter?: string;
 }
 
 const Lightbox = ({

@@ -1,81 +1,106 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-describe('Lightbox', () => {
-  const LightboxContent = 'Quote this';
-  const LightboxFooter = 'Foot';
-  const LightboxCite = 'Cit';
+import Lightbox from '@components/Lightbox';
 
-  describe('Test Lightbox with/without sources', () => {
+describe('Lightbox', () => {
+  describe('Test Lightbox', () => {
     test('renders the basic Lightbox component', () => {
-      render(<blockquote>{LightboxContent}</blockquote>);
-      expect(screen.getByText(LightboxContent)).toBeInTheDocument();
+      render(<Lightbox>children</Lightbox>);
+      expect(screen.getByText('children')).toBeInTheDocument();
+      expect(screen.getByText('children')).toHaveClass('wb-lbx');
+      expect(screen.getByText('children')).toHaveClass('wb-init');
+      expect(screen.getByText('children')).toHaveClass('wb-lbx-inited');
     });
-    test('renders the Lightbox component with footer', () => {
-      render(
-        <blockquote>
-          {LightboxContent}
-          <footer>{LightboxFooter}</footer>
-        </blockquote>
+    test('renders the Lightbox component with title/footer', () => {
+      render(<Lightbox title="titleText">children</Lightbox>);
+      expect(screen.getByText('children')).toBeInTheDocument();
+      expect(screen.getByText('children')).toHaveClass('wb-lbx');
+      expect(screen.getByText('children')).toHaveClass('wb-init');
+      expect(screen.getByText('children')).toHaveClass('wb-lbx-inited');
+      expect(screen.getByText('children')).toHaveAttribute(
+        'title',
+        'titleText'
       );
-      expect(screen.getByText(LightboxContent)).toBeInTheDocument();
-      expect(screen.getByText(LightboxFooter)).toBeInTheDocument();
     });
-    test('renders the Lightbox component with citation', () => {
-      render(
-        <blockquote>
-          {LightboxContent}
-          <footer>
-            <cite>{LightboxCite}</cite>
-          </footer>
-        </blockquote>
-      );
-      expect(screen.getByText(LightboxContent)).toBeInTheDocument();
-      expect(screen.getByText(LightboxCite)).toBeInTheDocument();
-    });
-    test('renders the Lightbox component with footer and citation', () => {
-      render(
-        <blockquote>
-          {LightboxContent}
-          <footer>
-            {LightboxFooter}
-            <br />
-            <cite>{LightboxCite}</cite>
-          </footer>
-        </blockquote>
-      );
-      expect(screen.getByText(LightboxContent)).toBeInTheDocument();
-      expect(screen.getByText(LightboxFooter)).toBeInTheDocument();
-      expect(screen.getByText(LightboxCite)).toBeInTheDocument();
+    test('renders the Lightbox component with src', () => {
+      render(<Lightbox src="srcText">children</Lightbox>);
+      expect(screen.getByText('children')).toBeInTheDocument();
+      expect(screen.getByText('children')).toHaveClass('wb-lbx');
+      expect(screen.getByText('children')).toHaveClass('wb-init');
+      expect(screen.getByText('children')).toHaveClass('wb-lbx-inited');
+      expect(screen.getByText('children')).toHaveAttribute('href', 'srcText');
     });
   });
-  describe('Test justification', () => {
-    test('source justified', () => {
-      render(
-        <blockquote>
-          {LightboxContent}
-          <footer className="text-right">
-            {LightboxFooter}
-            <br />
-            <cite>{LightboxCite}</cite>
-          </footer>
-        </blockquote>
-      );
-      expect(screen.getByText(LightboxFooter)).toHaveClass('text-right');
+  describe('Test gallery', () => {
+    test('renders the Lightbox component with gallery', () => {
+      render(<Lightbox gallery>children</Lightbox>);
+      expect(screen.getByText('children')).toBeInTheDocument();
+      expect(screen.getByText('children')).not.toHaveClass('wb-lbx');
+      expect(screen.getByText('children')).toHaveClass('wb-init');
+      expect(screen.getByText('children')).toHaveClass('wb-lbx-inited');
     });
-    test('block quote justified', () => {
+    test('renders the Gallery component', () => {
       render(
-        <blockquote className="blockquote-reverse">
-          {LightboxContent}
-          <footer>
-            {LightboxFooter}
-            <br />
-            <cite>{LightboxCite}</cite>
-          </footer>
-        </blockquote>
+        <Lightbox.Gallery>
+          <Lightbox gallery>children</Lightbox>
+        </Lightbox.Gallery>
       );
-      expect(screen.getByText(LightboxContent)).toHaveClass(
-        'blockquote-reverse'
+      expect(screen.getByText('children')).toBeInTheDocument();
+      expect(screen.getByText('children')).not.toHaveClass('wb-lbx');
+      expect(screen.getByText('children')).toHaveClass('wb-init');
+      expect(screen.getByText('children')).toHaveClass('wb-lbx-inited');
+      expect(screen.getByText('children').closest('section')).toHaveClass(
+        'lbx-gal'
+      );
+      expect(screen.getByText('children').closest('section')).toHaveClass(
+        'lbx-gal'
+      );
+      expect(screen.getByText('children').closest('section')).toHaveClass(
+        'wb-lbx-inited'
+      );
+    });
+    test('renders the Gallery component with custom tag', () => {
+      render(
+        <Lightbox.Gallery tag="div">
+          <Lightbox gallery>children</Lightbox>
+        </Lightbox.Gallery>
+      );
+      expect(screen.getByText('children')).toBeInTheDocument();
+      expect(screen.getByText('children')).not.toHaveClass('wb-lbx');
+      expect(screen.getByText('children')).toHaveClass('wb-init');
+      expect(screen.getByText('children')).toHaveClass('wb-lbx-inited');
+      expect(screen.getByText('children').closest('div')).toHaveClass(
+        'lbx-gal'
+      );
+      expect(screen.getByText('children').closest('div')).toHaveClass(
+        'wb-init'
+      );
+      expect(screen.getByText('children').closest('div')).toHaveClass(
+        'wb-lbx-inited'
+      );
+    });
+    test('renders the Gallery component with hide', () => {
+      render(
+        <Lightbox.Gallery hide>
+          <Lightbox gallery>children</Lightbox>
+        </Lightbox.Gallery>
+      );
+      expect(screen.getByText('children')).toBeInTheDocument();
+      expect(screen.getByText('children')).not.toHaveClass('wb-lbx');
+      expect(screen.getByText('children')).toHaveClass('wb-init');
+      expect(screen.getByText('children')).toHaveClass('wb-lbx-inited');
+      expect(screen.getByText('children').closest('section')).toHaveClass(
+        'lbx-hide-gal'
+      );
+      expect(screen.getByText('children').closest('section')).not.toHaveClass(
+        'lbx-gal'
+      );
+      expect(screen.getByText('children').closest('section')).toHaveClass(
+        'wb-init'
+      );
+      expect(screen.getByText('children').closest('section')).toHaveClass(
+        'wb-lbx-inited'
       );
     });
   });
