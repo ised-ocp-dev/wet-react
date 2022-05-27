@@ -14,6 +14,31 @@ export interface LightboxProps extends React.HTMLAttributes<HTMLElement> {
   hide?: boolean;
 }
 
+function closeLightbox(e: Element) {
+  const main = e.closest('.lightbox-breezy');
+  if (main) {
+    const html = main.closest('html');
+    if (html) {
+      const style = html.getAttribute('style');
+      if (style) {
+        html.setAttribute(
+          'style',
+          style.replace('margin-right: 17px; overflow: hidden;', '')
+        );
+      }
+    }
+    const body = main.closest('body');
+    if (body) {
+      body.classList.remove('mfp-zoom-out-cur');
+      body.classList.remove('wb-modal');
+    }
+    (main.childNodes[1] as Element).classList.remove('mfp-bg');
+    (main.childNodes[1] as Element).classList.remove('mfp-ready');
+    // (main.childNodes[2] as Element).classList.remove('mfp-wrap');
+    (main.childNodes[2].childNodes[0] as Element).removeAttribute('open');
+  }
+}
+
 const Lightbox = ({
   children,
   gallery = false,
@@ -22,14 +47,12 @@ const Lightbox = ({
 }: LightboxProps) => {
   const className = gallery ? '' : 'wb-lbx';
   return (
-    <span>
+    <span className="lightbox-breezy">
       <a
         className={`${className} wb-init wb-lbx-inited`}
         href={src}
         title={title}
-        onLoad={console.log('LOADED')}
         onClick={(e) => {
-          console.log('hi');
           e.preventDefault();
           (e.target as Element)
             .closest('html')
@@ -41,25 +64,52 @@ const Lightbox = ({
           const sib1 = (e.target as Element).parentNode?.parentNode
             ?.childNodes[1];
           if (sib1) {
-            (sib1 as Element).className = 'mfp-bg mfp-ready';
+            (sib1 as Element).className = 'mfp-bg mfp-ready ';
           }
           const sib2 = (e.target as Element).parentNode?.parentNode
             ?.childNodes[2];
           if (sib2) {
-            (sib2 as Element).className += 'mfp-wrap';
+            // (sib2 as Element).className += 'mfp-wrap ';
             const sib2c = sib2.childNodes[0];
             if (sib2c) {
               (sib2c as Element).setAttribute('open', 'open');
             }
           }
+          const image = (e.target as Element).parentNode?.parentNode
+            ?.childNodes[2].childNodes[0].childNodes[0].childNodes[0];
+          if (image) {
+            (image as Element).scrollIntoView({
+              behavior: 'auto',
+              block: 'center',
+              inline: 'center',
+            });
+          }
+          document.addEventListener(
+            'keydown',
+            (event) => {
+              if (event.key === 'Escape') {
+                closeLightbox(e.target as Element);
+              }
+            },
+            { once: true }
+          );
         }}
       >
         {children}
       </a>
-      <div />
+      <div
+        role="link"
+        tabIndex={0}
+        aria-label="Close Lightbox"
+        onClick={(e1) => {
+          closeLightbox(e1.target as Element);
+        }}
+        onKeyDown={() => {
+          // ignore, handled elsewhere. lint is dumb.
+        }}
+      />
       <div
         className="mfp-close-btn-in mfp-auto-cursor mfp-ready"
-        open="open"
         style={{ overflow: 'hidden auto' }}
       >
         <dialog className="mfp-container">
@@ -74,6 +124,9 @@ const Lightbox = ({
                   title="Close overlay (escape key)"
                   type="button"
                   className="mfp-close"
+                  onClick={(e1) => {
+                    closeLightbox(e1.target as Element);
+                  }}
                 >
                   ×<span className="wb-inv">Close overlay (escape key)</span>
                 </button>
