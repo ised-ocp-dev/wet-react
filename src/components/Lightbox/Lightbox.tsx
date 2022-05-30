@@ -1,4 +1,6 @@
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { fireEvent } from '@testing-library/react';
 import '../../style.css';
 
 export interface LightboxProps extends React.HTMLAttributes<HTMLElement> {
@@ -34,6 +36,80 @@ function closeLightbox(e: Element) {
   }
 }
 
+function galleryOpenLightbox(e: Element) {
+  e.closest('html')?.setAttribute(
+    'style',
+    'margin-right: 17px; overflow: hidden;'
+  );
+  const body = e.closest('body');
+  if (body) {
+    body.className = 'mfp-zoom-out-cur wb-modal';
+  }
+  let gallery: Element | null;
+  if (e.closest('lbx-gal') === null) {
+    gallery = e.closest('lbx-hide-gal');
+  } else {
+    gallery = e.closest('lbx-gal');
+  }
+  if (gallery === null) {
+    return;
+  }
+  (gallery.childNodes[0].childNodes[0] as Element).className =
+    'mfp-bg mfp-ready ';
+  (gallery.childNodes[0].childNodes[1].childNodes[0] as Element).setAttribute(
+    'open',
+    'open'
+  );
+  (
+    gallery.childNodes[0].childNodes[1].childNodes[0].childNodes[0]
+      .childNodes[0] as Element
+  ).scrollIntoView({
+    behavior: 'auto',
+    block: 'center',
+    inline: 'center',
+  });
+  // set src, title, mfp-counter
+  const link = e.closest('lightbox-breezy')?.childNodes[0] as Element;
+  const src = link.getAttribute('src');
+  const title = link.getAttribute('title');
+  const links = gallery.getElementsByClassName('lightbox-breezy');
+  let index = 0;
+  for (let i = 0; i < links.length; i += 1) {
+    if ((links[i].childNodes[0] as Element).getAttribute('src') === src) {
+      index = i;
+      break;
+    }
+  }
+  if (src != null) {
+    (
+      gallery.childNodes[0].childNodes[1].childNodes[0].childNodes[0]
+        .childNodes[0].childNodes[0].childNodes[1].childNodes[0] as Element
+    ).setAttribute('src', src);
+  }
+  if (title != null) {
+    (
+      gallery.childNodes[0].childNodes[1].childNodes[0].childNodes[0]
+        .childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0]
+        .childNodes[0] as Element
+    ).innerHTML = title;
+  }
+  (
+    gallery.childNodes[0].childNodes[1].childNodes[0].childNodes[0]
+      .childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0]
+      .childNodes[1] as Element
+  ).innerHTML = `${index}/${links.length}`;
+
+  document.addEventListener(
+    'keydown',
+    (event) => {
+      if (event.key === 'Escape' && gallery != null) {
+        fireEvent.click(gallery.childNodes[0].childNodes[0]);
+      }
+    },
+    { once: true }
+  );
+}
+
 const Lightbox = ({ children, title = '', src = '' }: LightboxProps) => (
   <span className="lightbox-breezy">
     <a
@@ -41,12 +117,12 @@ const Lightbox = ({ children, title = '', src = '' }: LightboxProps) => (
       href={src}
       title={title}
       onClick={(e) => {
+        e.preventDefault();
         if (
           (e.target as Element).closest('lbx-gal') === null &&
           (e.target as Element).closest('lbx-hide-gal') === null
         ) {
           // this lightbox is standalone, do lightbox things
-          e.preventDefault();
           (e.target as Element)
             .closest('html')
             ?.setAttribute('style', 'margin-right: 17px; overflow: hidden;');
@@ -68,7 +144,7 @@ const Lightbox = ({ children, title = '', src = '' }: LightboxProps) => (
             }
           }
           const image = (e.target as Element).closest('.lightbox-breezy')
-            ?.childNodes[2].childNodes[0].childNodes[0].childNodes[0];
+            ?.childNodes[2].childNodes[0].childNodes[0].childNodes[0]; // center lightbox image
           if (image) {
             (image as Element).scrollIntoView({
               behavior: 'auto',
@@ -91,9 +167,34 @@ const Lightbox = ({ children, title = '', src = '' }: LightboxProps) => (
               ?.childNodes[0] as Element
           ).classList.contains('wb-lbx')
         ) {
-          // this lightbox is in an uninitialized gallery, so init gallery, then open this lightbox
+          // this lightbox is in an uninitialized gallery, so init gallery, then open this lightbox in gallery
+          let gallery;
+          if ((e.target as Element).closest('lbx-gal') === null) {
+            gallery = (e.target as Element).closest('lbx-hide-gal');
+          } else {
+            gallery = (e.target as Element).closest('lbx-gal');
+          }
+          if (gallery === null) {
+            return;
+          }
+          const links = gallery.getElementsByClassName('lightbox-breezy');
+          if (gallery.classList.contains('lbx-gal')) {
+            for (let i = 0; i < links.length; i += 1) {
+              const link = links[i];
+              (link.childNodes[0] as Element).classList.remove('wb-lbx');
+            }
+          } else {
+            (links[0].childNodes[0] as Element).classList.remove('wb-lbx');
+            for (let i = 1; i < links.length; i += 1) {
+              const link = links[i];
+              (link.childNodes[0] as Element).classList.remove('wb-lbx');
+              (link.childNodes[0] as Element).setAttribute('hidden', 'true');
+            }
+          }
+          galleryOpenLightbox(e.target as Element);
         }
-        // else this is in gallery, gallery is inited, so do nothing
+        // else this is in gallery, gallery is inited, so open this lightbox in gallery
+        galleryOpenLightbox(e.target as Element);
       }}
     >
       {children}
@@ -136,7 +237,7 @@ const Lightbox = ({ children, title = '', src = '' }: LightboxProps) => (
                 <figcaption>
                   <div className="mfp-bottom-bar" id="lbx-title">
                     <div className="mfp-title">{title}</div>
-                    <div className="mfp-counter">1/1</div>
+                    <div className="mfp-counter"> </div>
                   </div>
                 </figcaption>
               </figure>
