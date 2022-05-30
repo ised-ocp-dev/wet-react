@@ -10,6 +10,8 @@ export interface LightboxProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
   /** title of lightbox */
   title?: string;
+  /** use to hide lightbox, recommended for galleries where you want to only show the first image */
+  hidden?: boolean;
 }
 
 function closeLightbox(e: Element) {
@@ -110,12 +112,18 @@ function galleryOpenLightbox(e: Element) {
   );
 }
 
-const Lightbox = ({ children, title = '', src = '' }: LightboxProps) => (
+const Lightbox = ({
+  children,
+  title = '',
+  src = '',
+  hidden = false,
+}: LightboxProps) => (
   <span className="lightbox-breezy">
     <a
       className="wb-lbx wb-init wb-lbx-inited"
       href={src}
       title={title}
+      hidden={hidden}
       onClick={(e) => {
         e.preventDefault();
         if (

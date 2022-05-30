@@ -88,10 +88,9 @@ function getNextPrev(hop: number, e: Element) {
     (fork.childNodes[1].childNodes[0].childNodes[0] as Element).innerHTML =
       newTitle;
   }
-
-  (
-    fork.childNodes[1].childNodes[0].childNodes[1] as Element
-  ).innerHTML = `${newIndex}/${links.length}`;
+  (fork.childNodes[1].childNodes[0].childNodes[1] as Element).innerHTML = `${
+    newIndex + 1
+  }/${links.length}`;
 }
 
 const LightboxGallery = ({

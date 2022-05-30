@@ -11,20 +11,134 @@ import { Lightbox } from '../..';
 />
 
 export const Template = (args) => (
-  <Lightbox.Gallery {...args}>
-    <Lightbox
-      gallery
-      title="Example lightbox"
-      src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
-      children={<p>First Picture</p>}
-    />
-    <Lightbox
-      gallery
-      title="Example lightbox"
-      src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
-      children={<p>Second Picture</p>}
-    />
-  </Lightbox.Gallery>
+  <span>
+    <Lightbox.Gallery {...args}>
+      <Lightbox
+        title="Example lightbox 1"
+        src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
+        children={<p>First Picture</p>}
+      />
+      <Lightbox
+        title="Example lightbox 2"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTJh5kgOqt5xacw9IhGakSqpdNDcvjhq6qiLGcfEu-u2Q8OeazkXIh_tLZx0F0ue5eGIk&usqp=CAU"
+        children={<p>Second Picture</p>}
+      />
+      <Lightbox
+        title="Example lightbox 3"
+        src="https://www.fearfreehappyhomes.com/wp-content/uploads/2020/08/shutterstock_707431309-e1554172878508.jpg"
+        children={<p>Third Picture</p>}
+      />
+    </Lightbox.Gallery>
+    <p>
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+    </p>
+  </span>
+);
+
+export const TemplateTwo = (args) => (
+  <span>
+    <Lightbox.Gallery>
+      <Lightbox
+        title="Example lightbox 1"
+        src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
+        children={
+          <span>
+            <img
+              src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
+              height="300px"
+            />
+            <p>First Picture, so not hidden</p>
+          </span>
+        }
+      />
+      <Lightbox
+        title="Example lightbox 2"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTJh5kgOqt5xacw9IhGakSqpdNDcvjhq6qiLGcfEu-u2Q8OeazkXIh_tLZx0F0ue5eGIk&usqp=CAU"
+        children={<p>Second Picture</p>}
+        {...args}
+      />
+      <p>
+        Note the other pictures are hidden, but you can see them when going
+        through the gallery
+      </p>
+      <Lightbox
+        title="Example lightbox 3"
+        src="https://www.fearfreehappyhomes.com/wp-content/uploads/2020/08/shutterstock_707431309-e1554172878508.jpg"
+        children={<p>Third Picture</p>}
+        {...args}
+      />
+    </Lightbox.Gallery>
+    <p>
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+      spacing text
+      <br />
+    </p>
+  </span>
 );
 
 # Lightbox
@@ -32,8 +146,6 @@ export const Template = (args) => (
 ## Gallery
 
 Use the `Lightbox.Gallery` element to make a gallery for displaying multiple lightboxes
-
-Make sure to set the `gallery` attribute of each lightbox in the gallery to true
 
 ## Example
 
@@ -47,22 +159,69 @@ Make sure to set the `gallery` attribute of each lightbox in the gallery to true
 
 Use the `tag` attribute to set the HTML element that will act as the gallery (default is `'section'`)
 
+For example: an unordered list `ul` of lightboxes
+
 ## Example
 
 <Canvas>
-  <Story name="Tag" args={{ tag: 'ul' }}>
-    {Template.bind({})}
+  <Lightbox.Gallery>
+    <ul>
+      <li>
+        <Lightbox
+          title="Example lightbox 1"
+          src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
+          children={
+            <img
+              src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
+              height="300px"
+            />
+          }
+        />
+      </li>
+      <li>
+        <Lightbox
+          title="Example lightbox 2"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTJh5kgOqt5xacw9IhGakSqpdNDcvjhq6qiLGcfEu-u2Q8OeazkXIh_tLZx0F0ue5eGIk&usqp=CAU"
+          children={
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTJh5kgOqt5xacw9IhGakSqpdNDcvjhq6qiLGcfEu-u2Q8OeazkXIh_tLZx0F0ue5eGIk&usqp=CAU" />
+          }
+        />
+      </li>
+      <li>
+        <Lightbox
+          title="Example lightbox 3"
+          src="https://www.fearfreehappyhomes.com/wp-content/uploads/2020/08/shutterstock_707431309-e1554172878508.jpg"
+          children={
+            <img
+              src="https://www.fearfreehappyhomes.com/wp-content/uploads/2020/08/shutterstock_707431309-e1554172878508.jpg"
+              height="300px"
+            />
+          }
+        />
+      </li>
+    </ul>
+  </Lightbox.Gallery>
+</Canvas>
+
+## Hidden
+
+To hide lightboxes in a gallery, for example all but the first lightbox, use the `hidden` attribute in the
+undesired lightboxes
+
+There is also a `hide` attribute in gallery, which hides all but the first lightbox, but it only takes effect once a lightbox is clicked
+
+## Example with hidden
+
+<Canvas>
+  <Story name="Hidden" args={{ hidden: true }}>
+    {TemplateTwo.bind({})}
   </Story>
 </Canvas>
 
-## Hide
-
-Use the `hide` attribute to hide all but the first lightbox in the gallery
-
-## Example
+## Example with hide (open and close one lightbox, then look at list again)
 
 <Canvas>
-  <Story name="Hide" args={{ hide }}>
+  <Story name="Hide" args={{ hide: true }}>
     {Template.bind({})}
   </Story>
 </Canvas>
