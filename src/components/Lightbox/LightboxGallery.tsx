@@ -23,3 +23,5 @@ const LightboxGallery = ({
 };
 
 export default LightboxGallery;
+
+// remove 'wb-lbx' for lightboxes
