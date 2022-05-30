@@ -46,10 +46,10 @@ function galleryOpenLightbox(e: Element) {
     body.className = 'mfp-zoom-out-cur wb-modal';
   }
   let gallery: Element | null;
-  if (e.closest('lbx-gal') === null) {
-    gallery = e.closest('lbx-hide-gal');
+  if (e.closest('.lbx-gal') === null) {
+    gallery = e.closest('.lbx-hide-gal');
   } else {
-    gallery = e.closest('lbx-gal');
+    gallery = e.closest('.lbx-gal');
   }
   if (gallery === null) {
     return;
@@ -69,13 +69,13 @@ function galleryOpenLightbox(e: Element) {
     inline: 'center',
   });
   // set src, title, mfp-counter
-  const link = e.closest('lightbox-breezy')?.childNodes[0] as Element;
-  const src = link.getAttribute('src');
+  const link = e.closest('.lightbox-breezy')?.childNodes[0] as Element;
+  const src = link.getAttribute('href');
   const title = link.getAttribute('title');
   const links = gallery.getElementsByClassName('lightbox-breezy');
   let index = 0;
   for (let i = 0; i < links.length; i += 1) {
-    if ((links[i].childNodes[0] as Element).getAttribute('src') === src) {
+    if ((links[i].childNodes[0] as Element).getAttribute('href') === src) {
       index = i;
       break;
     }
@@ -97,7 +97,7 @@ function galleryOpenLightbox(e: Element) {
     gallery.childNodes[0].childNodes[1].childNodes[0].childNodes[0]
       .childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0]
       .childNodes[1] as Element
-  ).innerHTML = `${index}/${links.length}`;
+  ).innerHTML = `${index + 1}/${links.length}`;
 
   document.addEventListener(
     'keydown',
@@ -119,8 +119,8 @@ const Lightbox = ({ children, title = '', src = '' }: LightboxProps) => (
       onClick={(e) => {
         e.preventDefault();
         if (
-          (e.target as Element).closest('lbx-gal') === null &&
-          (e.target as Element).closest('lbx-hide-gal') === null
+          (e.target as Element).closest('.lbx-gal') === null &&
+          (e.target as Element).closest('.lbx-hide-gal') === null
         ) {
           // this lightbox is standalone, do lightbox things
           (e.target as Element)
@@ -163,16 +163,16 @@ const Lightbox = ({ children, title = '', src = '' }: LightboxProps) => (
           );
         } else if (
           (
-            (e.target as Element).closest('lightbox-breezy')
+            (e.target as Element).closest('.lightbox-breezy')
               ?.childNodes[0] as Element
           ).classList.contains('wb-lbx')
         ) {
           // this lightbox is in an uninitialized gallery, so init gallery, then open this lightbox in gallery
           let gallery;
-          if ((e.target as Element).closest('lbx-gal') === null) {
-            gallery = (e.target as Element).closest('lbx-hide-gal');
+          if ((e.target as Element).closest('.lbx-gal') === null) {
+            gallery = (e.target as Element).closest('.lbx-hide-gal');
           } else {
-            gallery = (e.target as Element).closest('lbx-gal');
+            gallery = (e.target as Element).closest('.lbx-gal');
           }
           if (gallery === null) {
             return;
@@ -192,9 +192,10 @@ const Lightbox = ({ children, title = '', src = '' }: LightboxProps) => (
             }
           }
           galleryOpenLightbox(e.target as Element);
+        } else {
+          // else this is in gallery, gallery is inited, so open this lightbox in gallery
+          galleryOpenLightbox(e.target as Element);
         }
-        // else this is in gallery, gallery is inited, so open this lightbox in gallery
-        galleryOpenLightbox(e.target as Element);
       }}
     >
       {children}

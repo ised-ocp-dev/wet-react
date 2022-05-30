@@ -3,7 +3,7 @@ import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
 import { Lightbox } from '../..';
 
 <Meta
-  title="Components/Lightbox/Intro"
+  title="Components/Lightbox/Test"
   component={Lightbox}
   subcomponents={{
     'Lightbox.Gallery': Lightbox.Gallery,
@@ -36,6 +36,11 @@ WAI-ARIA Dialog (Modal) design pattern</a>
           ></img>
         </span>
       }
+    />
+    <Lightbox
+      title="Example Lightbox 1"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTJh5kgOqt5xacw9IhGakSqpdNDcvjhq6qiLGcfEu-u2Q8OeazkXIh_tLZx0F0ue5eGIk&usqp=CAU"
+      children={<p>Example Lightbox Link</p>}
     />
   </Lightbox.Gallery>
 </Canvas>

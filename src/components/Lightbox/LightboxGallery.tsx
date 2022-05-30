@@ -12,7 +12,86 @@ export interface LightboxGalleryProps
 }
 
 function galleryCloseLightbox(e: Element) {
-  const x = 5;
+  let gallery: Element | null;
+  if (e.closest('.lbx-gal') === null) {
+    gallery = e.closest('.lbx-hide-gal');
+  } else {
+    gallery = e.closest('.lbx-gal');
+  }
+  if (gallery === null) {
+    return;
+  }
+  if (gallery) {
+    const html = gallery.closest('html');
+    if (html) {
+      const style = html.getAttribute('style');
+      if (style) {
+        html.setAttribute(
+          'style',
+          style.replace('margin-right: 17px; overflow: hidden;', '')
+        );
+      }
+    }
+    const body = gallery.closest('body');
+    if (body) {
+      body.classList.remove('mfp-zoom-out-cur');
+      body.classList.remove('wb-modal');
+    }
+    (gallery.childNodes[0].childNodes[0] as Element).classList.remove('mfp-bg');
+    (gallery.childNodes[0].childNodes[0] as Element).classList.remove(
+      'mfp-ready'
+    );
+    (
+      gallery.childNodes[0].childNodes[1].childNodes[0] as Element
+    ).removeAttribute('open');
+  }
+}
+
+function getNextPrev(hop: number, e: Element) {
+  let gallery: Element | null;
+  if (e.closest('.lbx-gal') === null) {
+    gallery = e.closest('.lbx-hide-gal');
+  } else {
+    gallery = e.closest('.lbx-gal');
+  }
+  if (gallery === null) {
+    return;
+  }
+  const links = gallery.getElementsByClassName('lightbox-breezy');
+  let index = 0;
+  const fork = gallery.childNodes[0].childNodes[1].childNodes[0].childNodes[0]
+    .childNodes[0].childNodes[0].childNodes[1] as Element;
+  for (let i = 0; i < links.length; i += 1) {
+    if (
+      (links[i].childNodes[0] as Element).getAttribute('href') ===
+      (fork.childNodes[0] as Element).getAttribute('src')
+    ) {
+      index = i;
+      break;
+    }
+  }
+  const newIndex =
+    (index + hop) % links.length >= 0
+      ? (index + hop) % links.length
+      : links.length - 1;
+  const newFork =
+    links[newIndex].childNodes[2].childNodes[0].childNodes[0].childNodes[0]
+      .childNodes[0].childNodes[1];
+  const newSrc = (newFork.childNodes[0] as Element).getAttribute('src');
+  if (newSrc != null) {
+    (fork.childNodes[0] as Element).setAttribute('src', newSrc);
+  }
+  const newTitle = (
+    newFork.childNodes[1].childNodes[0].childNodes[0] as Element
+  ).innerHTML;
+  if (newTitle != null) {
+    (fork.childNodes[1].childNodes[0].childNodes[0] as Element).innerHTML =
+      newTitle;
+  }
+
+  (
+    fork.childNodes[1].childNodes[0].childNodes[1] as Element
+  ).innerHTML = `${newIndex}/${links.length}`;
 }
 
 const LightboxGallery = ({
@@ -25,7 +104,7 @@ const LightboxGallery = ({
     : 'lbx-gal wb-init wb-lbx-inited';
   return React.createElement(
     tag,
-    { class: name },
+    { className: name },
     <span>
       <div
         role="link"
@@ -75,6 +154,9 @@ const LightboxGallery = ({
               title="Previous (left arrow key)"
               type="button"
               className="mfp-arrow mfp-arrow-left mfp-prevent-close"
+              onClick={(e) => {
+                getNextPrev(-1, e.target as Element);
+              }}
             >
               <span className="wb-inv"> Previous (left arrow key)</span>
             </button>
@@ -82,6 +164,9 @@ const LightboxGallery = ({
               title="Next (right arrow key)"
               type="button"
               className="mfp-arrow mfp-arrow-right mfp-prevent-close"
+              onClick={(e) => {
+                getNextPrev(1, e.target as Element);
+              }}
             >
               <span className="wb-inv"> Next (right arrow key)</span>
             </button>
