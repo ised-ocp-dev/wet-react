@@ -58,4 +58,7 @@ describe('Heading', () => {
       'page-header'
     );
   });
+  test('heading defaults', () => {
+    render(<Heading />);
+  });
 });
