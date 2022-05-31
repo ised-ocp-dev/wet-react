@@ -199,8 +199,12 @@ const ShareWidget = ({
             <RowRB>{disclaimer}</RowRB>
           </ContainerRB>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={() => setShowModal(false)}>
+        <Modal.Footer style={{ display: 'flex' }}>
+          <Button
+            variant="primary"
+            onClick={() => setShowModal(false)}
+            style={{ left: 0 }}
+          >
             {closeLabel}
           </Button>
         </Modal.Footer>
