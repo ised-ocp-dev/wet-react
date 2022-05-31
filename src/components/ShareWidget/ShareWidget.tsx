@@ -186,10 +186,7 @@ const ShareWidget = ({
         onHide={() => setShowModal(false)}
         {...rest}
       >
-        <Modal.Header
-          closeButton
-          style={{ background: '#2e5274', color: 'white' }}
-        >
+        <Modal.Header closeButton>
           <Modal.Title>{modalTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
