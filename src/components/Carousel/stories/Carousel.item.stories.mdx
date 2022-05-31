@@ -1,0 +1,59 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import Carousel from '../Carousel';
+
+<Meta
+  title="Components/Carousel/Carousel Item"
+  component={Carousel}
+  subcomponents={{ 'Carousel.Item': Carousel.Item }}
+/>
+
+export const TemplateGroup = (args) => {
+  return (
+    <Carousel {...args}>
+      <Carousel.Item interval={1000}>
+        <div style={{ height: '400px', width: '100%', background: 'yellow' }} />
+      </Carousel.Item>
+      <Carousel.Item>
+        <div style={{ height: '400px', width: '100%', background: 'red' }} />
+      </Carousel.Item>
+      <Carousel.Item>
+        <div style={{ height: '400px', width: '100%', background: 'blue' }} />
+      </Carousel.Item>
+    </Carousel>
+  );
+};
+
+# Carousel Item
+
+A slide component that contains content you wish to display (e.g., image, text, etc.). Must be nested inside a `Carousel` component.
+
+<Canvas>
+  <Story name="General Example" args={{}}>
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>
+
+## Carousel Item Interval Prop
+
+The Carousel.Item `interval` prop determines the amount of time to delay between automatically cycling a specific item. Will default to the Carousel's `interval` prop value if none is specified.
+
+### Default (No Interval)
+
+<Canvas>
+  <Story name="Default Interval" args={{}}>
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>
+
+### Carousel Interval (3 Seconds) and Carousel Item Interval (1 Second Applied on the 1st Slide) Example
+
+<Canvas>
+  <Story name="Carousel Item Interval" args={{ interval: 3000 }}>
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>
+
+## Available Props
+
+<ArgsTable />

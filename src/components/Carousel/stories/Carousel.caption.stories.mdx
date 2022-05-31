@@ -1,0 +1,53 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import Carousel from '../Carousel';
+
+<Meta
+  title="Components/Carousel/Carousel Caption"
+  component={Carousel}
+  subcomponents={{ 'Carousel.Caption': Carousel.Caption }}
+/>
+
+export const TemplateGroup = (args) => {
+  return (
+    <Carousel {...args}>
+      <Carousel.Item>
+        <div style={{ height: '400px', width: '100%', background: 'yellow' }} />
+        <Carousel.Caption>
+          <h5>First Slide</h5>
+          <p>The colour yellow.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <div style={{ height: '400px', width: '100%', background: 'red' }} />
+        <Carousel.Caption>
+          <h5>Second Slide</h5>
+          <p>The colour red.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <div style={{ height: '400px', width: '100%', background: 'blue' }} />
+        <Carousel.Caption>
+          <h5>Third Slide</h5>
+          <p>The colour blue.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+    </Carousel>
+  );
+};
+
+# Carousel Caption
+
+A caption component that provides further context to the content found inside a slide (i.e., a `Carousel.Item` component). Must be nested inside a `Carousel.Item` component.
+
+## Example
+
+<Canvas>
+  <Story name="Caption" args={{}}>
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>
+
+## Available Props
+
+<ArgsTable />

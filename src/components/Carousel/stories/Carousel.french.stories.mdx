@@ -1,0 +1,37 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import Carousel from '../Carousel';
+
+<Meta title="Components/Carousel/French" component={Carousel} />
+
+export const TemplateGroup = (args) => {
+  return (
+    <Carousel {...args}>
+      <Carousel.Item>
+        <div style={{ height: '400px', width: '100%', background: 'yellow' }} />
+      </Carousel.Item>
+      <Carousel.Item>
+        <div style={{ height: '400px', width: '100%', background: 'red' }} />
+      </Carousel.Item>
+      <Carousel.Item>
+        <div style={{ height: '400px', width: '100%', background: 'blue' }} />
+      </Carousel.Item>
+    </Carousel>
+  );
+};
+
+# Default (No Translation)
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>
+
+# French Translation
+
+<Canvas>
+  <Story name="French" args={{ french: true }}>
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>

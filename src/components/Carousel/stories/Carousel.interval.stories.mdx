@@ -1,0 +1,41 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import Carousel from '../Carousel';
+
+<Meta title="Components/Carousel/Interval" component={Carousel} />
+
+export const TemplateGroup = (args) => {
+  return (
+    <Carousel {...args}>
+      <Carousel.Item>
+        <div style={{ height: '400px', width: '100%', background: 'yellow' }} />
+      </Carousel.Item>
+      <Carousel.Item>
+        <div style={{ height: '400px', width: '100%', background: 'red' }} />
+      </Carousel.Item>
+      <Carousel.Item>
+        <div style={{ height: '400px', width: '100%', background: 'blue' }} />
+      </Carousel.Item>
+    </Carousel>
+  );
+};
+
+# Carousel Interval Prop
+
+The Carousel `interval` prop determines the amount of time to delay between automatically cycling an item. If not specified, the carousel will not automatically cycle.
+
+## Default (No Interval)
+
+<Canvas>
+  <Story name="Default" args={{}}>
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>
+
+## Carousel Interval (3 Seconds) Example
+
+<Canvas>
+  <Story name="Carousel Interval" args={{ interval: 3000 }}>
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>
