@@ -45,7 +45,7 @@ const Slider = ({
   const nextHighest =
     nextHighestNonsterilized > max ? max : nextHighestNonsterilized;
   const nextLowest =
-    nextLowestNonsterilized < min ? min : nextLowestNonsterilized;
+    nextLowestNonsterilized === min ? min : nextLowestNonsterilized;
   const sterilizedValue2 =
     (sterilizedValue - min) % sterilizedStep === 0
       ? sterilizedValue

@@ -90,6 +90,19 @@ describe('Slider Tests', () => {
         const target = render(<Slider value="110" step={40} />);
         expect(target.container.firstChild).toHaveAttribute('value', '100');
       });
+      test('Test for min!=int', () => {
+        const target = render(<Slider min={2.3} step={3.5} />);
+        expect(target.container.firstChild).toHaveAttribute('step', '3.5');
+        expect(target.container.firstChild).toHaveAttribute('min', '2.3');
+      });
+      test('Test for nextLowestStep<min', () => {
+        const target = render(<Slider min={2} step={10} value="3" />);
+        expect(target.container.firstChild).toHaveAttribute('value', '2');
+      });
+      test('Test for nextLowestStep>min', () => {
+        const target = render(<Slider min={0} step={2} value="4.6" />);
+        expect(target.container.firstChild).toHaveAttribute('value', '4');
+      });
     });
   });
 });
