@@ -15,4 +15,7 @@ describe('KeyboardKey', () => {
     expect(screen.getByText(key)).toBeInTheDocument();
     expect(screen.getByTitle(keyDesc)).toBeInTheDocument();
   });
+  test('renders KeyboardKey with with no value', () => {
+    render(<KeyboardKey />);
+  });
 });

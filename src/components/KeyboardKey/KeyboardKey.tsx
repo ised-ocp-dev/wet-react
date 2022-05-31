@@ -8,21 +8,18 @@ export interface KeyboardKeyProps extends React.HTMLAttributes<HTMLElement> {
   description?: string;
 }
 
-const KeyboardKey = ({ keyValue = '', description = '' }: KeyboardKeyProps) => {
-  const ret =
-    keyValue === '' ? null : description === '' ? (
-      <p>
-        Press <kbd>{keyValue}</kbd>
-      </p>
-    ) : (
-      <p>
-        Press{' '}
-        <kbd>
-          <abbr title={description}>{keyValue}</abbr>
-        </kbd>
-      </p>
-    );
-  return ret;
-};
+const KeyboardKey = ({ keyValue = '', description = '' }: KeyboardKeyProps) =>
+  keyValue === '' ? null : description === '' ? (
+    <p>
+      Press <kbd>{keyValue}</kbd>
+    </p>
+  ) : (
+    <p>
+      Press{' '}
+      <kbd>
+        <abbr title={description}>{keyValue}</abbr>
+      </kbd>
+    </p>
+  );
 
 export default KeyboardKey;
