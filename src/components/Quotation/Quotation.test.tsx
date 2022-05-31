@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
+import Quotation from '@components/Quotation';
+
 describe('Quotation', () => {
   const QuotationContent = 'Quote this';
   const QuotationFooter = 'Foot';
@@ -8,75 +10,53 @@ describe('Quotation', () => {
 
   describe('Test Quotation with/without sources', () => {
     test('renders the basic Quotation component', () => {
-      render(<blockquote>{QuotationContent}</blockquote>);
+      render(<Quotation>{QuotationContent}</Quotation>);
       expect(screen.getByText(QuotationContent)).toBeInTheDocument();
     });
     test('renders the Quotation component with footer', () => {
       render(
-        <blockquote>
-          {QuotationContent}
-          <footer>{QuotationFooter}</footer>
-        </blockquote>
+        <Quotation footer={QuotationFooter}>{QuotationContent}</Quotation>
       );
       expect(screen.getByText(QuotationContent)).toBeInTheDocument();
-      expect(screen.getByText(QuotationFooter)).toBeInTheDocument();
     });
     test('renders the Quotation component with citation', () => {
-      render(
-        <blockquote>
-          {QuotationContent}
-          <footer>
-            <cite>{QuotationCite}</cite>
-          </footer>
-        </blockquote>
-      );
+      render(<Quotation cite={QuotationCite}>{QuotationContent}</Quotation>);
       expect(screen.getByText(QuotationContent)).toBeInTheDocument();
       expect(screen.getByText(QuotationCite)).toBeInTheDocument();
     });
     test('renders the Quotation component with footer and citation', () => {
       render(
-        <blockquote>
+        <Quotation footer={QuotationFooter} cite={QuotationCite}>
           {QuotationContent}
-          <footer>
-            {QuotationFooter}
-            <br />
-            <cite>{QuotationCite}</cite>
-          </footer>
-        </blockquote>
+        </Quotation>
       );
       expect(screen.getByText(QuotationContent)).toBeInTheDocument();
-      expect(screen.getByText(QuotationFooter)).toBeInTheDocument();
       expect(screen.getByText(QuotationCite)).toBeInTheDocument();
     });
   });
   describe('Test justification', () => {
     test('source justified', () => {
       render(
-        <blockquote>
+        <Quotation reverseSource footer={QuotationFooter} cite={QuotationCite}>
           {QuotationContent}
-          <footer className="text-right">
-            {QuotationFooter}
-            <br />
-            <cite>{QuotationCite}</cite>
-          </footer>
-        </blockquote>
+        </Quotation>
       );
-      expect(screen.getByText(QuotationFooter)).toHaveClass('text-right');
+      expect(screen.getByText(QuotationCite).parentNode).toHaveClass(
+        'text-right'
+      );
     });
     test('block quote justified', () => {
       render(
-        <blockquote className="blockquote-reverse">
+        <Quotation reverseQuote footer={QuotationFooter} cite={QuotationCite}>
           {QuotationContent}
-          <footer>
-            {QuotationFooter}
-            <br />
-            <cite>{QuotationCite}</cite>
-          </footer>
-        </blockquote>
+        </Quotation>
       );
-      expect(screen.getByText(QuotationContent)).toHaveClass(
+      expect(screen.getByText(QuotationContent).parentNode).toHaveClass(
         'blockquote-reverse'
       );
+    });
+    test('empty quote', () => {
+      render(<Quotation />);
     });
   });
 });
