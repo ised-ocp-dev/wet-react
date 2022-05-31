@@ -8,7 +8,7 @@ describe('Archived', () => {
   const ArchivedAdditionalContent = 'addon content';
   test('renders default english Archived component', () => {
     render(
-      <Archived content="">
+      <Archived>
         <p>{ArchivedContent}</p>
       </Archived>
     );
