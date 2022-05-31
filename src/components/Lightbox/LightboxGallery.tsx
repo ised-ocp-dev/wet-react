@@ -21,30 +21,28 @@ function galleryCloseLightbox(e: Element) {
   if (gallery === null) {
     return;
   }
-  if (gallery) {
-    const html = gallery.closest('html');
-    if (html) {
-      const style = html.getAttribute('style');
-      if (style) {
-        html.setAttribute(
-          'style',
-          style.replace('margin-right: 17px; overflow: hidden;', '')
-        );
-      }
+  const html = gallery.closest('html');
+  if (html) {
+    const style = html.getAttribute('style');
+    if (style) {
+      html.setAttribute(
+        'style',
+        style.replace('margin-right: 17px; overflow: hidden;', '')
+      );
     }
-    const body = gallery.closest('body');
-    if (body) {
-      body.classList.remove('mfp-zoom-out-cur');
-      body.classList.remove('wb-modal');
-    }
-    (gallery.childNodes[0].childNodes[0] as Element).classList.remove('mfp-bg');
-    (gallery.childNodes[0].childNodes[0] as Element).classList.remove(
-      'mfp-ready'
-    );
-    (
-      gallery.childNodes[0].childNodes[1].childNodes[0] as Element
-    ).removeAttribute('open');
   }
+  const body = gallery.closest('body');
+  if (body) {
+    body.classList.remove('mfp-zoom-out-cur');
+    body.classList.remove('wb-modal');
+  }
+  (gallery.childNodes[0].childNodes[0] as Element).classList.remove('mfp-bg');
+  (gallery.childNodes[0].childNodes[0] as Element).classList.remove(
+    'mfp-ready'
+  );
+  (
+    gallery.childNodes[0].childNodes[1].childNodes[0] as Element
+  ).removeAttribute('open');
 }
 
 function getNextPrev(hop: number, e: Element) {
@@ -77,17 +75,17 @@ function getNextPrev(hop: number, e: Element) {
   const newFork =
     links[newIndex].childNodes[2].childNodes[0].childNodes[0].childNodes[0]
       .childNodes[0].childNodes[1];
-  const newSrc = (newFork.childNodes[0] as Element).getAttribute('src');
+  const newSrc = (links[newIndex].childNodes[0] as Element).getAttribute(
+    'href'
+  ); // (newFork.childNodes[0] as Element).getAttribute('src');
   if (newSrc != null) {
     (fork.childNodes[0] as Element).setAttribute('src', newSrc);
   }
   const newTitle = (
     newFork.childNodes[1].childNodes[0].childNodes[0] as Element
   ).innerHTML;
-  if (newTitle != null) {
-    (fork.childNodes[1].childNodes[0].childNodes[0] as Element).innerHTML =
-      newTitle;
-  }
+  (fork.childNodes[1].childNodes[0].childNodes[0] as Element).innerHTML =
+    newTitle;
   (fork.childNodes[1].childNodes[0].childNodes[1] as Element).innerHTML = `${
     newIndex + 1
   }/${links.length}`;

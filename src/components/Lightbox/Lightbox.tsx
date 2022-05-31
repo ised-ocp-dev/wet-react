@@ -23,7 +23,7 @@ function closeLightbox(e: Element) {
       if (style) {
         html.setAttribute(
           'style',
-          style.replace('margin-right: 17px; overflow: hidden;', '')
+          style.replace('margin-right: 17px; overflow: hidden;', 'ty')
         );
       }
     }
@@ -39,14 +39,6 @@ function closeLightbox(e: Element) {
 }
 
 function galleryOpenLightbox(e: Element) {
-  e.closest('html')?.setAttribute(
-    'style',
-    'margin-right: 17px; overflow: hidden;'
-  );
-  const body = e.closest('body');
-  if (body) {
-    body.className = 'mfp-zoom-out-cur wb-modal';
-  }
   let gallery: Element | null;
   if (e.closest('.lbx-gal') === null) {
     gallery = e.closest('.lbx-hide-gal');
@@ -55,6 +47,34 @@ function galleryOpenLightbox(e: Element) {
   }
   if (gallery === null) {
     return;
+  }
+  if (
+    (
+      e.closest('.lightbox-breezy')?.childNodes[0] as Element
+    ).classList.contains('wb-lbx')
+  ) {
+    const linkList = gallery.getElementsByClassName('lightbox-breezy');
+    if (gallery.classList.contains('lbx-gal')) {
+      for (let i = 0; i < linkList.length; i += 1) {
+        const link = linkList[i];
+        (link.childNodes[0] as Element).classList.remove('wb-lbx');
+      }
+    } else {
+      (linkList[0].childNodes[0] as Element).classList.remove('wb-lbx');
+      for (let i = 1; i < linkList.length; i += 1) {
+        const link = linkList[i];
+        (link.childNodes[0] as Element).classList.remove('wb-lbx');
+        (link.childNodes[0] as Element).setAttribute('hidden', 'true');
+      }
+    }
+  }
+  e.closest('html')?.setAttribute(
+    'style',
+    'margin-right: 17px; overflow: hidden;'
+  );
+  const body = e.closest('body');
+  if (body) {
+    body.className = 'mfp-zoom-out-cur wb-modal';
   }
   (gallery.childNodes[0].childNodes[0] as Element).className =
     'mfp-bg mfp-ready ';
@@ -169,41 +189,8 @@ const Lightbox = ({
             },
             { once: true }
           );
-        } else if (
-          (
-            (e.target as Element).closest('.lightbox-breezy')
-              ?.childNodes[0] as Element
-          ).classList.contains('wb-lbx')
-        ) {
-          // this lightbox is in an uninitialized gallery, so init gallery, then open this lightbox in gallery
-          let gallery;
-          if ((e.target as Element).closest('.lbx-gal') === null) {
-            gallery = (e.target as Element).closest('.lbx-hide-gal');
-          } else {
-            gallery = (e.target as Element).closest('.lbx-gal');
-          }
-          if (gallery === null) {
-            return;
-          }
-          const links = gallery.getElementsByClassName('lightbox-breezy');
-          if (gallery.classList.contains('lbx-gal')) {
-            for (let i = 0; i < links.length; i += 1) {
-              const link = links[i];
-              (link.childNodes[0] as Element).classList.remove('wb-lbx');
-            }
-          } else {
-            (links[0].childNodes[0] as Element).classList.remove('wb-lbx');
-            for (let i = 1; i < links.length; i += 1) {
-              const link = links[i];
-              (link.childNodes[0] as Element).classList.remove('wb-lbx');
-              (link.childNodes[0] as Element).setAttribute('hidden', 'true');
-            }
-          }
-          galleryOpenLightbox(e.target as Element);
-        } else {
-          // else this is in gallery, gallery is inited, so open this lightbox in gallery
-          galleryOpenLightbox(e.target as Element);
         }
+        galleryOpenLightbox(e.target as Element);
       }}
     >
       {children}

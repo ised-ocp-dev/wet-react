@@ -93,6 +93,104 @@ describe('Lightbox', () => {
           ?.childNodes[0]
       ).not.toHaveAttribute('open', 'open');
     });
+    test('click basic lightbox, then close with x button', () => {
+      render(<Lightbox>children</Lightbox>);
+      fireEvent.click(screen.getByText('children'));
+      fireEvent.click(screen.getAllByRole('button')[0]);
+      expect(screen.getByText('children').closest('body')).not.toHaveClass(
+        'mfp-zoom-out-cur'
+      );
+      expect(screen.getByText('children').closest('body')).not.toHaveClass(
+        'wb-modal'
+      );
+      expect(
+        screen.getByText('children').closest('.lightbox-breezy')?.childNodes[1]
+      ).not.toHaveClass('mfp-bg');
+      expect(
+        screen.getByText('children').closest('.lightbox-breezy')?.childNodes[1]
+      ).not.toHaveClass('mfp-ready');
+      expect(
+        screen.getByText('children').closest('.lightbox-breezy')?.childNodes[2]
+          ?.childNodes[0]
+      ).not.toHaveAttribute('open', 'open');
+    });
+    test('click basic lightbox, then close with div', () => {
+      render(<Lightbox>children</Lightbox>);
+      fireEvent.click(screen.getByText('children'));
+      const div = screen.getByText('children')?.parentNode?.childNodes[1];
+      if (div) {
+        fireEvent.click(div);
+      }
+      expect(screen.getByText('children').closest('body')).not.toHaveClass(
+        'mfp-zoom-out-cur'
+      );
+      expect(screen.getByText('children').closest('body')).not.toHaveClass(
+        'wb-modal'
+      );
+      expect(
+        screen.getByText('children').closest('.lightbox-breezy')?.childNodes[1]
+      ).not.toHaveClass('mfp-bg');
+      expect(
+        screen.getByText('children').closest('.lightbox-breezy')?.childNodes[1]
+      ).not.toHaveClass('mfp-ready');
+      expect(
+        screen.getByText('children').closest('.lightbox-breezy')?.childNodes[2]
+          ?.childNodes[0]
+      ).not.toHaveAttribute('open', 'open');
+    });
+    test('click basic lightbox, then close with esc but no html style', () => {
+      render(<Lightbox>children</Lightbox>);
+      fireEvent.click(screen.getByText('children'));
+      screen.getByText('children').closest('html')?.removeAttribute('style');
+      fireEvent.keyDown(screen.getByText('children'), {
+        key: 'Escape',
+        code: 'Escape',
+        keyCode: 27,
+        charCode: 27,
+      });
+      expect(screen.getByText('children').closest('body')).not.toHaveClass(
+        'mfp-zoom-out-cur'
+      );
+      expect(screen.getByText('children').closest('body')).not.toHaveClass(
+        'wb-modal'
+      );
+      expect(
+        screen.getByText('children').closest('.lightbox-breezy')?.childNodes[1]
+      ).not.toHaveClass('mfp-bg');
+      expect(
+        screen.getByText('children').closest('.lightbox-breezy')?.childNodes[1]
+      ).not.toHaveClass('mfp-ready');
+      expect(
+        screen.getByText('children').closest('.lightbox-breezy')?.childNodes[2]
+          ?.childNodes[0]
+      ).not.toHaveAttribute('open', 'open');
+    });
+    test('click basic lightbox, but no main div on close', () => {
+      render(<Lightbox>children</Lightbox>);
+      fireEvent.click(screen.getByText('children'));
+      (
+        screen.getByText('children').closest('.lightbox-breezy') as Element
+      ).classList.remove('lightbox-breezy');
+      const div = screen.getByText('children')?.parentNode?.childNodes[1];
+      if (div) {
+        fireEvent.click(div);
+      }
+      expect(screen.getByText('children').closest('body')).toHaveClass(
+        'mfp-zoom-out-cur'
+      );
+      expect(screen.getByText('children').closest('body')).toHaveClass(
+        'wb-modal'
+      );
+      expect(
+        screen.getByText('children').parentNode?.childNodes[1]
+      ).toHaveClass('mfp-bg');
+      expect(
+        screen.getByText('children').parentNode?.childNodes[1]
+      ).toHaveClass('mfp-ready');
+      expect(
+        screen.getByText('children').parentNode?.childNodes[2]?.childNodes[0]
+      ).toHaveAttribute('open', 'open');
+    });
     test('renders the Lightbox component with props, checks entire lightbox display', () => {
       render(
         <Lightbox src="srcText" title="titleText">
@@ -357,7 +455,7 @@ describe('Lightbox', () => {
         screen.getByText('children').parentNode?.childNodes[0]
       ).not.toHaveClass('wb-lbx');
     });
-    test('Test standard gallery hide with open+close', () => {
+    test('Test hide gallery with open+close', () => {
       render(
         <Lightbox.Gallery hide>
           child
@@ -408,6 +506,52 @@ describe('Lightbox', () => {
       expect(
         screen.getByText('children').parentNode?.childNodes[0]
       ).toHaveAttribute('hidden');
+    });
+    test('Test standard gallery hide with open+close+open(again)', () => {
+      render(
+        <Lightbox.Gallery hide>
+          child
+          <Lightbox />
+          <Lightbox src="srcText">children</Lightbox>
+        </Lightbox.Gallery>
+      );
+      fireEvent.click(screen.getByText('children'));
+      fireEvent.keyDown(screen.getByText('children'), {
+        key: 'Escape',
+        code: 'Escape',
+        keyCode: 27,
+        charCode: 27,
+      });
+      fireEvent.click(screen.getByText('children'));
+      expect(screen.getByText('children').closest('body')).toHaveClass(
+        'mfp-zoom-out-cur'
+      );
+      expect(screen.getByText('children').closest('body')).toHaveClass(
+        'wb-modal'
+      );
+      expect(
+        screen.getByText('child').parentNode?.childNodes[0]?.childNodes[0]
+      ).toHaveClass('mfp-bg');
+      expect(
+        screen.getByText('child').parentNode?.childNodes[0].childNodes[0]
+      ).toHaveClass('mfp-ready');
+      expect(
+        screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+          ?.childNodes[0]
+      ).toHaveAttribute('open', 'open');
+      expect(
+        screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+          ?.childNodes[0]?.childNodes[0]?.childNodes[0]?.childNodes[0]
+          ?.childNodes[1]?.childNodes[0]
+      ).toHaveClass('mfp-img');
+      expect(
+        screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+          ?.childNodes[0]?.childNodes[0]?.childNodes[0]?.childNodes[0]
+          ?.childNodes[1]?.childNodes[0]
+      ).toHaveAttribute('src', 'srcText');
+      expect(
+        screen.getByText('children').parentNode?.childNodes[0]
+      ).not.toHaveClass('wb-lbx');
     });
     test('Test standard gallery component with open+next+prev', () => {
       render(
@@ -471,7 +615,6 @@ describe('Lightbox', () => {
       screen.getByText('children').parentNode?.childNodes[0]
     ).toHaveAttribute('hidden');
   });
-
   test('Test gallery x button', () => {
     render(
       <Lightbox.Gallery hide>
@@ -499,5 +642,183 @@ describe('Lightbox', () => {
       screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
         ?.childNodes[0]
     ).not.toHaveAttribute('open', 'open');
+  });
+  test('Test gallery open, remove gallery, attempt close', () => {
+    render(
+      <Lightbox.Gallery>
+        child
+        <Lightbox src="srcText">children</Lightbox>
+      </Lightbox.Gallery>
+    );
+    fireEvent.click(screen.getByText('children'));
+    (screen.getByText('child').parentNode as Element)?.classList.remove(
+      'lbx-gal'
+    );
+    fireEvent.click(screen.getAllByRole('button')[0]);
+    expect(screen.getByText('children').closest('body')).toHaveClass(
+      'mfp-zoom-out-cur'
+    );
+    expect(screen.getByText('children').closest('body')).toHaveClass(
+      'wb-modal'
+    );
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0]?.childNodes[0]
+    ).toHaveClass('mfp-bg');
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[0]
+    ).toHaveClass('mfp-ready');
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+        ?.childNodes[0]
+    ).toHaveAttribute('open', 'open');
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+        ?.childNodes[0]?.childNodes[0]?.childNodes[0]?.childNodes[0]
+        ?.childNodes[1]?.childNodes[0]
+    ).toHaveClass('mfp-img');
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+        ?.childNodes[0]?.childNodes[0]?.childNodes[0]?.childNodes[0]
+        ?.childNodes[1]?.childNodes[0]
+    ).toHaveAttribute('src', 'srcText');
+    expect(
+      screen.getByText('children').parentNode?.childNodes[0]
+    ).not.toHaveClass('wb-lbx');
+  });
+  test('Test standard gallery component with open+ (remove gallery) +next+prev', () => {
+    render(
+      <Lightbox.Gallery>
+        child
+        <Lightbox src="one" />
+        <Lightbox src="two">children</Lightbox>
+        <Lightbox src="three" />
+      </Lightbox.Gallery>
+    );
+    fireEvent.click(screen.getByText('children'));
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+        ?.childNodes[0]?.childNodes[0]?.childNodes[0]?.childNodes[0]
+        ?.childNodes[1]?.childNodes[0]
+    ).toHaveAttribute('src', 'two');
+    (screen.getByText('child').parentNode as Element)?.classList.remove(
+      'lbx-gal'
+    );
+    fireEvent.click(screen.getAllByRole('button')[1]);
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+        ?.childNodes[0]?.childNodes[0]?.childNodes[0]?.childNodes[0]
+        ?.childNodes[1]?.childNodes[0]
+    ).toHaveAttribute('src', 'two');
+  });
+  test('Test standard gallery component with open+ no html style +close', () => {
+    render(
+      <Lightbox.Gallery>
+        child
+        <Lightbox src="two">children</Lightbox>
+      </Lightbox.Gallery>
+    );
+    fireEvent.click(screen.getByText('children'));
+    screen.getByText('children').closest('html')?.removeAttribute('style');
+    fireEvent.click(screen.getAllByRole('button')[0]);
+    expect(screen.getByText('children').closest('body')).not.toHaveClass(
+      'mfp-zoom-out-cur'
+    );
+    expect(screen.getByText('children').closest('body')).not.toHaveClass(
+      'wb-modal'
+    );
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0]?.childNodes[0]
+    ).not.toHaveClass('mfp-bg');
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[0]
+    ).not.toHaveClass('mfp-ready');
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+        ?.childNodes[0]
+    ).not.toHaveAttribute('open', 'open');
+  });
+  test('Test standard gallery component with open on invalid lightbox', () => {
+    render(
+      <Lightbox.Gallery>
+        child
+        <Lightbox>children</Lightbox>
+      </Lightbox.Gallery>
+    );
+    screen.getByText('children').closest('a')?.removeAttribute('href');
+    screen.getByText('children').closest('a')?.removeAttribute('title');
+    fireEvent.click(screen.getByText('children'));
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+        ?.childNodes[0]?.childNodes[0]?.childNodes[0]?.childNodes[0]
+        ?.childNodes[1]?.childNodes[0]
+    ).not.toHaveAttribute('src');
+  });
+  test('Test standard gallery component with open on invalid lightbox next/prev', () => {
+    render(
+      <Lightbox.Gallery>
+        child
+        <Lightbox>children</Lightbox>
+        <Lightbox>chil</Lightbox>
+      </Lightbox.Gallery>
+    );
+    screen.getByText('children').closest('a')?.removeAttribute('href');
+    screen.getByText('chil').closest('a')?.removeAttribute('href');
+    screen.getByText('chil').closest('a')?.removeAttribute('title');
+    screen.getByText('children').closest('a')?.removeAttribute('title');
+    fireEvent.click(screen.getByText('chil'));
+    fireEvent.click(screen.getAllByRole('button')[2]);
+    fireEvent.click(screen.getAllByRole('button')[2]);
+    fireEvent.click(screen.getAllByRole('button')[1]);
+    fireEvent.click(screen.getAllByRole('button')[1]);
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+        ?.childNodes[0]?.childNodes[0]?.childNodes[0]?.childNodes[0]
+        ?.childNodes[1]?.childNodes[0]
+    ).not.toHaveAttribute('src');
+  });
+  test('Test standard gallery with non-esc keypress', () => {
+    render(
+      <Lightbox.Gallery>
+        child
+        <Lightbox src="srcText">children</Lightbox>
+      </Lightbox.Gallery>
+    );
+    fireEvent.click(screen.getByText('children'));
+    fireEvent.keyDown(screen.getByText('children'), {
+      key: 'Enter',
+      code: 'Enter',
+      keyCode: 13,
+      charCode: 13,
+    });
+    fireEvent.click(screen.getByText('children'));
+    expect(screen.getByText('children').closest('body')).toHaveClass(
+      'mfp-zoom-out-cur'
+    );
+    expect(screen.getByText('children').closest('body')).toHaveClass(
+      'wb-modal'
+    );
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0]?.childNodes[0]
+    ).toHaveClass('mfp-bg');
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[0]
+    ).toHaveClass('mfp-ready');
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+        ?.childNodes[0]
+    ).toHaveAttribute('open', 'open');
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+        ?.childNodes[0]?.childNodes[0]?.childNodes[0]?.childNodes[0]
+        ?.childNodes[1]?.childNodes[0]
+    ).toHaveClass('mfp-img');
+    expect(
+      screen.getByText('child').parentNode?.childNodes[0].childNodes[1]
+        ?.childNodes[0]?.childNodes[0]?.childNodes[0]?.childNodes[0]
+        ?.childNodes[1]?.childNodes[0]
+    ).toHaveAttribute('src', 'srcText');
+    expect(
+      screen.getByText('children').parentNode?.childNodes[0]
+    ).not.toHaveClass('wb-lbx');
   });
 });
