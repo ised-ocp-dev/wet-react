@@ -1,0 +1,26 @@
+import { Tabs } from '../..';
+
+<Meta
+  title="Components/Tabs/Id"
+  component={Tabs}
+  subcomponents={{
+    'Tabs.Panel': Tabs.Panel,
+  }}
+/>
+
+# Tabs
+
+Each `Tabs` component **must** have a unique custom id. It can be anything, even a randomly generated number, but it must exist and be unique in the page.
+
+# TabPanel
+
+Each `TabPanel` component **must** have a unique custom id. It can be anything, even a randomly generated number, but it must exist and be unique in the page.
+
+## Example
+
+<Canvas>
+  <Tabs id="uniquevalue">
+    <Tabs.Panel id="text1" title="tab one" children={<p>I am a tab!</p>} />
+    <Tabs.Panel id="text2" title="tab two" children={<p>I am also a tab!</p>} />
+  </Tabs>
+</Canvas>

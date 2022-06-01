@@ -3,7 +3,7 @@ import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 import { Tabs } from '../..';
 
 <Meta
-  title="Components/Tabs/IgnoreSession"
+  title="Components/Tabs/Open"
   component={Tabs}
   subcomponents={{
     'Tabs.Panel': Tabs.Panel,
@@ -11,22 +11,27 @@ import { Tabs } from '../..';
 />
 
 export const Template = (args) => (
-  <Tabs {...args} id="unique">
+  <Tabs id="unique">
     <Tabs.Panel id="hi" title="tab one" children={<p>hello there</p>} />
-    <Tabs.Panel id="hello" title="tab two" children={<p>obi-wan!</p>} open />
+    <Tabs.Panel
+      {...args}
+      id="hello"
+      title="tab two"
+      children={<p>obi-wan!</p>}
+    />
   </Tabs>
 );
 
 # Tabs
 
-## Ignore Session
+## Open
 
-Use the `ignoreSession` attribute to open the default tab on page load, instead of the last opened tab
+Use the `open` attribute to set which tab to have open on pageload. It will select the first 'open' tab, or default to the first tab
 
 ## Example
 
 <Canvas>
-  <Story name="Ignore Session" args={{ ignoreSession: true }}>
+  <Story name="open" args={{ open: true }}>
     {Template.bind({})}
   </Story>
 </Canvas>

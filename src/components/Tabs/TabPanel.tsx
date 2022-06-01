@@ -1,14 +1,14 @@
 import React from 'react';
 
 export interface TabPanelProps extends React.HTMLAttributes<HTMLElement> {
-  /** Content of TabPanel body */
-  children?: React.ReactNode;
-  /** **REQUIRED** unique identification value **REQUIRED** */
+  /** **REQUIRED** unique identification value */
   id: string;
   /** title, displayed to user */
   title?: string;
   /** indicates that this tab should be the one that is open by default */
   open?: boolean;
+  /** Content of TabPanel body */
+  children?: React.ReactNode;
 }
 
 const TabPanel = ({
@@ -19,7 +19,9 @@ const TabPanel = ({
 }: TabPanelProps) => (
   <details id={id} open={open} className="wb-tab-panel">
     <summary>{title}</summary>
-    {children}
+    <div className="tgl-panel" role="tabpanel">
+      {children}
+    </div>
   </details>
 );
 

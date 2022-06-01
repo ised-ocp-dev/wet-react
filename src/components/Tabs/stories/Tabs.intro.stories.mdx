@@ -6,9 +6,7 @@ import { Tabs } from '../..';
   title="Components/Tabs/Intro"
   component={Tabs}
   subcomponents={{
-    'Tabs.List': Tabs.List,
-    'Tabs.ListItem': Tabs.ListItem,
-    'Tabs.PanelItem': Tabs.PanelItem,
+    'Tabs.Panel': Tabs.Panel,
   }}
 />
 
@@ -19,23 +17,9 @@ Display images and other content in a dialog box, either individually or as part
 ## Example
 
 <Canvas>
-  <Tabs
-    list={
-      <Tabs.List>
-        <Tabs.ListItem href="hi">panel 1</Tabs.ListItem>
-        <Tabs.ListItem active href="higar">
-          panel 2
-        </Tabs.ListItem>
-      </Tabs.List>
-    }
-  >
-    <Tabs.PanelItem id="hi" summary="tab one" children={<p>hello there</p>} />
-    <Tabs.PanelItem
-      id="higar"
-      summary="tab two"
-      children={<p>obi-wan!</p>}
-      open
-    />
+  <Tabs id="uniqueIDvalue">
+    <Tabs.Panel id="text1" title="tab one" children={<p>hello there!</p>} />
+    <Tabs.Panel id="text2" title="tab two" children={<p>obi-wan!</p>} />
   </Tabs>
 </Canvas>
 

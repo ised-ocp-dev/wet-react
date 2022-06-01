@@ -1,0 +1,34 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Tabs } from '../..';
+
+<Meta
+  title="Components/Tabs/Title"
+  component={Tabs}
+  subcomponents={{
+    'Tabs.List': Tabs.List,
+    'Tabs.ListItem': Tabs.ListItem,
+    'Tabs.PanelItem': Tabs.PanelItem,
+  }}
+/>
+
+export const Template = (args) => (
+  <Tabs id="unique">
+    <Tabs.Panel id="hi" {...args} children={<p>hello there</p>} />
+    <Tabs.Panel id="hello" title="tab two" children={<p>obi-wan!</p>} />
+  </Tabs>
+);
+
+# Tabs
+
+## Title
+
+Use the `title` attribute to set the title of a tab
+
+## Example
+
+<Canvas>
+  <Story name="Title" args={{ title: 'custom title' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
