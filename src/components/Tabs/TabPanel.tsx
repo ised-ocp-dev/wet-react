@@ -1,4 +1,5 @@
 import React from 'react';
+import TabRB from 'react-bootstrap/Tab';
 
 export interface TabPanelProps extends React.HTMLAttributes<HTMLElement> {
   /** **REQUIRED** unique identification value */

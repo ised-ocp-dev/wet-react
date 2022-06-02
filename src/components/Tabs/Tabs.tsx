@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import TabsRB from 'react-bootstrap/Tabs';
 import '../../style.css';
 
 export interface TabsProps extends React.HTMLAttributes<HTMLElement> {
@@ -14,11 +15,11 @@ function closeAllTabs(tabs: Element) {
   const tabPanels = tabs.getElementsByClassName('wb-tab-panel');
   for (let i = 0; i < tabPanels.length; i += 1) {
     (tabs.childNodes[0].childNodes[i] as Element).classList.remove('active');
-    (tabs.childNodes[0].childNodes[i] as Element).setAttribute(
+    (tabs.childNodes[0].childNodes[i].childNodes[0] as Element).setAttribute(
       'tabIndex',
       '-1'
     );
-    (tabs.childNodes[0].childNodes[i] as Element).setAttribute(
+    (tabs.childNodes[0].childNodes[i].childNodes[0] as Element).setAttribute(
       'aria-selected',
       'false'
     );
@@ -151,6 +152,9 @@ function initTabs(id: string) {
 const Tabs = ({ id, children, ignoreSession = false }: TabsProps) => {
   window.addEventListener('load', () => initTabs(id));
   window.addEventListener('resize', () => handleResize(id));
+  useEffect(() => {
+    initTabs(id);
+  }, []);
   return (
     <div
       className={`wb-tabs wb-init tabs-acc ${
