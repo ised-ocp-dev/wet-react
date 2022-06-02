@@ -99,7 +99,7 @@ function galleryOpenLightbox(e: Element) {
       gallery.childNodes[0].childNodes[1].childNodes[0].childNodes[0]
         .childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0]
         .childNodes[0] as Element
-    ).innerHTML = title;
+    ).textContent = title;
   }
   (
     gallery.childNodes[0].childNodes[1].childNodes[0].childNodes[0]
