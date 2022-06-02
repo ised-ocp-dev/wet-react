@@ -39,12 +39,7 @@ function closeLightbox(e: Element) {
 }
 
 function galleryOpenLightbox(e: Element) {
-  let gallery: Element | null;
-  if (e.closest('.lbx-gal') === null) {
-    gallery = e.closest('.lbx-hide-gal');
-  } else {
-    gallery = e.closest('.lbx-gal');
-  }
+  const gallery = e.closest('.lbx-gal');
   if (gallery === null) {
     return;
   }
@@ -54,18 +49,9 @@ function galleryOpenLightbox(e: Element) {
     ).classList.contains('wb-lbx')
   ) {
     const linkList = gallery.getElementsByClassName('lightbox-breezy');
-    if (gallery.classList.contains('lbx-gal')) {
-      for (let i = 0; i < linkList.length; i += 1) {
-        const link = linkList[i];
-        (link.childNodes[0] as Element).classList.remove('wb-lbx');
-      }
-    } else {
-      (linkList[0].childNodes[0] as Element).classList.remove('wb-lbx');
-      for (let i = 1; i < linkList.length; i += 1) {
-        const link = linkList[i];
-        (link.childNodes[0] as Element).classList.remove('wb-lbx');
-        (link.childNodes[0] as Element).setAttribute('hidden', 'true');
-      }
+    for (let i = 0; i < linkList.length; i += 1) {
+      const link = linkList[i];
+      (link.childNodes[0] as Element).classList.remove('wb-lbx');
     }
   }
   e.closest('html')?.setAttribute(
@@ -121,15 +107,21 @@ function galleryOpenLightbox(e: Element) {
       .childNodes[1] as Element
   ).innerHTML = `${index + 1}/${links.length}`;
 
-  document.addEventListener(
-    'keydown',
-    (event) => {
-      if (event.key === 'Escape' && gallery != null) {
-        fireEvent.click(gallery.childNodes[0].childNodes[0]);
-      }
-    },
-    { once: true }
-  );
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && gallery != null) {
+      fireEvent.click(gallery.childNodes[0].childNodes[0]);
+    }
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft' && gallery != null) {
+      fireEvent.click(gallery.getElementsByClassName('mfp-arrow-left')[0]);
+    }
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight' && gallery != null) {
+      fireEvent.click(gallery.getElementsByClassName('mfp-arrow-right')[0]);
+    }
+  });
 }
 
 const Lightbox = ({
@@ -146,10 +138,7 @@ const Lightbox = ({
       hidden={hidden}
       onClick={(e) => {
         e.preventDefault();
-        if (
-          (e.target as Element).closest('.lbx-gal') === null &&
-          (e.target as Element).closest('.lbx-hide-gal') === null
-        ) {
+        if ((e.target as Element).closest('.lbx-gal') === null) {
           // this lightbox is standalone, do lightbox things
           (e.target as Element)
             .closest('html')
@@ -180,15 +169,11 @@ const Lightbox = ({
               inline: 'center',
             });
           }
-          document.addEventListener(
-            'keydown',
-            (event) => {
-              if (event.key === 'Escape') {
-                closeLightbox(e.target as Element);
-              }
-            },
-            { once: true }
-          );
+          document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+              closeLightbox(e.target as Element);
+            }
+          });
         }
         galleryOpenLightbox(e.target as Element);
       }}
@@ -203,7 +188,7 @@ const Lightbox = ({
         closeLightbox(e1.target as Element);
       }}
       onKeyDown={() => {
-        // ignore, handled elsewhere. lint is dumb.
+        // ignore, handled elsewhere
       }}
     />
     <div

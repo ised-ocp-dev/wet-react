@@ -3,7 +3,7 @@ import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 import { Lightbox } from '../..';
 
 <Meta
-  title="Components/Lightbox/Gallery"
+  title="Components/Lightbox/Title"
   component={Lightbox}
   subcomponents={{
     'Lightbox.Gallery': Lightbox.Gallery,
@@ -12,23 +12,7 @@ import { Lightbox } from '../..';
 
 export const Template = (args) => (
   <span>
-    <Lightbox.Gallery {...args}>
-      <Lightbox
-        title="Example lightbox 1"
-        src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
-        children={<p>First Picture</p>}
-      />
-      <Lightbox
-        title="Example lightbox 2"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTJh5kgOqt5xacw9IhGakSqpdNDcvjhq6qiLGcfEu-u2Q8OeazkXIh_tLZx0F0ue5eGIk&usqp=CAU"
-        children={<p>Second Picture</p>}
-      />
-      <Lightbox
-        title="Example lightbox 3"
-        src="https://www.fearfreehappyhomes.com/wp-content/uploads/2020/08/shutterstock_707431309-e1554172878508.jpg"
-        children={<p>Third Picture</p>}
-      />
-    </Lightbox.Gallery>
+    <Lightbox {...args} />
     <p>
       <br />
       spacing text
@@ -82,14 +66,21 @@ export const Template = (args) => (
 
 # Lightbox
 
-## Gallery
+## Title
 
-Use the `Lightbox.Gallery` element to make a gallery for displaying multiple lightboxes
+Use the `title` attribute to set the text under the lightbox, and the tooltip popup on mouseover
 
 ## Example
 
 <Canvas>
-  <Story name="Gallery" args={{}}>
+  <Story
+    name="Title"
+    args={{
+      title: 'This will be altered',
+      src: 'https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg',
+      children: <p>Open the lightbox to see your altered title!</p>,
+    }}
+  >
     {Template.bind({})}
   </Story>
 </Canvas>

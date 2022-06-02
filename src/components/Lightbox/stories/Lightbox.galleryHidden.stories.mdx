@@ -3,30 +3,44 @@ import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 import { Lightbox } from '../..';
 
 <Meta
-  title="Components/Lightbox/Gallery"
+  title="Components/Lightbox/Gallery_Hidden"
   component={Lightbox}
   subcomponents={{
     'Lightbox.Gallery': Lightbox.Gallery,
   }}
 />
 
-export const Template = (args) => (
+export const TemplateTwo = (args) => (
   <span>
-    <Lightbox.Gallery {...args}>
+    <Lightbox.Gallery>
       <Lightbox
         title="Example lightbox 1"
         src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
-        children={<p>First Picture</p>}
+        children={
+          <span>
+            <img
+              src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
+              height="300px"
+            />
+            <p>First Picture, so not hidden</p>
+          </span>
+        }
       />
       <Lightbox
         title="Example lightbox 2"
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTJh5kgOqt5xacw9IhGakSqpdNDcvjhq6qiLGcfEu-u2Q8OeazkXIh_tLZx0F0ue5eGIk&usqp=CAU"
         children={<p>Second Picture</p>}
+        {...args}
       />
+      <p>
+        Note the other pictures are hidden, but you can see them when going
+        through the gallery
+      </p>
       <Lightbox
         title="Example lightbox 3"
         src="https://www.fearfreehappyhomes.com/wp-content/uploads/2020/08/shutterstock_707431309-e1554172878508.jpg"
         children={<p>Third Picture</p>}
+        {...args}
       />
     </Lightbox.Gallery>
     <p>
@@ -53,43 +67,21 @@ export const Template = (args) => (
       <br />
       spacing text
       <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
     </p>
   </span>
 );
 
 # Lightbox
 
-## Gallery
+## Hidden
 
-Use the `Lightbox.Gallery` element to make a gallery for displaying multiple lightboxes
+To hide lightboxes in a gallery, for example all but the first lightbox, use the `hidden` attribute in the
+undesired lightboxes
 
-## Example
+## Example with hidden
 
 <Canvas>
-  <Story name="Gallery" args={{}}>
-    {Template.bind({})}
+  <Story name="Gallery_Hidden" args={{ hidden: true }}>
+    {TemplateTwo.bind({})}
   </Story>
 </Canvas>

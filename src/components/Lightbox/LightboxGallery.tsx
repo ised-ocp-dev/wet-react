@@ -7,17 +7,10 @@ export interface LightboxGalleryProps
   children?: React.ReactNode;
   /** HTML tag the gallery will be based on */
   tag?: string;
-  /** hides all but the first item in the gallery */
-  hide?: boolean;
 }
 
 function galleryCloseLightbox(e: Element) {
-  let gallery: Element | null;
-  if (e.closest('.lbx-gal') === null) {
-    gallery = e.closest('.lbx-hide-gal');
-  } else {
-    gallery = e.closest('.lbx-gal');
-  }
+  const gallery = e.closest('.lbx-gal');
   if (gallery === null) {
     return;
   }
@@ -46,12 +39,7 @@ function galleryCloseLightbox(e: Element) {
 }
 
 function getNextPrev(hop: number, e: Element) {
-  let gallery: Element | null;
-  if (e.closest('.lbx-gal') === null) {
-    gallery = e.closest('.lbx-hide-gal');
-  } else {
-    gallery = e.closest('.lbx-gal');
-  }
+  const gallery = e.closest('.lbx-gal');
   if (gallery === null) {
     return;
   }
@@ -77,7 +65,7 @@ function getNextPrev(hop: number, e: Element) {
       .childNodes[0].childNodes[1];
   const newSrc = (links[newIndex].childNodes[0] as Element).getAttribute(
     'href'
-  ); // (newFork.childNodes[0] as Element).getAttribute('src');
+  );
   if (newSrc != null) {
     (fork.childNodes[0] as Element).setAttribute('src', newSrc);
   }
@@ -94,11 +82,8 @@ function getNextPrev(hop: number, e: Element) {
 const LightboxGallery = ({
   children,
   tag = 'section',
-  hide = false,
 }: LightboxGalleryProps) => {
-  const name = hide
-    ? 'lbx-hide-gal wb-init wb-lbx-inited'
-    : 'lbx-gal wb-init wb-lbx-inited';
+  const name = 'lbx-gal wb-init wb-lbx-inited';
   return React.createElement(
     tag,
     { className: name },
@@ -111,7 +96,7 @@ const LightboxGallery = ({
           galleryCloseLightbox(e1.target as Element);
         }}
         onKeyDown={() => {
-          // ignore, handled elsewhere. lint is dumb.
+          // ignore, handled elsewhere
         }}
       />
       <div
