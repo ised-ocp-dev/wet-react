@@ -29,13 +29,10 @@ function galleryCloseLightbox(e: Element) {
     body.classList.remove('mfp-zoom-out-cur');
     body.classList.remove('wb-modal');
   }
-  (gallery.childNodes[0].childNodes[0] as Element).classList.remove('mfp-bg');
-  (gallery.childNodes[0].childNodes[0] as Element).classList.remove(
-    'mfp-ready'
-  );
-  (
-    gallery.childNodes[0].childNodes[1].childNodes[0] as Element
-  ).removeAttribute('open');
+  (gallery.childNodes[0] as Element).classList.remove('mfp-bg');
+  (gallery.childNodes[0] as Element).classList.remove('mfp-ready');
+  (gallery.childNodes[1] as HTMLElement).style.removeProperty('height');
+  (gallery.childNodes[1].childNodes[0] as Element).removeAttribute('open');
 }
 
 function getNextPrev(hop: number, e: Element) {
@@ -45,8 +42,8 @@ function getNextPrev(hop: number, e: Element) {
   }
   const links = gallery.getElementsByClassName('lightbox-breezy');
   let index = 0;
-  const fork = gallery.childNodes[0].childNodes[1].childNodes[0].childNodes[0]
-    .childNodes[0].childNodes[0].childNodes[1] as Element;
+  const fork = gallery.childNodes[1].childNodes[0].childNodes[0].childNodes[0]
+    .childNodes[0].childNodes[1] as Element;
   for (let i = 0; i < links.length; i += 1) {
     if (
       (links[i].childNodes[0] as Element).getAttribute('href') ===
@@ -77,17 +74,23 @@ function getNextPrev(hop: number, e: Element) {
   (fork.childNodes[1].childNodes[0].childNodes[1] as Element).innerHTML = `${
     newIndex + 1
   }/${links.length}`;
+  (
+    gallery.childNodes[1].childNodes[0].childNodes[0].childNodes[0] as Element
+  ).scrollIntoView({
+    behavior: 'auto',
+    block: 'center',
+    inline: 'center',
+  });
 }
 
 const LightboxGallery = ({
   children,
   tag = 'section',
+  ...rest
 }: LightboxGalleryProps) => {
   const name = 'lbx-gal wb-init wb-lbx-inited';
-  return React.createElement(
-    tag,
-    { className: name },
-    <span>
+  return (
+    <span className={name}>
       <div
         role="link"
         tabIndex={0}
@@ -155,7 +158,7 @@ const LightboxGallery = ({
           </div>
         </dialog>
       </div>
-      {children}
+      {React.createElement(tag, { ...rest }, children)}
     </span>
   );
 };

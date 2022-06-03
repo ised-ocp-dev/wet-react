@@ -1,16 +1,13 @@
 import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 
 import Link from '../Link';
+import flamingoPic from '@storybook/react/flamingo.jpg';
 
 <Meta title="Typography/Link/Image Link" component={Link} />
 
 export const Template = (args) => (
   <Link {...args}>
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg"
-      alt="Sample text"
-      width="200"
-    />
+    <img src={flamingoPic} alt="Sample text" width="200" />
   </Link>
 );
 

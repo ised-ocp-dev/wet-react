@@ -1,9 +1,12 @@
 import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 
 import { Lightbox } from '../..';
+import cat1 from '@storybook/react/cat_1.jpg';
+import cat2 from '@storybook/react/cat_2.jpg';
+import cat3 from '@storybook/react/cat_3.jpg';
 
 <Meta
-  title="Components/Lightbox/Gallery_Hidden"
+  title="Components/Lightbox/Gallery Hidden"
   component={Lightbox}
   subcomponents={{
     'Lightbox.Gallery': Lightbox.Gallery,
@@ -11,64 +14,34 @@ import { Lightbox } from '../..';
 />
 
 export const TemplateTwo = (args) => (
-  <span>
-    <Lightbox.Gallery>
-      <Lightbox
-        title="Example lightbox 1"
-        src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
-        children={
-          <span>
-            <img
-              src="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg"
-              height="300px"
-            />
-            <p>First Picture, so not hidden</p>
-          </span>
-        }
-      />
-      <Lightbox
-        title="Example lightbox 2"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTJh5kgOqt5xacw9IhGakSqpdNDcvjhq6qiLGcfEu-u2Q8OeazkXIh_tLZx0F0ue5eGIk&usqp=CAU"
-        children={<p>Second Picture</p>}
-        {...args}
-      />
-      <p>
-        Note the other pictures are hidden, but you can see them when going
-        through the gallery
-      </p>
-      <Lightbox
-        title="Example lightbox 3"
-        src="https://www.fearfreehappyhomes.com/wp-content/uploads/2020/08/shutterstock_707431309-e1554172878508.jpg"
-        children={<p>Third Picture</p>}
-        {...args}
-      />
-    </Lightbox.Gallery>
+  <Lightbox.Gallery>
+    <Lightbox
+      title="Example lightbox 1"
+      src={cat1}
+      children={
+        <span>
+          <img src={cat1} height="300px" />
+          <p>First Picture, so not hidden</p>
+        </span>
+      }
+    />
+    <Lightbox
+      title="Example lightbox 2"
+      src={cat2}
+      children={<p>Second Picture</p>}
+      {...args}
+    />
     <p>
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
+      Note the other pictures are hidden, but you can see them when going
+      through the gallery
     </p>
-  </span>
+    <Lightbox
+      title="Example lightbox 3"
+      src={cat3}
+      children={<p>Third Picture</p>}
+      {...args}
+    />
+  </Lightbox.Gallery>
 );
 
 # Lightbox
@@ -81,7 +54,7 @@ undesired lightboxes
 ## Example with hidden
 
 <Canvas>
-  <Story name="Gallery_Hidden" args={{ hidden: true }}>
+  <Story name="Gallery Hidden" args={{ hidden: true }}>
     {TemplateTwo.bind({})}
   </Story>
 </Canvas>

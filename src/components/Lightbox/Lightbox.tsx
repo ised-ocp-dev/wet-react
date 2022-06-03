@@ -34,6 +34,7 @@ function closeLightbox(e: Element) {
     }
     (main.childNodes[1] as Element).classList.remove('mfp-bg');
     (main.childNodes[1] as Element).classList.remove('mfp-ready');
+    (main.childNodes[2] as HTMLElement).style.removeProperty('height');
     (main.childNodes[2].childNodes[0] as Element).removeAttribute('open');
   }
 }
@@ -62,20 +63,7 @@ function galleryOpenLightbox(e: Element) {
   if (body) {
     body.className = 'mfp-zoom-out-cur wb-modal';
   }
-  (gallery.childNodes[0].childNodes[0] as Element).className =
-    'mfp-bg mfp-ready ';
-  (gallery.childNodes[0].childNodes[1].childNodes[0] as Element).setAttribute(
-    'open',
-    'open'
-  );
-  (
-    gallery.childNodes[0].childNodes[1].childNodes[0].childNodes[0]
-      .childNodes[0] as Element
-  ).scrollIntoView({
-    behavior: 'auto',
-    block: 'center',
-    inline: 'center',
-  });
+  (gallery.childNodes[0] as Element).className = 'mfp-bg mfp-ready ';
   // set src, title, mfp-counter
   const link = e.closest('.lightbox-breezy')?.childNodes[0] as Element;
   const src = link.getAttribute('href');
@@ -90,26 +78,41 @@ function galleryOpenLightbox(e: Element) {
   }
   if (src != null) {
     (
-      gallery.childNodes[0].childNodes[1].childNodes[0].childNodes[0]
-        .childNodes[0].childNodes[0].childNodes[1].childNodes[0] as Element
+      gallery.childNodes[1].childNodes[0].childNodes[0].childNodes[0]
+        .childNodes[0].childNodes[1].childNodes[0] as Element
     ).setAttribute('src', src);
   }
   if (title != null) {
     (
-      gallery.childNodes[0].childNodes[1].childNodes[0].childNodes[0]
-        .childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0]
+      gallery.childNodes[1].childNodes[0].childNodes[0].childNodes[0]
+        .childNodes[0].childNodes[1].childNodes[1].childNodes[0]
         .childNodes[0] as Element
     ).textContent = title;
   }
+  (gallery.childNodes[1] as HTMLElement).style.height = `${
+    (
+      gallery.childNodes[1].childNodes[0].childNodes[0].childNodes[0]
+        .childNodes[0].childNodes[1].childNodes[0] as HTMLImageElement
+    ).naturalHeight
+  }px`;
+  (gallery.childNodes[1].childNodes[0] as Element).setAttribute('open', 'open');
   (
-    gallery.childNodes[0].childNodes[1].childNodes[0].childNodes[0]
-      .childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0]
+    gallery.childNodes[1].childNodes[0].childNodes[0].childNodes[0]
+      .childNodes[0] as Element
+  ).scrollIntoView({
+    behavior: 'auto',
+    block: 'center',
+    inline: 'center',
+  });
+  (
+    gallery.childNodes[1].childNodes[0].childNodes[0].childNodes[0]
+      .childNodes[0].childNodes[1].childNodes[1].childNodes[0]
       .childNodes[1] as Element
   ).innerHTML = `${index + 1}/${links.length}`;
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && gallery != null) {
-      fireEvent.click(gallery.childNodes[0].childNodes[0]);
+      fireEvent.click(gallery.childNodes[0]);
     }
   });
   document.addEventListener('keydown', (event) => {
@@ -155,15 +158,19 @@ const Lightbox = ({
           const sib2 = (e.target as Element).closest('.lightbox-breezy')
             ?.childNodes[2];
           if (sib2) {
+            (sib2 as HTMLElement).style.height = `${
+              (
+                sib2.childNodes[0].childNodes[0].childNodes[0].childNodes[0]
+                  .childNodes[1].childNodes[0] as HTMLImageElement
+              ).naturalHeight
+            }px`;
             const sib2c = sib2.childNodes[0];
             if (sib2c) {
               (sib2c as Element).setAttribute('open', 'open');
             }
-          }
-          const image = (e.target as Element).closest('.lightbox-breezy')
-            ?.childNodes[2].childNodes[0].childNodes[0].childNodes[0]; // center lightbox image
-          if (image) {
-            (image as Element).scrollIntoView({
+            (
+              sib2.childNodes[0].childNodes[0].childNodes[0] as Element
+            ).scrollIntoView({
               behavior: 'auto',
               block: 'center',
               inline: 'center',

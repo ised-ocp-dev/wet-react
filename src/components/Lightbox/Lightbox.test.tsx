@@ -5,6 +5,8 @@ import Lightbox from '@components/Lightbox';
 
 window.HTMLElement.prototype.scrollIntoView = jest.fn();
 
+// removed span below 'lbx-gal'
+
 describe('Lightbox', () => {
   describe('Test Lightbox', () => {
     test('renders the basic Lightbox component', () => {

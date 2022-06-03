@@ -1,6 +1,9 @@
 import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 
 import { Lightbox } from '../..';
+import cat1 from '@storybook/react/cat_1.jpg';
+import cat2 from '@storybook/react/cat_2.jpg';
+import cat3 from '@storybook/react/cat_3.jpg';
 
 <Meta
   title="Components/Lightbox/Src"
@@ -10,59 +13,7 @@ import { Lightbox } from '../..';
   }}
 />
 
-export const Template = (args) => (
-  <span>
-    <Lightbox {...args} />
-    <p>
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-      <br />
-      spacing text
-    </p>
-  </span>
-);
+export const Template = (args) => <Lightbox {...args} />;
 
 # Lightbox
 
@@ -77,7 +28,7 @@ Use the `src` attribute to set the link to the image you want to display in the 
     name="Src"
     args={{
       title: 'Example lightbox',
-      src: 'https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-e28def62c2d01ee6368d9aa312c68998415b5e72-s1100-c50.jpg',
+      src: cat2,
       children: <p>Alter my src!</p>,
     }}
   >
