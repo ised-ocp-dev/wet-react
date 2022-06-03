@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../style.css';
 
 export interface LightboxGalleryProps
@@ -7,14 +7,12 @@ export interface LightboxGalleryProps
   children?: React.ReactNode;
   /** HTML tag the gallery will be based on */
   tag?: string;
+  /** unique custom id for gallery */
+  id: string;
 }
 
 function galleryCloseLightbox(e: Element) {
-  const gallery = e.closest('.lbx-gal');
-  if (gallery === null) {
-    return;
-  }
-  const html = gallery.closest('html');
+  const html = e.closest('html');
   if (html) {
     const style = html.getAttribute('style');
     if (style) {
@@ -24,78 +22,139 @@ function galleryCloseLightbox(e: Element) {
       );
     }
   }
-  const body = gallery.closest('body');
+  const body = e.closest('body');
   if (body) {
     body.classList.remove('mfp-zoom-out-cur');
     body.classList.remove('wb-modal');
   }
-  (gallery.childNodes[0] as Element).classList.remove('mfp-bg');
-  (gallery.childNodes[0] as Element).classList.remove('mfp-ready');
-  (gallery.childNodes[1] as HTMLElement).style.removeProperty('height');
-  (gallery.childNodes[1].childNodes[0] as Element).removeAttribute('open');
 }
 
 function getNextPrev(hop: number, e: Element) {
-  const gallery = e.closest('.lbx-gal');
-  if (gallery === null) {
+  window.setTimeout(
+    () =>
+      (
+        e.closest('.lbx-gal')?.childNodes[1].childNodes[0].childNodes[0]
+          .childNodes[0].childNodes[0] as Element
+      ).scrollIntoView({
+        behavior: 'auto',
+        block: 'center',
+        inline: 'center',
+      }),
+    0
+  );
+}
+
+function galleryOpenLightbox(event: Event, id: string) {
+  const e = event.target as Element;
+  const gallery = document.getElementById(id);
+  if (!gallery) {
     return;
   }
-  const links = gallery.getElementsByClassName('lightbox-breezy');
-  let index = 0;
-  const fork = gallery.childNodes[1].childNodes[0].childNodes[0].childNodes[0]
-    .childNodes[0].childNodes[1] as Element;
-  for (let i = 0; i < links.length; i += 1) {
-    if (
-      (links[i].childNodes[0] as Element).getAttribute('href') ===
-      (fork.childNodes[0] as Element).getAttribute('src')
-    ) {
-      index = i;
-      break;
-    }
-  }
-  const newIndex =
-    (index + hop) % links.length >= 0
-      ? (index + hop) % links.length
-      : links.length - 1;
-  const newFork =
-    links[newIndex].childNodes[2].childNodes[0].childNodes[0].childNodes[0]
-      .childNodes[0].childNodes[1];
-  const newSrc = (links[newIndex].childNodes[0] as Element).getAttribute(
-    'href'
+  e.closest('html')?.setAttribute(
+    'style',
+    'margin-right: 17px; overflow: hidden;'
   );
-  if (newSrc != null) {
-    (fork.childNodes[0] as Element).setAttribute('src', newSrc);
+  const body = e.closest('body');
+  if (body) {
+    body.className = 'mfp-zoom-out-cur wb-modal';
   }
-  const newTitle = (
-    newFork.childNodes[1].childNodes[0].childNodes[0] as Element
-  ).innerHTML;
-  (fork.childNodes[1].childNodes[0].childNodes[0] as Element).innerHTML =
-    newTitle;
-  (fork.childNodes[1].childNodes[0].childNodes[1] as Element).innerHTML = `${
-    newIndex + 1
-  }/${links.length}`;
-  (
-    gallery.childNodes[1].childNodes[0].childNodes[0].childNodes[0] as Element
-  ).scrollIntoView({
-    behavior: 'auto',
-    block: 'center',
-    inline: 'center',
-  });
+  window.setTimeout(
+    () =>
+      (
+        gallery.childNodes[1].childNodes[0].childNodes[0].childNodes[0]
+          .childNodes[0] as Element
+      ).scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center',
+      }),
+    0
+  );
 }
 
 const LightboxGallery = ({
   children,
   tag = 'section',
+  id,
   ...rest
 }: LightboxGalleryProps) => {
-  const name = 'lbx-gal wb-init wb-lbx-inited';
+  const [open, setOpen] = React.useState(false);
+  const [index, setIndex] = React.useState(-1);
+  const temp = document.getElementById(id);
+  const numImages =
+    temp === null ? 0 : temp.getElementsByClassName('lightbox-breezy').length;
+  function tempOpen(e: Event) {
+    galleryOpenLightbox(e, id);
+    setOpen(true);
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Escape') {
+        setOpen(false);
+        galleryCloseLightbox(ev.target as Element);
+      }
+    });
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key === 'ArrowLeft') {
+        const newIndex = (index - 1) % numImages;
+        setIndex(newIndex < 0 ? numImages - 1 : newIndex);
+        window.setTimeout(
+          () =>
+            (
+              (ev.target as Element).closest('.lbx-gal')?.childNodes[1]
+                .childNodes[0].childNodes[0].childNodes[0]
+                .childNodes[0] as Element
+            ).scrollIntoView({
+              behavior: 'auto',
+              block: 'center',
+              inline: 'center',
+            }),
+          0
+        );
+      }
+    });
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key === 'ArrowRight') {
+        setIndex((index + 1) % numImages);
+        console.log(index);
+        getNextPrev(1, ev.target as Element);
+      }
+    });
+    const temp2 = Number(
+      (
+        (e.target as Element).closest('.lightbox-breezy')
+          ?.childNodes[0] as Element
+      ).getAttribute('index')
+    );
+    if (temp2 || temp2 === 0) {
+      setIndex(temp2);
+    }
+  }
+
+  useEffect(() => {
+    const linkList = document
+      .getElementById(id)
+      ?.getElementsByClassName('lightbox-breezy');
+    if (linkList) {
+      for (let i = 0; i < linkList.length; i += 1) {
+        (linkList[i].childNodes[0] as Element).classList.remove('wb-lbx');
+        (linkList[i].childNodes[0] as Element).setAttribute('index', `${i}`);
+        (linkList[i].childNodes[0] as HTMLElement).addEventListener(
+          'click',
+          (e) => tempOpen(e),
+          false
+        );
+      }
+    }
+  }, []);
+
   return (
-    <span className={name}>
+    <span className="lbx-gal wb-init wb-lbx-inited" id={id}>
       <div
         role="link"
         tabIndex={0}
         aria-label="Close Lightbox"
+        className={open ? 'mfp-bg mfp-ready' : ''}
         onClick={(e1) => {
+          setOpen(false);
           galleryCloseLightbox(e1.target as Element);
         }}
         onKeyDown={() => {
@@ -104,9 +163,12 @@ const LightboxGallery = ({
       />
       <div
         className="mfp-close-btn-in mfp-auto-cursor mfp-ready"
-        style={{ overflow: 'hidden auto' }}
+        style={{
+          overflow: 'hidden auto',
+          height: open ? `${window.innerHeight}px` : 'auto',
+        }}
       >
-        <dialog className="mfp-container">
+        <dialog className="mfp-container" open={open}>
           <div className="mfp-container mfp-s-ready mfp-image-holder">
             <div
               className="mfp-content"
@@ -119,17 +181,49 @@ const LightboxGallery = ({
                   type="button"
                   className="mfp-close"
                   onClick={(e1) => {
+                    setOpen(false);
                     galleryCloseLightbox(e1.target as Element);
                   }}
                 >
                   ×<span className="wb-inv">Close overlay (escape key)</span>
                 </button>
                 <figure>
-                  <img className="mfp-img" alt="hello" />
+                  <img
+                    className="mfp-img"
+                    src={
+                      (document
+                        .getElementById(id)
+                        ?.getElementsByClassName('lightbox-breezy')[index]
+                        ?.childNodes[0] as Element)
+                        ? (
+                            document
+                              .getElementById(id)
+                              ?.getElementsByClassName('lightbox-breezy')[index]
+                              ?.childNodes[0] as Element
+                          ).getAttribute('href')
+                        : ''
+                    }
+                    alt="hello"
+                  />
                   <figcaption>
                     <div className="mfp-bottom-bar" id="lbx-title">
-                      <div className="mfp-title"> </div>
-                      <div className="mfp-counter"> </div>
+                      <div className="mfp-title">
+                        {(document
+                          .getElementById(id)
+                          ?.getElementsByClassName('lightbox-breezy')[index]
+                          ?.childNodes[0] as Element)
+                          ? (
+                              document
+                                .getElementById(id)
+                                ?.getElementsByClassName('lightbox-breezy')[
+                                index
+                              ]?.childNodes[0] as Element
+                            ).getAttribute('title')
+                          : ''}
+                      </div>
+                      <div className="mfp-counter">{`${
+                        index + 1
+                      }/${numImages}`}</div>
                     </div>
                   </figcaption>
                 </figure>
@@ -140,6 +234,8 @@ const LightboxGallery = ({
               type="button"
               className="mfp-arrow mfp-arrow-left mfp-prevent-close"
               onClick={(e) => {
+                const newIndex = (index - 1) % numImages;
+                setIndex(newIndex < 0 ? numImages - 1 : newIndex);
                 getNextPrev(-1, e.target as Element);
               }}
             >
@@ -150,6 +246,7 @@ const LightboxGallery = ({
               type="button"
               className="mfp-arrow mfp-arrow-right mfp-prevent-close"
               onClick={(e) => {
+                setIndex((index + 1) % numImages);
                 getNextPrev(1, e.target as Element);
               }}
             >
@@ -164,5 +261,3 @@ const LightboxGallery = ({
 };
 
 export default LightboxGallery;
-
-x = 5;
