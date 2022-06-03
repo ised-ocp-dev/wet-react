@@ -164,5 +164,3 @@ const LightboxGallery = ({
 };
 
 export default LightboxGallery;
-
-x = 5;
