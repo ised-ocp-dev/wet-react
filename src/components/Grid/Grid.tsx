@@ -10,10 +10,6 @@ export interface GridProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const Grid = ({ fluid = false, children }: GridProps) =>
-  fluid ? (
-    <div className="container-fluid">{children}</div>
-  ) : (
-    <GridRB className="container">{children}</GridRB>
-  );
+  fluid ? <GridRB fluid>{children}</GridRB> : <GridRB>{children}</GridRB>;
 
 export default Grid;

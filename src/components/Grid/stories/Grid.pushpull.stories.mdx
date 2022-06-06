@@ -14,15 +14,19 @@ One row has a width of 12. Use the `xsPush`, `smPush`, `mdPush`, `lgPush`, `xsPu
 the pull and push (out of 12) that a given cell will have on a given viewport size (xs, sm, md, lg). This allows you to swap cell positions
 on different viewport sizes
 
-## example
+## Example using push pull to swap cell positions
 
 <Canvas>
   <Grid.Row>
     <Grid.Cell mdWidth={9} mdPush={3}>
-      <div class="well well-sm brdr-rds-0">.col-md-9 .col-md-push-3</div>
+      <div class="well well-sm brdr-rds-0">
+        First column, should render on left
+      </div>
     </Grid.Cell>
     <Grid.Cell mdWidth={3} mdPull={9}>
-      <div class="well well-sm brdr-rds-0">.col-md-3 .col-md-pull-9</div>
+      <div class="well well-sm brdr-rds-0">
+        Second column, should render on right
+      </div>
     </Grid.Cell>
   </Grid.Row>
 </Canvas>
