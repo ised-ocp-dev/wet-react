@@ -1,5 +1,4 @@
 import React from 'react';
-import InputGroupRB from 'react-bootstrap/InputGroup';
 import '../../style.css';
 
 export interface InputGroupTextProps
@@ -18,7 +17,7 @@ const InputGroupText = ({
   className = '',
   ...rest
 }: InputGroupTextProps) => (
-  <span className="input-group-addon" id={id}>
+  <span className={`input-group-addon ${className}`} id={id} {...rest}>
     {children}
   </span>
 );
