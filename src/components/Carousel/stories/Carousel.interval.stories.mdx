@@ -1,6 +1,10 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
 
 import Carousel from '../Carousel';
+import Image from '@components/Image';
+import naturePhoto from '@storybook/react/nature.jpg';
+import fieldPhoto from '@storybook/react/field.jpg';
+import treesPhoto from '@storybook/react/trees.jpg';
 
 <Meta title="Components/Carousel/Interval" component={Carousel} />
 
@@ -8,13 +12,13 @@ export const TemplateGroup = (args) => {
   return (
     <Carousel {...args}>
       <Carousel.Item>
-        <div style={{ height: '400px', width: '100%', background: 'yellow' }} />
+        <Image style={{ width: '100%' }} src={naturePhoto} />
       </Carousel.Item>
       <Carousel.Item>
-        <div style={{ height: '400px', width: '100%', background: 'red' }} />
+        <Image style={{ width: '100%' }} src={fieldPhoto} />
       </Carousel.Item>
       <Carousel.Item>
-        <div style={{ height: '400px', width: '100%', background: 'blue' }} />
+        <Image style={{ width: '100%' }} src={treesPhoto} />
       </Carousel.Item>
     </Carousel>
   );

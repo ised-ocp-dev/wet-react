@@ -4,10 +4,16 @@ export interface CarouselCaptionProps
   extends React.FormHTMLAttributes<HTMLDivElement> {
   /** Content of Carousel Caption component. */
   children?: React.ReactNode;
+  /** Additional custom classNames */
+  className?: string;
 }
 
-const CarouselCaption = ({ children, ...rest }: CarouselCaptionProps) => (
-  <div className="carousel-item-caption" {...rest} style={{ padding: 5 }}>
+const CarouselCaption = ({
+  children,
+  className,
+  ...rest
+}: CarouselCaptionProps) => (
+  <div className={className} {...rest} style={{ padding: 5 }}>
     {children}
   </div>
 );

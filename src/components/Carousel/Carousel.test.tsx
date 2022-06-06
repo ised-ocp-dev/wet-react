@@ -56,7 +56,9 @@ describe('Carousel Tests', () => {
       render(
         <Carousel>
           <Carousel.Item>
-            <Carousel.Caption>Caption</Carousel.Caption>
+            <Carousel.Caption className="carousel-item-caption">
+              Caption
+            </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
       );

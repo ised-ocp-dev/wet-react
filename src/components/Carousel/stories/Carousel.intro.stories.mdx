@@ -1,6 +1,10 @@
 import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 
 import Carousel from '../Carousel';
+import Image from '@components/Image';
+import naturePhoto from '@storybook/react/nature.jpg';
+import fieldPhoto from '@storybook/react/field.jpg';
+import treesPhoto from '@storybook/react/trees.jpg';
 
 <Meta
   title="Components/Carousel/Intro"
@@ -20,24 +24,24 @@ A slideshow component for cycling through elements (e.g., images, text, etc.).
 <Canvas>
   <Carousel interval={3000}>
     <Carousel.Item>
-      <div style={{ height: '400px', width: '100%', background: 'yellow' }} />
+      <Image style={{ width: '100%' }} src={naturePhoto} />
       <Carousel.Caption>
         <h5>First Slide</h5>
-        <p>The colour yellow.</p>
+        <p>Hills in the clouds.</p>
       </Carousel.Caption>
     </Carousel.Item>
     <Carousel.Item>
-      <div style={{ height: '400px', width: '100%', background: 'red' }} />
+      <Image style={{ width: '100%' }} src={fieldPhoto} />
       <Carousel.Caption>
         <h5>Second Slide</h5>
-        <p>The colour red.</p>
+        <p>Open fields.</p>
       </Carousel.Caption>
     </Carousel.Item>
     <Carousel.Item>
-      <div style={{ height: '400px', width: '100%', background: 'blue' }} />
+      <Image style={{ width: '100%' }} src={treesPhoto} />
       <Carousel.Caption>
         <h5>Third Slide</h5>
-        <p>The colour blue.</p>
+        <p>Forest road.</p>
       </Carousel.Caption>
     </Carousel.Item>
   </Carousel>

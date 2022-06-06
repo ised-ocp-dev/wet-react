@@ -1,8 +1,5 @@
 import React from 'react';
 import CarouselRB from 'react-bootstrap/Carousel';
-import ContainerRB from 'react-bootstrap/Container';
-import RowRB from 'react-bootstrap/Row';
-import ColRB from 'react-bootstrap/Col';
 import Text from '@components/Text';
 import Button from '@components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -38,8 +35,8 @@ const Carousel = ({
   const playLabel = french ? 'Lancer' : 'Play';
 
   return (
-    <ContainerRB>
-      <RowRB>
+    <div>
+      <div>
         {intervalValue ? (
           <CarouselRB
             fade
@@ -64,35 +61,22 @@ const Carousel = ({
             {children}
           </CarouselRB>
         )}
-      </RowRB>
-      <RowRB style={{ display: 'flex', paddingTop: 7, alignItems: 'center' }}>
-        <ColRB
-          lg={1}
-          md={1}
-          sm={2}
-          xl={1}
-          xs={2}
-          xxl={1}
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
+      </div>
+      <div style={{ display: 'flex', padding: 5, alignItems: 'center' }}>
+        <Button
+          aria-label="previous"
+          data-testid="previous-btn"
+          style={{ borderRadius: '50%' }}
+          onClick={() => {
+            if (intervalValue) {
+              setIntervalValue(null);
+            }
+            setCurrentIndex(Math.abs(currentIndex - 1) % numberOfSlides);
           }}
         >
-          <Button
-            aria-label="previous"
-            data-testid="previous-btn"
-            style={{ borderRadius: '50%' }}
-            onClick={() => {
-              if (intervalValue) {
-                setIntervalValue(null);
-              }
-              setCurrentIndex(Math.abs(currentIndex - 1) % numberOfSlides);
-            }}
-          >
-            <FontAwesomeIcon icon={faChevronLeft} size="3x" />
-          </Button>
-        </ColRB>
-        <ColRB lg={1} md={2} sm={2} xl={1} xs={3} xxl={1}>
+          <FontAwesomeIcon icon={faChevronLeft} size="3x" />
+        </Button>
+        <div style={{ marginLeft: 15, marginRight: 15 }}>
           <Text
             style={{
               display: 'block',
@@ -110,71 +94,46 @@ const Carousel = ({
               margin: 'auto',
             }}
           >{`${currentIndex + 1} ${ofLabel} ${numberOfSlides}`}</Text>
-        </ColRB>
-        <ColRB
-          lg={1}
-          md={1}
-          sm={2}
-          xl={1}
-          xs={2}
-          xxl={1}
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
+        </div>
+        <Button
+          aria-label="next"
+          style={{ borderRadius: '50%' }}
+          onClick={() => {
+            if (intervalValue) {
+              setIntervalValue(null);
+            }
+            setCurrentIndex((currentIndex + 1) % numberOfSlides);
           }}
         >
-          <Button
-            aria-label="next"
-            style={{ borderRadius: '50%' }}
-            onClick={() => {
-              if (intervalValue) {
-                setIntervalValue(null);
-              }
-              setCurrentIndex((currentIndex + 1) % numberOfSlides);
-            }}
-          >
-            <FontAwesomeIcon icon={faChevronRight} size="3x" />
-          </Button>
-        </ColRB>
-        <ColRB
-          lg={9}
-          md={8}
-          sm={6}
-          xl={9}
-          xs={5}
-          xxl={9}
-          style={{ display: 'flex' }}
+          <FontAwesomeIcon icon={faChevronRight} size="3x" />
+        </Button>
+        <Button
+          aria-label={intervalValue ? 'pause' : 'play'}
+          style={{ display: 'flex', marginLeft: 'auto' }}
+          disabled={interval === null}
+          onClick={() =>
+            intervalValue ? setIntervalValue(null) : setIntervalValue(interval)
+          }
         >
-          <Button
-            aria-label={intervalValue ? 'pause' : 'play'}
-            style={{ display: 'flex', marginLeft: 'auto' }}
-            disabled={interval === null}
-            onClick={() =>
-              intervalValue
-                ? setIntervalValue(null)
-                : setIntervalValue(interval)
-            }
-          >
-            {intervalValue ? (
-              <FontAwesomeIcon
-                icon={faPause}
-                size="2x"
-                style={{ margin: 'auto' }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={faPlay}
-                size="2x"
-                style={{ margin: 'auto' }}
-              />
-            )}
-            <Text size="h3" style={{ margin: 'auto', marginLeft: 7 }}>
-              {intervalValue ? 'Pause' : `${playLabel}`}
-            </Text>
-          </Button>
-        </ColRB>
-      </RowRB>
-    </ContainerRB>
+          {intervalValue ? (
+            <FontAwesomeIcon
+              icon={faPause}
+              size="2x"
+              style={{ margin: 'auto' }}
+            />
+          ) : (
+            <FontAwesomeIcon
+              icon={faPlay}
+              size="2x"
+              style={{ margin: 'auto' }}
+            />
+          )}
+          <Text size="h3" style={{ margin: 'auto', marginLeft: 7 }}>
+            {intervalValue ? 'Pause' : `${playLabel}`}
+          </Text>
+        </Button>
+      </div>
+    </div>
   );
 };
 
