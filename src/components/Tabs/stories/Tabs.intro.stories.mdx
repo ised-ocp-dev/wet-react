@@ -1,4 +1,5 @@
 import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+import TabsRB from 'react-bootstrap/Tabs';
 
 import { Tabs } from '../..';
 
@@ -17,9 +18,16 @@ Display images and other content in a dialog box, either individually or as part
 ## Example
 
 <Canvas>
-  <Tabs id="uniqueIDvalue">
-    <Tabs.Panel id="text1" title="tab one" children={<p>hello there!</p>} />
-    <Tabs.Panel id="text2" title="tab two" children={<p>obi-wan!</p>} />
+  <Tabs mainPanel="contact" id="hi">
+    <TabRB eventKey="home" title="Home">
+      <p>one</p>
+    </TabRB>
+    <TabRB eventKey="profile" title="Profile">
+      <p>two</p>
+    </TabRB>
+    <TabRB eventKey="contact" title="Contact">
+      <p>tre</p>
+    </TabRB>
   </Tabs>
 </Canvas>
 
