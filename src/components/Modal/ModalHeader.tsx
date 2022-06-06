@@ -20,6 +20,4 @@ const ModalHeader = ({
   </ModalHeaderRB>
 );
 
-ModalHeader.displayName = 'Modal.Header';
-
 export default ModalHeader;

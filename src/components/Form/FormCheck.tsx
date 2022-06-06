@@ -92,6 +92,4 @@ const FormCheck = React.forwardRef(
   }
 );
 
-FormCheck.displayName = 'Form.Check';
-
 export default FormCheck;
