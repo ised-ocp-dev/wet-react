@@ -22,7 +22,7 @@ export interface SliderProps extends React.HTMLAttributes<HTMLDivElement> {
 const Slider = ({
   max = 100,
   min = 0,
-  value = 'NaNey',
+  value = 'NaN',
   step = 1,
   title = '',
   name = '',
