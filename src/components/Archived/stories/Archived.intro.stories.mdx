@@ -31,7 +31,19 @@ Add the following markup at the start of the content area of the page (after the
 Add a paragraph after the first h2 providing a link to a replacement (if one exists) and explaining why the current page was archived.
 
 <Canvas>
-  <Archived content='The <a href="https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=24227"> Standard on Web Usability </a> replaces this content. This content is archived because Common Look and Feel 2.0 Standards have been rescinded.' />
+  <Archived
+    children={
+      <p>
+        The{' '}
+        <a href="https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=24227">
+          {' '}
+          Standard on Web Usability{' '}
+        </a>{' '}
+        replaces this content. This content is archived because Common Look and
+        Feel 2.0 Standards have been rescinded.
+      </p>
+    }
+  />
 </Canvas>
 
 ## French pages
@@ -49,9 +61,23 @@ Add a paragraph after the first h2 providing a link to a replacement (if one exi
 <Canvas>
   <Archived
     french
-    content='The <a href="https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=24227"> Standard on Web Usability </a> replaces this content. This content is archived because Common Look and Feel 2.0 Standards have been rescinded.'
+    children={
+      <p>
+        The{' '}
+        <a href="https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=24227">
+          {' '}
+          Standard on Web Usability{' '}
+        </a>{' '}
+        replaces this content. This content is archived because Common Look and
+        Feel 2.0 Standards have been rescinded.
+      </p>
+    }
   />
 </Canvas>
+
+## Available Props
+
+<ArgsTable />
 
 ## CSS
 

@@ -5,8 +5,26 @@ import Archived from '@components/Archived';
 
 describe('Archived', () => {
   const ArchivedContent = 'Hello world!';
-  const ArchivedAdditionalContent = 'addon content';
   test('renders default english Archived component', () => {
+    render(<Archived />);
+    expect(
+      screen.getByText('This page has been archived on the Web')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('This page has been archived on the Web').parentNode
+    ).toHaveClass('alert alert-warning wb-inview');
+  });
+  test('renders default french Archived component', () => {
+    render(<Archived french />);
+    expect(
+      screen.getByText('Cette page Web a été archivée dans le Web')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Cette page Web a été archivée dans le Web').parentNode
+    ).toHaveClass('alert alert-warning wb-inview');
+  });
+
+  test('renders default english Archived component with optional link', () => {
     render(
       <Archived>
         <p>{ArchivedContent}</p>
@@ -14,32 +32,13 @@ describe('Archived', () => {
     );
     expect(screen.getByText(ArchivedContent)).toBeInTheDocument();
   });
-  test('renders default french Archived component', () => {
-    render(
-      <Archived content="" french>
-        <p>{ArchivedContent}</p>
-      </Archived>
-    );
-    expect(screen.getByText(ArchivedContent)).toBeInTheDocument();
-  });
-
-  test('renders default english Archived component with optional link', () => {
-    render(
-      <Archived content={ArchivedAdditionalContent}>
-        <p>{ArchivedContent}</p>
-      </Archived>
-    );
-    expect(screen.getByText(ArchivedContent)).toBeInTheDocument();
-    expect(screen.getByText(ArchivedAdditionalContent)).toBeInTheDocument();
-  });
 
   test('renders default french Archived component with optional link', () => {
     render(
-      <Archived content={ArchivedAdditionalContent} french>
+      <Archived french>
         <p>{ArchivedContent}</p>
       </Archived>
     );
     expect(screen.getByText(ArchivedContent)).toBeInTheDocument();
-    expect(screen.getByText(ArchivedAdditionalContent)).toBeInTheDocument();
   });
 });

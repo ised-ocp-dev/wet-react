@@ -2,21 +2,14 @@ import React from 'react';
 import '../../style.css';
 
 export interface ArchivedProps extends React.HTMLAttributes<HTMLElement> {
-  /** contents of Archived */
+  /** optional additional content, such as an alternative link */
   children?: React.ReactNode;
-  /** optional additional content */
-  content?: string;
   /** language selection */
   french?: boolean;
 }
 
-const Archived = ({
-  children,
-  content = '',
-  french = false,
-}: ArchivedProps) => {
-  const contentText = content === '' ? '' : <p>{content}</p>;
-  return !french ? (
+const Archived = ({ children, french = false }: ArchivedProps) =>
+  !french ? (
     <span>
       <section
         id="Archived"
@@ -24,7 +17,7 @@ const Archived = ({
         data-inview="archived-bnr"
       >
         <h2>This page has been archived on the Web</h2>
-        {contentText}
+        {children}
         <p>
           Information identified as archived is provided for reference, research
           or recordkeeping purposes. It is not subject to the Government of
@@ -44,7 +37,6 @@ const Archived = ({
         <p>
           <a href="#archived">This page has been archived on the Web.</a>
         </p>
-        {children}
       </section>
     </span>
   ) : (
@@ -55,7 +47,7 @@ const Archived = ({
         data-inview="archived-bnr"
       >
         <h2>Cette page Web a été archivée dans le Web</h2>
-        {contentText}
+        {children}
         <p>
           L’information dont il est indiqué qu’elle est archivée est fournie à
           des fins de référence, de recherche ou de tenue de documents. Elle
@@ -76,10 +68,8 @@ const Archived = ({
         <p>
           <a href="#archived">Cette page Web a été archivée dans le Web.</a>
         </p>
-        {children}
       </section>
     </span>
   );
-};
 
 export default Archived;
