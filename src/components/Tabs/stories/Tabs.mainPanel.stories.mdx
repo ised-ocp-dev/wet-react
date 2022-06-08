@@ -1,0 +1,101 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Tabs } from '../..';
+
+<Meta title="Components/Tabs/mainPanel" component={Tabs} />
+
+export const Template = (args) => (
+  <Tabs
+    panels={[
+      { title: 'tab one', content: <p>I am a tab!</p>, id: 'text1' },
+      { title: 'tab two', content: <p>I am also a tab!</p>, id: 'text2' },
+      {
+        title: 'tab three',
+        content: (
+          <p>
+            Ladies and gentlemen, it is my pleasure to announce to you today,
+            that we do indeed have... a third tab!
+          </p>
+        ),
+        id: 'text3',
+      },
+    ]}
+    {...args}
+  />
+);
+
+# Tabs
+
+Each `Tabs` component can have a `mainPanel` attribute, which contains the id of the tab to have open by default
+
+## Example
+
+<Canvas>
+  <Tabs
+    id="unique1"
+    mainPanel="text2"
+    panels={[
+      { title: 'tab one', content: <p>I am a tab!</p>, id: 'text1' },
+      { title: 'tab two', content: <p>I am also a tab!</p>, id: 'text2' },
+      {
+        title: 'tab three',
+        content: (
+          <p>
+            Ladies and gentlemen, it is my pleasure to announce to you today,
+            that we do indeed have... a third tab!
+          </p>
+        ),
+        id: 'text3',
+      },
+    ]}
+  />
+</Canvas>
+
+If `mainPanel` is not specified, it will default to the first tab
+
+## Example
+
+<Canvas>
+  <Tabs
+    id="unique1"
+    panels={[
+      { title: 'tab one', content: <p>I am a tab!</p>, id: 'text1' },
+      { title: 'tab two', content: <p>I am also a tab!</p>, id: 'text2' },
+      {
+        title: 'tab three',
+        content: (
+          <p>
+            Ladies and gentlemen, it is my pleasure to announce to you today,
+            that we do indeed have... a third tab!
+          </p>
+        ),
+        id: 'text3',
+      },
+    ]}
+  />
+</Canvas>
+
+if `mainpanel` is an id that does not exist, no panels will be open by default. (this is an intentional feature)
+
+## Example
+
+<Canvas>
+  <Tabs
+    id="unique1"
+    mainPanel="non-existant"
+    panels={[
+      { title: 'tab one', content: <p>I am a tab!</p>, id: 'text1' },
+      { title: 'tab two', content: <p>I am also a tab!</p>, id: 'text2' },
+      {
+        title: 'tab three',
+        content: (
+          <p>
+            Ladies and gentlemen, it is my pleasure to announce to you today,
+            that we do indeed have... a third tab!
+          </p>
+        ),
+        id: 'text3',
+      },
+    ]}
+  />
+</Canvas>

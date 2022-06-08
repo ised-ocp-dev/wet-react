@@ -8,53 +8,31 @@ import { Tabs } from '../..';
 
 # Tabs
 
-Display images and other content in a dialog box, either individually or as part of a gallery. Implements the<a href="https://www.w3.org/TR/wai-aria-practices/#dialog_modal" target="_blank"> WAI-ARIA Dialog (Modal) design pattern</a>
+Display images and other content in a dialog box, either individually or as part of a gallery.
+Implements the<a href="https://www.w3.org/TR/wai-aria-practices/#dialog_modal" target="_blank"> WAI-ARIA Dialog (Modal) design pattern</a>
 
 ## Example
 
 <Canvas>
-  <Tabs mainPanel="contact" id="hi">
-    <TabRB eventKey="home" title="Home">
-      <p>one</p>
-    </TabRB>
-    <TabRB eventKey="profile" title="Profile">
-      <p>two</p>
-    </TabRB>
-    <TabRB eventKey="contact" title="Contact">
-      <p>tre</p>
-    </TabRB>
-  </Tabs>
+  <Tabs
+    id="uniquevalue"
+    panels={[
+      { title: 'tab one', content: <p>I am a tab!</p>, id: 'text1' },
+      { title: 'tab two', content: <p>I am also a tab!</p>, id: 'text2' },
+      {
+        title: 'tab three',
+        content: (
+          <p>
+            Ladies and gentlemen, it is my pleasure to announce to you today,
+            that we do indeed have... a third tab!
+          </p>
+        ),
+        id: 'text3',
+      },
+    ]}
+  />
 </Canvas>
 
 ## Available Props
 
 <ArgsTable />
-
-<Canvas>
-  <Tabs mainPanel="01" id="hi">
-    <Accordion.Item eventKey="0">
-      <Accordion.Header>Accordion Item #1</Accordion.Header>
-      <Accordion.Body>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </Accordion.Body>
-    </Accordion.Item>
-    <Accordion.Item eventKey="1">
-      <Accordion.Header>Accordion Item #2</Accordion.Header>
-      <Accordion.Body>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </Accordion.Body>
-    </Accordion.Item>
-  </Tabs>
-</Canvas>
