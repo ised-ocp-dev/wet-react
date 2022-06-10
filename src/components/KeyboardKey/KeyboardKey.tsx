@@ -11,11 +11,10 @@ export interface KeyboardKeyProps extends React.HTMLAttributes<HTMLElement> {
 const KeyboardKey = ({ keyValue = '', description = '' }: KeyboardKeyProps) =>
   keyValue === '' ? null : description === '' ? (
     <p>
-      Press <kbd>{keyValue}</kbd>
+      <kbd>{keyValue}</kbd>
     </p>
   ) : (
     <p>
-      Press{' '}
       <kbd>
         <abbr title={description}>{keyValue}</abbr>
       </kbd>
