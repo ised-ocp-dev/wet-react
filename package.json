@@ -33,7 +33,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "react-bootstrap": "^2.1.1",
+    "bootstrap": "^5.1.3",
+    "react-bootstrap": "^2.4.0",
     "react-syntax-highlighter": "^15.0.0"
   },
   "devDependencies": {

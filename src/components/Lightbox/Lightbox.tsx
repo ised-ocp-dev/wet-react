@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from '@components/Modal';
+import './Lightbox.css';
 import '../../style.css';
 
 export interface LightboxProps extends React.HTMLAttributes<HTMLElement> {

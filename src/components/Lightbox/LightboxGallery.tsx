@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Modal from '@components/Modal';
+import './Lightbox.css';
 import '../../style.css';
 
 export interface LightboxGalleryProps
@@ -24,7 +25,7 @@ const LightboxGallery = ({
   const [numImages, setNumImages] = React.useState(0);
 
   function tempOpen(e: Event) {
-    // open gallery, find index of lightbox to open
+    // open gallery, get index of lightbox to open
     setIsOpen(true);
     const newIndex = Number(
       (
@@ -57,21 +58,6 @@ const LightboxGallery = ({
         setNumImages(temp.getElementsByClassName('lightbox-breezy').length);
       }
     }
-    // arrow key handlers, SUPER broken
-    /*    document.addEventListener('keydown', (ev) => {
-      ev.preventDefault();
-      ev.stopPropagation();
-      if (ev.key === 'ArrowUp') {
-        console.log('u');
-        const newIndex = (index - 1) % numImages;
-        setIndex(newIndex < 0 ? numImages - 1 : newIndex);
-      } else if (ev.key === 'ArrowDown') {
-        console.log('d');
-        const hi = (index + 1) % numImages;
-        setIndex(hi);
-      }
-      return false;
-    }); */
   }, []);
 
   return (
@@ -84,7 +70,18 @@ const LightboxGallery = ({
         onHide={() => setIsOpen(false)}
         className="mfp-zoom-out-cur"
       >
-        <Modal.Body bsPrefix="bg-darker" style={{ cursor: 'auto' }}>
+        <Modal.Body
+          tabIndex={-1}
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+              setIndex(index === 0 ? numImages - 1 : index - 1);
+            } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+              setIndex((index + 1) % numImages);
+            }
+          }}
+          bsPrefix="bg-darker"
+          style={{ cursor: 'auto' }}
+        >
           <button
             title="Close overlay (escape key)"
             type="button"
