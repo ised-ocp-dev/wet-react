@@ -31,7 +31,7 @@ const PaginationButton = ({
   children,
   active = false,
   disabled = false,
-  value = 'nil',
+  value = '',
 }: PaginationButtonProps) => (
   <li className={active ? 'active' : disabled ? 'disabled' : ''}>
     <a
