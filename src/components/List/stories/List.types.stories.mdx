@@ -14,8 +14,8 @@ Use to list items when the order does not explicitly matter
 
 <Canvas>
   <List type="ul">
-    <li>hello, this is an unordered list</li>
-    <li>note the bullet points in the left column</li>
+    <li>This is an unordered list</li>
+    <li>Note the bullet points in the left column</li>
   </List>
 </Canvas>
 
@@ -27,8 +27,8 @@ Use to list of items when the order does explicitly matter
 
 <Canvas>
   <List type="ol">
-    <li>hello, this is an ordered list</li>
-    <li>note the numbers in the left column</li>
+    <li>This is an ordered list</li>
+    <li>Note the numbers in the left column</li>
   </List>
 </Canvas>
 
@@ -42,10 +42,10 @@ Use datalists `<dl>` for terms `<dt>` and the associated definitions `<dd>` that
 
 <Canvas>
   <List type="dl">
-    <dt>cat</dt>
-    <dd>small furry feline</dd>
-    <dt>dog</dt>
-    <dd>large furry canine</dd>
+    <dt>Cat</dt>
+    <dd>Small furry feline</dd>
+    <dt>Dog</dt>
+    <dd>Large furry canine</dd>
   </List>
 </Canvas>
 
@@ -59,10 +59,10 @@ Use mainly as a nested second level list
 
 <Canvas>
   <List>
-    <li>hello, this is a list with a lowercase alpha ordered sub-list</li>
+    <li>This is a list with a lowercase alpha ordered sub-list</li>
     <List type="alpha">
-      <li>hello, this is a lowercase alpha list</li>
-      <li>note the lowercase letters in the left column</li>
+      <li>This is a lowercase alpha sub-list</li>
+      <li>Note the lowercase letters in the left column</li>
     </List>
   </List>
 </Canvas>
@@ -76,9 +76,12 @@ Use mainly in legal documents
 ## Example
 
 <Canvas>
-  <List type="alpha" upper>
-    <li>hello, this is an uppercase alpha list</li>
-    <li>note the uppercase letters in the left column</li>
+  <List>
+    <li>This is a list with an uppercase alpha ordered sub-list</li>
+    <List type="alpha" upper>
+      <li>This is an uppercase alpha sub-list</li>
+      <li>Note the uppercase letters in the left column</li>
+    </List>
   </List>
 </Canvas>
 
@@ -90,9 +93,9 @@ Use mainly as a nested second level list
 
 <Canvas>
   <List>
-    <li>hello, this is a list with a lowercase roman ordered sub-list</li>
+    <li>This is a list with a lowercase roman ordered sub-list</li>
     <List type="roman">
-      <li>hello, this is a lowercase roman list</li>
+      <li>This is a lowercase roman sub-list</li>
       <li>note the lowercase roman numerals in the left column</li>
     </List>
   </List>
@@ -107,8 +110,11 @@ Use mainly in legal documents
 ## Example
 
 <Canvas>
-  <List type="roman" upper>
-    <li>hello, this is an uppercase roman list</li>
-    <li>note the uppercase roman numerals in the left column</li>
+  <List>
+    <li>This is a list with an uppercase roman ordered sub-list</li>
+    <List type="roman" upper>
+      <li>This is an uppercase roman sub-list</li>
+      <li>note the uppercase roman numerals in the left column</li>
+    </List>
   </List>
 </Canvas>
