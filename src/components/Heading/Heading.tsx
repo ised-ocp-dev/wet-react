@@ -23,7 +23,7 @@ const Heading = ({
   text = '',
 }: HeadingProps) => {
   const underlineString = underline ? 'page-header' : '';
-  const Tag = level === undefined ? 'h1' : level;
+  const Tag = level;
   return secondaryText === '' ? (
     <Tag className={underlineString}>{text}</Tag>
   ) : (

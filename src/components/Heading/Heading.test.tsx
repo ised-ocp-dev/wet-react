@@ -58,6 +58,19 @@ describe('Heading', () => {
       'page-header'
     );
   });
+  test('heading no level', () => {
+    render(
+      <Heading
+        text={HeadingContent}
+        secondaryText={HeadingSecondary}
+        underline
+      />
+    );
+    expect(screen.getByText(HeadingSecondary)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1 })).toHaveClass(
+      'page-header'
+    );
+  });
   test('heading defaults', () => {
     render(<Heading />);
   });
