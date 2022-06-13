@@ -4,7 +4,7 @@ import FormLabel from './FormLabel';
 import FormGroupContext from './FormGroupContext';
 
 /** Types */
-type typeType = 'checkbox' | 'radio' | 'switch' | undefined;
+type typeType = 'checkbox' | 'radio' | undefined;
 
 export interface FormCheckProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -68,7 +68,7 @@ const FormCheck = React.forwardRef(
       >
         <FormRB.Check.Label className="check-label">
           <FormRB.Check.Input
-            type={type as any}
+            type={type}
             disabled={isDisabled}
             aria-required={isRequiredResult}
             aria-invalid={isInvalidResult}
@@ -91,7 +91,5 @@ const FormCheck = React.forwardRef(
     );
   }
 );
-
-FormCheck.displayName = 'Form.Check';
 
 export default FormCheck;
