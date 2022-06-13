@@ -11,22 +11,19 @@ import { Tabs } from '../..';
 Display images and other content in a dialog box, either individually or as part of a gallery.
 Implements the<a href="https://www.w3.org/TR/wai-aria-practices/#dialog_modal" target="_blank"> WAI-ARIA Dialog (Modal) design pattern</a>
 
+When the screen width is less than 992px, the tabs will reformat into an accordion style to better fit. <br />Try it now by opening `inspect element` and increasing its width!
+
 ## Example
 
 <Canvas>
   <Tabs
     id="uniquevalue"
     panels={[
-      { title: 'tab one', content: <p>I am a tab!</p>, id: 'text1' },
-      { title: 'tab two', content: <p>I am also a tab!</p>, id: 'text2' },
+      { title: 'tab one', content: <p>Tab Content</p>, id: 'text1' },
+      { title: 'tab two', content: <p>Second Tab Content</p>, id: 'text2' },
       {
         title: 'tab three',
-        content: (
-          <p>
-            Ladies and gentlemen, it is my pleasure to announce to you today,
-            that we do indeed have... a third tab!
-          </p>
-        ),
+        content: <p>Third Tab Content</p>,
         id: 'text3',
       },
     ]}

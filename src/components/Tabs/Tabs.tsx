@@ -12,7 +12,7 @@ export interface TabsProps extends React.HTMLAttributes<HTMLElement> {
   mainPanel?: string;
   /** unique identification value */
   id?: string;
-  /** array of panels to be displayed, of the form {[{title:"...", id:"...", content:<>...</>},...]} */
+  /** array of panels to be displayed, of the form <br />{ [ {title:"...", id:"...", content:<>...</>}, ... ] } */
   panels?: { title: string; id: string; content: React.ReactNode }[];
 }
 
@@ -45,9 +45,7 @@ const Tabs = ({ mainPanel, id = '', panels }: TabsProps) => {
             as="ul"
             bsPrefix="generated"
             role="tablist"
-            onSelect={(sk) => {
-              setOpenID(sk === null ? openID : sk);
-            }}
+            onSelect={(e) => setOpenID(e)}
           >
             {panels.map((item) => (
               <NavItem

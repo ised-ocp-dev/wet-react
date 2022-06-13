@@ -144,7 +144,7 @@ describe('Tabs component', () => {
     expect(screen.getByText('tab one')).toBeInTheDocument();
     expect(screen.getByText('tab two')).toBeInTheDocument();
     act(() => {
-      global.innerWidth = 990;
+      global.innerWidth = 500;
       global.dispatchEvent(new Event('resize'));
     });
     expect(screen.getByText('tab one').closest('summary')).toHaveClass(
@@ -163,13 +163,46 @@ describe('Tabs component', () => {
     expect(
       screen.getByText('tabContent2').closest('details')
     ).not.toHaveAttribute('open');
-    fireEvent.click(screen.getByText('tab two')); // for some reason this doesn't trigger the ontoggle handler...
+    fireEvent.click(screen.getByText('tab two'));
     expect(screen.getByText('tabContent').closest('details')).toHaveAttribute(
       'open',
       ''
     );
     expect(screen.getByText('tabContent2').closest('details')).toHaveAttribute(
       'open'
+    );
+  });
+  test('Tabs resize swap tab trigger ontoggle', () => {
+    render(
+      <Tabs
+        id="uniquevalue"
+        panels={[
+          { title: 'tab one', id: 'text1', content: <p>tabContent</p> },
+          { title: 'tab two', id: 'text2', content: <p>tabContent2</p> },
+        ]}
+      />
+    );
+    act(() => {
+      global.innerWidth = 500;
+      global.dispatchEvent(new Event('resize'));
+    });
+    expect(screen.getByText('tabContent').closest('details')).toHaveAttribute(
+      'open'
+    );
+    expect(
+      screen.getByText('tabContent2').closest('details')
+    ).not.toHaveAttribute('open');
+    screen
+      .getByText('tab one')
+      .closest('details')
+      .dispatchEvent(new Event('toggle'));
+    screen
+      .getByText('tab two')
+      .closest('details')
+      .dispatchEvent(new Event('toggle'));
+    expect(screen.getByText('tabContent').closest('details')).toHaveAttribute(
+      'open',
+      ''
     );
   });
   test('Tabs blank', () => {
