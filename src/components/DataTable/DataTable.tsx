@@ -4,9 +4,12 @@ import {
   GridValidRowModel,
   GridToolbarQuickFilter,
   GridColumns,
+  frFR,
 } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import { SxProps, Theme } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import '../../style.css';
 
 /** Types */
@@ -25,8 +28,12 @@ export interface DataTableProps extends React.HTMLAttributes<HTMLTableElement> {
   autoHeight?: boolean;
   /** Applies zebra-striping to the rows within the table. */
   stripped?: boolean;
+  /** Translates the component's text to French. */
+  french?: boolean;
 }
 
+const UpArrow = () => <FontAwesomeIcon icon={faArrowUp} />;
+const DownArrow = () => <FontAwesomeIcon icon={faArrowDown} />;
 const QuickSearchToolbar = () => (
   <Box
     sx={{
@@ -45,13 +52,14 @@ const DataTable = ({
   rowsPerPageOptions,
   autoHeight = false,
   autoPageSize = false,
+  french = false,
   stripped = false,
   ...rest
 }: DataTableProps) => {
   const [pageSizeValue, setPageSizeValue] = React.useState(pageSize);
   const styles: SxProps<Theme> = {
     padding: 1,
-    // '*': { fontSize: '16px' },
+    '*': { fontSize: '16px' },
     '.MuiDataGrid-columnHeaderTitle': {
       fontWeight: 'bold',
     },
@@ -82,8 +90,15 @@ const DataTable = ({
         onPageSizeChange={(newPage) => setPageSizeValue(newPage)}
         rowsPerPageOptions={rowsPerPageOptions}
         components={{
+          ColumnSortedAscendingIcon: UpArrow,
+          ColumnSortedDescendingIcon: DownArrow,
           Toolbar: QuickSearchToolbar,
         }}
+        localeText={
+          french
+            ? frFR.components.MuiDataGrid.defaultProps.localeText
+            : undefined
+        }
         disableSelectionOnClick
         {...rest}
       />
@@ -100,7 +115,12 @@ const DataTable = ({
       pageSize={pageSize}
       components={{
         Toolbar: QuickSearchToolbar,
+        ColumnSortedAscendingIcon: UpArrow,
+        ColumnSortedDescendingIcon: DownArrow,
       }}
+      localeText={
+        french ? frFR.components.MuiDataGrid.defaultProps.localeText : undefined
+      }
       disableSelectionOnClick
       {...rest}
     />
