@@ -1,0 +1,32 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Grid } from '../..';
+
+<Meta
+  title="Components/Grid/PushPull"
+  component={Grid}
+  subcomponents={{ 'Grid.Row': Grid.Row, 'Grid.Cell': Grid.Cell }}
+/>
+
+# Grid Width
+
+One row has a width of 12. Use the `xsPush`, `smPush`, `mdPush`, `lgPush`, `xsPull`, `smPull`, `mdPull`, `lgPull` attributes to specify
+the pull and push (out of 12) that a given cell will have on a given viewport size (xs, sm, md, lg). This allows you to swap cell positions
+on different viewport sizes
+
+## Example using push pull to swap cell positions
+
+<Canvas>
+  <Grid.Row>
+    <Grid.Cell mdWidth={9} mdPush={3}>
+      <div class="well well-sm brdr-rds-0">
+        First column, should render on left
+      </div>
+    </Grid.Cell>
+    <Grid.Cell mdWidth={3} mdPull={9}>
+      <div class="well well-sm brdr-rds-0">
+        Second column, should render on right
+      </div>
+    </Grid.Cell>
+  </Grid.Row>
+</Canvas>
