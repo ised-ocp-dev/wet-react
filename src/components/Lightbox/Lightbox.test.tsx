@@ -247,7 +247,7 @@ describe('Lightbox', () => {
       if (modalContainer) {
         expect(
           document.querySelector('.modal')?.getElementsByTagName('img')[0]
-        ).toHaveAttribute('src', 'two');
+        ).toHaveAttribute('src', 'one');
         fireEvent.keyDown(modalContainer.getElementsByTagName('img')[0], {
           key: 'ArrowRight',
           code: 'ArrowRight',
@@ -256,15 +256,6 @@ describe('Lightbox', () => {
         });
         expect(
           document.querySelector('.modal')?.getElementsByTagName('img')[0]
-        ).toHaveAttribute('src', 'one');
-        fireEvent.keyDown(modalContainer.getElementsByTagName('img')[0], {
-          key: 'ArrowLeft',
-          code: 'ArrowLeft',
-          keyCode: 37,
-          charCode: 37,
-        });
-        expect(
-          document.querySelector('.modal')?.getElementsByTagName('img')[0]
         ).toHaveAttribute('src', 'two');
         fireEvent.keyDown(modalContainer.getElementsByTagName('img')[0], {
           key: 'ArrowLeft',
@@ -275,6 +266,15 @@ describe('Lightbox', () => {
         expect(
           document.querySelector('.modal')?.getElementsByTagName('img')[0]
         ).toHaveAttribute('src', 'one');
+        fireEvent.keyDown(modalContainer.getElementsByTagName('img')[0], {
+          key: 'ArrowLeft',
+          code: 'ArrowLeft',
+          keyCode: 37,
+          charCode: 37,
+        });
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', 'two');
       }
     });
     test('Test gallery component with open+ArrowDown+ArrowUp+ArrowUp+J', () => {
