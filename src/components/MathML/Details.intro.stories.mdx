@@ -1,0 +1,31 @@
+import { Canvas, Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/MathML/Intro" />
+
+# MathML
+
+MathML enables the display of mathematical formulas. Because some browsers do not support this functionality natively, this polyfill emulates the same functionality using MathJax
+
+## Known Issues
+
+<ul>
+  <li>
+    Browsers that lack both MathML and SVG support (e.g., IE8 - IE9) will take
+    longer to load MathML than browsers with either SVG or MathML support
+  </li>
+  <li>
+    IE8 takes a lot longer to load MathML than IE9 (known MathJax reflow issue)
+  </li>
+  <li>
+    Pages with a lot of complex formulas can take a few minutes to load on slow
+    machines running IE8 (known MathJax issue)
+  </li>
+</ul>
+
+## How To Use
+
+To use the polyfill, standard MathML is required. In cases where a browser doesn't support MathML, the polyfill is automatically loaded
+
+<a href="https://www.w3.org/TR/MathML3/" target="_blank">
+  Configuration options available for MathML (MathML 3.0 specification)
+</a>
