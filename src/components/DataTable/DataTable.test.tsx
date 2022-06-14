@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import DataTable from '@components/DataTable';
 
@@ -50,8 +50,6 @@ describe('Test DataTable', () => {
 
   test('Testing pageSize prop', async () => {
     render(<DataTable rows={rows} columns={columns} pageSize={5} autoHeight />);
-    await waitFor(() => {
-      expect(screen.getAllByRole('row')).toHaveLength(6);
-    });
+    expect(screen.getAllByRole('row')).toHaveLength(6);
   });
 });
