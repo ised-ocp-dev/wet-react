@@ -3,7 +3,13 @@ import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 import InputGroup from '../InputGroup';
 import Form from 'src/components/Form/index.ts';
 
-<Meta title="Components/InputGroup/Intro" component={InputGroup} />
+<Meta
+  title="Components/InputGroup/Intro"
+  component={InputGroup}
+  subcomponents={{
+    'InputGroup.Text': InputGroup.Text,
+  }}
+/>
 
 # Input Group
 

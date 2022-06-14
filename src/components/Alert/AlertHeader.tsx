@@ -22,6 +22,4 @@ const AlertHeader = ({
   </Title>
 );
 
-AlertHeader.displayName = 'Alert.Header';
-
 export default AlertHeader;
