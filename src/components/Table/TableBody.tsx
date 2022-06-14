@@ -15,6 +15,4 @@ const TableBody = ({ children, className, ...rest }: TableBodyProps) => (
   </tbody>
 );
 
-TableBody.displayName = 'Table.Body';
-
 export default TableBody;
