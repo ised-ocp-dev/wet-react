@@ -23,6 +23,4 @@ const FormText = ({
   </FormRB.Text>
 );
 
-FormText.displayName = 'Form.Text';
-
 export default FormText;

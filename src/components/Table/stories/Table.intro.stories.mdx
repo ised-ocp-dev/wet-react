@@ -2,7 +2,16 @@ import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
 
 import { Table } from '../..';
 
-<Meta title="Components/Table/Intro" component={Table} />
+<Meta
+  title="Components/Table/Intro"
+  component={Table}
+  subcomponents={{
+    'Table.Body': Table.Body,
+    'Table.Cell': Table.Cell,
+    'Table.Header': Table.Header,
+    'Table.Row': Table.Row,
+  }}
+/>
 
 # Table
 
