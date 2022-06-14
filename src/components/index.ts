@@ -20,5 +20,5 @@ export { default as Modal } from './Modal';
 export { default as InputGroup } from './InputGroup';
 export { default as FootnoteLink } from './Footnote/FootnoteLink';
 export { default as FootnoteSection } from './Footnote/FootnoteSection';
-export { default as List } from './List
+export { default as List } from './List';
 export { default as Grid } from './Grid';
