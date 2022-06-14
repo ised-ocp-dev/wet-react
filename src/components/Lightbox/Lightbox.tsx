@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '@components/Modal';
+import ModalRB from 'react-bootstrap/Modal';
 import './Lightbox.css';
 import '../../style.css';
 
@@ -37,7 +37,8 @@ const Lightbox = ({
       >
         {children}
       </a>
-      <Modal
+      <ModalRB
+        size="xl"
         show={isOpen}
         centered // supposed to center it, but css class doesn't exist...
         animation={false}
@@ -45,7 +46,7 @@ const Lightbox = ({
         onHide={() => setIsOpen(false)}
         className="mfp-zoom-out-cur"
       >
-        <Modal.Body bsPrefix="bg-darker" style={{ cursor: 'auto' }}>
+        <ModalRB.Body bsPrefix="bg-darker" style={{ cursor: 'auto' }}>
           <button
             title="Close overlay (escape key)"
             type="button"
@@ -62,8 +63,8 @@ const Lightbox = ({
               <div className="mfp-counter" />
             </div>
           </figcaption>
-        </Modal.Body>
-      </Modal>
+        </ModalRB.Body>
+      </ModalRB>
     </span>
   );
 };
