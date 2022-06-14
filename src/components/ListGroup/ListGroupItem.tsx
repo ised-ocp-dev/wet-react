@@ -41,6 +41,5 @@ const ListGroupItem = ({
     {children}
   </ListGroupRB.Item>
 );
-ListGroupItem.displayName = 'ListGroup.Item';
 
 export default ListGroupItem;

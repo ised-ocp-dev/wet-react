@@ -9,5 +9,5 @@ export interface ModalBodyProps extends React.HTMLAttributes<HTMLDivElement> {
 const ModalBody = ({ children, ...rest }: ModalBodyProps) => (
   <ModalBodyRB {...rest}>{React.Children.toArray(children)}</ModalBodyRB>
 );
-ModalBody.displayName = 'Modal.Body';
+
 export default ModalBody;
