@@ -31,6 +31,4 @@ const TableCell = ({
   </td>
 );
 
-TableCell.displayName = 'Table.Cell';
-
 export default TableCell;
