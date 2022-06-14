@@ -27,7 +27,7 @@ describe('Form Tests', () => {
             <Form.Check isDisabled={false} type="checkbox" label="testTarget" />
           </Form>
           <Form>
-            <Form.Check type="radio" label="testTarget2" />
+            <Form.Check type="radio" label="testTarget2" name="radioName" />
           </Form>
         </>
       );
@@ -37,6 +37,7 @@ describe('Form Tests', () => {
       expect(
         screen.getByRole('radio').parentElement?.parentElement
       ).toHaveClass('radio');
+      expect(screen.getByRole('radio')).toHaveAttribute('name', 'radioName');
     });
     test('Test default Form check type', () => {
       render(
@@ -62,13 +63,14 @@ describe('Form Tests', () => {
     test('Test isRequired property', () => {
       render(
         <Form>
-          <Form.Check isRequired type="radio" label="aTest" />
+          <Form.Check isRequired type="radio" label="aTest" name="radioName" />
         </Form>
       );
       expect(screen.getByRole('radio')).toHaveAttribute(
         'aria-required',
         'true'
       );
+      expect(screen.getByRole('radio')).toHaveAttribute('name', 'radioName');
     });
     test('Test required styling', () => {
       render(
