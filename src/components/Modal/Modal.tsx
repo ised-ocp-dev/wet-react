@@ -4,7 +4,7 @@ import '../../style.css';
 
 type sizeType = 'sm' | 'lg' | 'xl';
 
-type fullScreenType =
+type fullscreenType =
   | true
   | 'sm-down'
   | 'md-down'
@@ -24,15 +24,17 @@ export interface ModalProps {
   /** Render a large, extra large or small modal. When not provided, the modal is rendered with medium (default) size. */
   size?: sizeType;
   /** Renders a fullscreen modal. Specifying a breakpoint will render the modal as fullscreen below the breakpoint size. */
-  fullScreen?: fullScreenType;
+  fullscreen?: fullscreenType;
   /** When true The modal will restore focus to previously focused element once modal is hidden */
-  restorefocus?: boolean;
+  restoreFocus?: boolean;
   /** Allows scrolling the body instead of the entire Modal when overflowing. */
   scrollable?: boolean;
   /** Close the modal when escape key is pressed */
   keyboard?: boolean;
   /** The content of the modal */
   children?: React.ReactNode;
+  /** A callback fired when the header closeButton or non-static backdrop is clicked. Required if either are specified. */
+  onHide?: () => void;
 }
 
 const Modal = ({
@@ -41,23 +43,25 @@ const Modal = ({
   animation = true,
   autoFocus = true,
   size = 'lg',
-  fullScreen = 'lg-down',
-  restorefocus = true,
+  fullscreen = 'lg-down',
+  restoreFocus = true,
   keyboard = true,
   scrollable,
   centered,
+  onHide,
   ...rest
 }: ModalProps) => (
   <ModalRB
     size={size}
-    fullScreen={fullScreen}
+    fullscreen={fullscreen}
     scrollable={scrollable}
     centered={centered}
     keyboard={keyboard}
     autoFocus={autoFocus}
-    restorefocus={restorefocus}
+    restoreFocus={restoreFocus}
     animation={animation}
     show={show}
+    onHide={onHide}
     {...rest}
   >
     {React.Children.toArray(children)}
