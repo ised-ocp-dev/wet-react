@@ -19,3 +19,5 @@ export { default as Table } from './Table';
 export { default as Modal } from './Modal';
 export { default as InputGroup } from './InputGroup';
 export { default as Quotation } from './Quotation';
+export { default as Grid } from './Grid';
+export { default as List } from './List';
