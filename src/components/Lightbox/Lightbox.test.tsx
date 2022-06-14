@@ -207,8 +207,8 @@ describe('Lightbox', () => {
     test('Test gallery component with open+next+prev+prev', () => {
       render(
         <Lightbox.Gallery id="id">
-          <Lightbox>children</Lightbox>
-          <Lightbox>children2</Lightbox>
+          <Lightbox src="one">children</Lightbox>
+          <Lightbox src="two">children2</Lightbox>
         </Lightbox.Gallery>
       );
       expect(document.querySelector('.modal')).not.toBeInTheDocument();
@@ -216,16 +216,28 @@ describe('Lightbox', () => {
       expect(document.querySelector('.modal')).toBeInTheDocument();
       const modalContainer = document.querySelector('.modal');
       if (modalContainer) {
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', 'one');
         fireEvent.click(modalContainer.getElementsByTagName('button')[2]);
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', 'two');
         fireEvent.click(modalContainer.getElementsByTagName('button')[1]);
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', 'one');
         fireEvent.click(modalContainer.getElementsByTagName('button')[1]);
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', 'two');
       }
     });
     test('Test gallery component with open+ArrowRight+ArrowLeft+ArrowLeft', () => {
       render(
         <Lightbox.Gallery id="id">
-          <Lightbox>children</Lightbox>
-          <Lightbox>children2</Lightbox>
+          <Lightbox src="one">children</Lightbox>
+          <Lightbox src="two">children2</Lightbox>
         </Lightbox.Gallery>
       );
       expect(document.querySelector('.modal')).not.toBeInTheDocument();
@@ -233,31 +245,43 @@ describe('Lightbox', () => {
       expect(document.querySelector('.modal')).toBeInTheDocument();
       const modalContainer = document.querySelector('.modal');
       if (modalContainer) {
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', 'two');
         fireEvent.keyDown(modalContainer.getElementsByTagName('img')[0], {
           key: 'ArrowRight',
           code: 'ArrowRight',
           keyCode: 39,
           charCode: 39,
         });
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', 'one');
         fireEvent.keyDown(modalContainer.getElementsByTagName('img')[0], {
           key: 'ArrowLeft',
           code: 'ArrowLeft',
           keyCode: 37,
           charCode: 37,
         });
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', 'two');
         fireEvent.keyDown(modalContainer.getElementsByTagName('img')[0], {
           key: 'ArrowLeft',
           code: 'ArrowLeft',
           keyCode: 37,
           charCode: 37,
         });
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', 'one');
       }
     });
     test('Test gallery component with open+ArrowDown+ArrowUp+ArrowUp+J', () => {
       render(
         <Lightbox.Gallery id="id">
-          <Lightbox>children</Lightbox>
-          <Lightbox>children2</Lightbox>
+          <Lightbox src="one">children</Lightbox>
+          <Lightbox src="two">children2</Lightbox>
         </Lightbox.Gallery>
       );
       expect(document.querySelector('.modal')).not.toBeInTheDocument();
@@ -265,24 +289,36 @@ describe('Lightbox', () => {
       expect(document.querySelector('.modal')).toBeInTheDocument();
       const modalContainer = document.querySelector('.modal');
       if (modalContainer) {
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', 'one');
         fireEvent.keyDown(modalContainer.getElementsByTagName('img')[0], {
           key: 'ArrowDown',
           code: 'ArrowDown',
           keyCode: 40,
           charCode: 40,
         });
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', 'two');
         fireEvent.keyDown(modalContainer.getElementsByTagName('img')[0], {
           key: 'ArrowUp',
           code: 'ArrowUp',
           keyCode: 38,
           charCode: 38,
         });
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', 'one');
         fireEvent.keyDown(modalContainer.getElementsByTagName('img')[0], {
           key: 'ArrowUp',
           code: 'ArrowUp',
           keyCode: 38,
           charCode: 38,
         });
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', 'two');
         fireEvent.keyDown(modalContainer.getElementsByTagName('img')[0], {
           key: 'j',
           code: 'KeyJ',
@@ -303,6 +339,13 @@ describe('Lightbox', () => {
       );
       expect(document.querySelector('.modal')).not.toBeInTheDocument();
       fireEvent.click(screen.getByText('children'));
+      expect(document.querySelector('.modal')).toBeInTheDocument();
+      const modalContainer = document.querySelector('.modal');
+      if (modalContainer) {
+        expect(
+          document.querySelector('.modal')?.getElementsByTagName('img')[0]
+        ).toHaveAttribute('src', '');
+      }
     });
   });
   test('Test gallery component with 0 lightboxes', () => {
