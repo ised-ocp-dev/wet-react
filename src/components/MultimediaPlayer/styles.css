@@ -1,0 +1,24 @@
+.rhap_container {
+  background: #333;
+}
+.rhap_main-controls-button, .rhap_volume-button {
+  color: #ffffff;
+  font-size: 25px;
+}
+.rhap_volume-container {
+  flex: 0 1 200px;
+}
+.rhap_volume-indicator {
+  background: #ffffff;
+  opacity: 1;
+  width: 16px;
+  height: 16px;
+  top: -6px;
+  margin-left: -8px;
+}
+.rhap_time {
+  color: #ffffff;
+}
+.rhap_progress-indicator, .rhap_download-progress, .rhap_volume-bar, .rhap_progress-bar-show-download {
+  background: #ffffff;
+}

@@ -1,0 +1,31 @@
+import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+
+import { MultimediaPlayer } from '../..';
+
+import puppies from '@storybook/react/puppies.mp4';
+import Cat_1 from '@storybook/react/cat_sunglasses.jpg';
+
+<Meta
+  title="Components/MultimediaPlayer/Video/Poster"
+  component={MultimediaPlayer}
+/>
+
+# MultimediaPlayer
+
+## Poster
+
+Add a `poster` attribute to the video element with the value being the URL for the thumbnail image
+
+## Example
+
+<Canvas>
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp4',
+        source: puppies,
+      },
+    ]}
+    poster={Cat_1}
+  />
+</Canvas>

@@ -1,0 +1,30 @@
+import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+
+import { MultimediaPlayer } from '../..';
+
+import puppies from '@storybook/react/puppies.mp4';
+
+<Meta
+  title="Components/MultimediaPlayer/shareURL"
+  component={MultimediaPlayer}
+/>
+
+# MultimediaPlayer
+
+## shareURL
+
+**Optional:** Add a "Share this video" or "Share this audio file" link by adding a `shareURL`
+
+## Example
+
+<Canvas>
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp4',
+        source: puppies,
+      },
+    ]}
+    shareURL="This is the shareURL"
+  />
+</Canvas>

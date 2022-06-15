@@ -1,0 +1,37 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { MultimediaPlayer } from '../..';
+import puppies from '@storybook/react/puppies.mp4';
+
+<Meta
+  title="Components/MultimediaPlayer/Video/Intro"
+  component={MultimediaPlayer}
+/>
+
+# Multimedia Player
+
+## Video
+
+Embed a video element by adding one or more source elements with `type: mp4` or `type: webm`<br/>
+
+## Example
+
+<Canvas>
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp4',
+        source: puppies,
+      },
+      {
+        type: 'webm',
+        source: puppies,
+      },
+    ]}
+    cuePoints={[
+      { name: 'End of Intro', time: '15s' },
+      { name: '', time: '00:30' },
+    ]}
+    figCaption={<p>Example Video</p>}
+  />
+</Canvas>
