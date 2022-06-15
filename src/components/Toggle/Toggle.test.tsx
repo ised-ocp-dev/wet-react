@@ -96,7 +96,9 @@ describe('Toggle Tests', () => {
           {toggleContent}
         </Toggle>
       );
-      expect(result.container.querySelector('input[type="radio"]'));
+      expect(
+        result.container.querySelector('input[type="radio"]')
+      ).toBeInTheDocument();
       expect(result.container.querySelector('input')).toBeChecked();
     });
 
@@ -106,7 +108,9 @@ describe('Toggle Tests', () => {
           {toggleContent}
         </Toggle>
       );
-      expect(result.container.querySelector('input[type="radio"]'));
+      expect(
+        result.container.querySelector('input[type="radio"]')
+      ).toBeInTheDocument();
       expect(result.container.querySelector('input')).not.toBeChecked();
     });
 
@@ -116,7 +120,9 @@ describe('Toggle Tests', () => {
           {toggleContent}
         </Toggle>
       );
-      expect(result.container.querySelector('input[type="checkbox"]'));
+      expect(
+        result.container.querySelector('input[type="checkbox"]')
+      ).toBeInTheDocument();
       expect(result.container.querySelector('input')).toBeChecked();
     });
 
@@ -126,7 +132,9 @@ describe('Toggle Tests', () => {
           {toggleContent}
         </Toggle>
       );
-      expect(result.container.querySelector('input[type="checkbox"]'));
+      expect(
+        result.container.querySelector('input[type="checkbox"]')
+      ).toBeInTheDocument();
       expect(result.container.querySelector('input')).not.toBeChecked();
     });
   });
