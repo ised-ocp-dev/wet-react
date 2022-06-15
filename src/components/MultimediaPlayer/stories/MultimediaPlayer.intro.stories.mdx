@@ -2,6 +2,9 @@ import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
 
 import { MultimediaPlayer } from '../..';
 
+import puppies from '@storybook/react/puppies.mp4';
+import valkyries from '@storybook/react/ride_of_the_valkyries.mp3';
+
 <Meta title="Components/MultimediaPlayer/Intro" component={MultimediaPlayer} />
 
 # MultimediaPlayer
@@ -15,13 +18,12 @@ Provides an accessible multimedia player for embedding video and audio into web 
     sources={[
       {
         type: 'mp4',
-        source:
-          'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+        source: puppies,
       },
     ]}
     cuePoints={[
-      { name: 'End of Intro', time: '45s' },
-      { name: '', time: '01:10' },
+      { name: 'End of Intro', time: '15s' },
+      { name: '', time: '00:30' },
     ]}
     figCaption={<p>Example Video</p>}
   />
@@ -32,8 +34,7 @@ Provides an accessible multimedia player for embedding video and audio into web 
     sources={[
       {
         type: 'mp3',
-        source:
-          'https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.mp3',
+        source: valkyries,
       },
       {
         type: 'ogg',
@@ -51,11 +52,11 @@ Provides an accessible multimedia player for embedding video and audio into web 
     sources={[
       {
         type: 'youtube',
-        source: 'https://www.youtube.com/embed/ScMzIvxBSi4',
+        source: 'https://www.youtube.com/embed/a3ICNMQW7Ok',
       },
     ]}
     figCaption={<p>Placeholder Youtube Video</p>}
-    shareURL="https://www.youtube.com/watch?v=ScMzIvxBSi4"
+    shareURL="https://www.youtube.com/watch?v=a3ICNMQW7Ok"
   />
 </Canvas>
 

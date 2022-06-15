@@ -2,65 +2,38 @@ import { Canvas, Meta, Story } from '@storybook/addon-docs';
 
 import { MultimediaPlayer } from '../..';
 
-<Meta title="Components/MultimediaPlayer/Sizing" component={MultimediaPlayer} />
-
-export const MultimediaPlayerTemplate = (args) => {
-  return (
-    <MultimediaPlayer {...args}>
-      <li>
-        <a href="#" rel="prev">
-          Previous
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          1 <span class="wb-inv">Go to Page 1</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          2 <span class="wb-inv">Go to Page 2</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" rel="next">
-          Next
-        </a>
-      </li>
-    </MultimediaPlayer>
-  );
-};
+<Meta
+  title="Components/MultimediaPlayer/Youtube"
+  component={MultimediaPlayer}
+/>
 
 # MultimediaPlayer
 
-using the `size` prop it is possible to set the size of the MultimediaPlayer to large `lg` or small `sm`
+## Youtube
 
-## Default
+Embed a youtube video by adding a single source element with `type: 'youtube', source: <URL>`<br/>
 
-Use for typical MultimediaPlayer
+**IMPORTANT:** You must alter the `source` URL by replacing `watch?v=` with `embed/`<br/>
 
-<Canvas>
-  <Story name="Default" args={{ children: '' }}>
-    {MultimediaPlayerTemplate.bind({})}
-  </Story>
-</Canvas>
+<font size="15px">
+  https://<span></span>www.<span></span>youtube.com/
+  <font color="red">watch?v=</font>a3ICNMQW7Ok
+  <br />
+  https://<span></span>www.<span></span>youtube.com/
+  <font color="#228b22">embed/</font>a3ICNMQW7Ok
+</font>
 
-## Large
-
-Use when the MultimediaPlayer needs additional prominence on the page. <br/>Since the default buttons already create prominence and a call to action, there is limited value/need to increasing their size
-
-<Canvas>
-  <Story name="Large" args={{ children: '', size: 'lg' }}>
-    {MultimediaPlayerTemplate.bind({})}
-  </Story>
-</Canvas>
-
-## Small
-
-Use when the MultimediaPlayer appears in a small section of space. This reduces the button size to maximize the amount of buttons that appear in a single row
+**IMPORTANT:** You must **NOT** alter the `shareURL`
 
 <Canvas>
-  <Story name="Small" args={{ children: '', size: 'sm' }}>
-    {MultimediaPlayerTemplate.bind({})}
-  </Story>
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'youtube',
+        source: 'https://www.youtube.com/embed/a3ICNMQW7Ok',
+      },
+    ]}
+    figCaption={<p>Placeholder Youtube Video</p>}
+    shareURL="https://www.youtube.com/watch?v=a3ICNMQW7Ok"
+  />
 </Canvas>

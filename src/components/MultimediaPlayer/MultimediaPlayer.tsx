@@ -1,12 +1,15 @@
 import React, { useRef } from 'react';
+import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 import '../../style.css';
+import './styles.css';
 
 type videoType = 'mp4' | 'webm' | 'youtube';
 type audioType = 'mp3' | 'ogg';
 type captionType = 'text/html' | 'application/ttml+xml';
 
 type sourceType = {
-  type: videoType | audioType;
+  type: videoType | audioType | null;
   source: string;
 };
 type cuePointType = {
@@ -31,9 +34,9 @@ export interface MultimediaPlayerProps
   /** captions language longform for displaying to user */
   trackLabel?: string;
   /** track source URL */
-  trackSrc?: captionType;
+  trackSrc?: string;
   /** track data type, MIME ('text/html' or 'application/ttml+xml') */
-  trackDataType?: string;
+  trackDataType?: captionType;
   /** array of cue points, each containing name (text) and time ('78s', '1:18') */
   cuePoints?: cuePointType[];
   /** Content of heading */
@@ -45,7 +48,7 @@ const MultimediaPlayer = ({
   figCaption = '',
   poster = '',
   title = '',
-  sources = [],
+  sources = [{ type: null, source: '' }],
   trackSrclang = '',
   trackLabel = '',
   trackSrc = 'text/html',
@@ -54,12 +57,6 @@ const MultimediaPlayer = ({
   children,
 }: MultimediaPlayerProps) => {
   const videoPlayer = useRef<HTMLVideoElement>(null);
-  function setTime(tim: number) {
-    const vid = videoPlayer.current;
-    if (vid) {
-      vid.currentTime = tim;
-    }
-  }
   return sources[0].type === 'mp4' || sources[0].type === 'webm' ? (
     <span>
       {children}
@@ -70,7 +67,7 @@ const MultimediaPlayer = ({
         <video poster={poster} title={title} controls ref={videoPlayer}>
           {sources.map(({ type, source }) =>
             type === 'mp4' || type === 'webm' ? (
-              <source type={`video/${type}`} src={source} />
+              <source type={`video/${type}`} key={source} src={source} />
             ) : (
               'ERROR: invalid source'
             )
@@ -97,12 +94,15 @@ const MultimediaPlayer = ({
                 +timeSplit[2];
           return (
             <button
-              key={name}
+              key={time}
               className="btn btn-info cuepoint"
               type="button"
               data-cuepoint={time}
               onClick={() => {
-                setTime(buttonTime);
+                const vid = videoPlayer.current;
+                if (vid && buttonTime >= 0) {
+                  vid.currentTime = buttonTime;
+                }
               }}
             >
               {name === '' ? 'Cue point' : name} - {time}
@@ -119,20 +119,51 @@ const MultimediaPlayer = ({
         className="wb-mltmd"
         data-wb-mltmd={shareURL === '' ? '' : `{"shareUrl": "${shareURL}"}`}
       >
-        <audio title={title} controls>
-          {sources.map(({ type, source }) =>
-            type === 'mp3' || type === 'ogg' ? (
-              <source type={`audio/${type}`} src={source} />
-            ) : (
-              'ERROR: invalid source'
-            )
-          )}
-          <track kind="captions" />
-        </audio>
+        <AudioPlayer
+          src={sources[0].source}
+          showJumpControls={false}
+          defaultCurrentTime="00:00:00"
+          defaultDuration="--:--:--"
+          showFilledProgress={false}
+          volumeJumpStep={0.05}
+          customProgressBarSection={[RHAP_UI.PROGRESS_BAR]}
+          customAdditionalControls={[
+            RHAP_UI.MAIN_CONTROLS,
+            <p style={{ margin: '5px' }} />,
+            RHAP_UI.VOLUME,
+            <p style={{ margin: '15px' }} />,
+            RHAP_UI.CURRENT_TIME,
+            <p style={{ margin: '10px', color: 'white' }}>/</p>,
+            RHAP_UI.DURATION,
+          ]}
+          customControlsSection={[RHAP_UI.ADDITIONAL_CONTROLS]}
+          customIcons={{
+            play: (
+              <span className="glyphicon glyphicon-play">
+                <span className="wb-inv">Play</span>
+              </span>
+            ),
+            pause: (
+              <span className="glyphicon glyphicon-pause">
+                <span className="wb-inv">Pause</span>
+              </span>
+            ),
+            volume: (
+              <span className="glyphicon glyphicon-volume-up">
+                <span className="wb-inv">Mute</span>
+              </span>
+            ),
+            volumeMute: (
+              <span className="glyphicon glyphicon-volume-off">
+                <span className="wb-inv">Unmute</span>
+              </span>
+            ),
+          }}
+        />
         <figcaption>{figCaption}</figcaption>
       </figure>
     </span>
-  ) : (
+  ) : sources[0].type === 'youtube' ? (
     <span>
       {children}
       <figure
@@ -147,6 +178,8 @@ const MultimediaPlayer = ({
         <figcaption>{figCaption}</figcaption>
       </figure>
     </span>
+  ) : (
+    <p />
   );
 };
 MultimediaPlayer.displayName = 'MultimediaPlayer';
