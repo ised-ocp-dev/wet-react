@@ -10,5 +10,5 @@ export interface ModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {
 const ModalFooter = ({ children, ...rest }: ModalFooterProps) => (
   <ModalFooterRB {...rest}>{React.Children.toArray(children)}</ModalFooterRB>
 );
-ModalFooter.displayName = 'Modal.Footer';
+
 export default ModalFooter;
