@@ -1,7 +1,8 @@
 .rhap_container {
   background: #333;
 }
-.rhap_main-controls-button, .rhap_volume-button {
+.rhap_main-controls-button,
+.rhap_volume-button {
   color: #ffffff;
   font-size: 25px;
 }
@@ -19,6 +20,9 @@
 .rhap_time {
   color: #ffffff;
 }
-.rhap_progress-indicator, .rhap_download-progress, .rhap_volume-bar, .rhap_progress-bar-show-download {
+.rhap_progress-indicator,
+.rhap_download-progress,
+.rhap_volume-bar,
+.rhap_progress-bar-show-download {
   background: #ffffff;
 }

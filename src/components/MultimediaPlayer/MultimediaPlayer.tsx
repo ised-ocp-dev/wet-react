@@ -51,8 +51,8 @@ const MultimediaPlayer = ({
   sources = [{ type: null, source: '' }],
   trackSrclang = '',
   trackLabel = '',
-  trackSrc = 'text/html',
-  trackDataType = '',
+  trackSrc = '',
+  trackDataType = 'text/html',
   cuePoints = [],
   children,
 }: MultimediaPlayerProps) => {
@@ -67,7 +67,7 @@ const MultimediaPlayer = ({
         <video poster={poster} title={title} controls ref={videoPlayer}>
           {sources.map(({ type, source }) =>
             type === 'mp4' || type === 'webm' ? (
-              <source type={`video/${type}`} key={source} src={source} />
+              <source type={`video/${type}`} key={type + source} src={source} />
             ) : (
               'ERROR: invalid source'
             )
@@ -94,7 +94,7 @@ const MultimediaPlayer = ({
                 +timeSplit[2];
           return (
             <button
-              key={time}
+              key={name + time}
               className="btn btn-info cuepoint"
               type="button"
               data-cuepoint={time}
