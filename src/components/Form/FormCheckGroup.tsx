@@ -35,6 +35,4 @@ const FormCheckGroup = ({
   );
 };
 
-FormCheckGroup.displayName = 'Form.CheckGroup';
-
 export default FormCheckGroup;
