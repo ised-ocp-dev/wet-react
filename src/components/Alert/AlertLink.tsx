@@ -16,6 +16,4 @@ const AlertLink = ({ children, className = '', ...rest }: AlertLinkProps) => (
   </a>
 );
 
-AlertLink.displayName = 'Alert.Link';
-
 export default AlertLink;

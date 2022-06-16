@@ -4,7 +4,7 @@ import '../../style.css';
 
 type sizeType = 'sm' | 'lg' | 'xl';
 
-type fullScreenType =
+type fullscreenType =
   | true
   | 'sm-down'
   | 'md-down'
@@ -24,9 +24,9 @@ export interface ModalProps {
   /** Render a large, extra large or small modal. When not provided, the modal is rendered with medium (default) size. */
   size?: sizeType;
   /** Renders a fullscreen modal. Specifying a breakpoint will render the modal as fullscreen below the breakpoint size. */
-  fullScreen?: fullScreenType;
+  fullscreen?: fullscreenType;
   /** When true The modal will restore focus to previously focused element once modal is hidden */
-  restorefocus?: boolean;
+  restoreFocus?: boolean;
   /** Allows scrolling the body instead of the entire Modal when overflowing. */
   scrollable?: boolean;
   /** Close the modal when escape key is pressed */
@@ -43,8 +43,8 @@ const Modal = ({
   animation = true,
   autoFocus = true,
   size = 'lg',
-  fullScreen = 'lg-down',
-  restorefocus = true,
+  fullscreen = 'lg-down',
+  restoreFocus = true,
   keyboard = true,
   scrollable,
   centered,
@@ -53,12 +53,12 @@ const Modal = ({
 }: ModalProps) => (
   <ModalRB
     size={size}
-    fullscreen={fullScreen}
+    fullscreen={fullscreen}
     scrollable={scrollable}
     centered={centered}
     keyboard={keyboard}
     autoFocus={autoFocus}
-    restoreFocus={restorefocus}
+    restoreFocus={restoreFocus}
     animation={animation}
     show={show}
     onHide={onHide}

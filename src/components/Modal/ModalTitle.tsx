@@ -10,6 +10,4 @@ const ModalTitle = ({ children, ...rest }: ModalTitleProps) => (
   <ModalTitleRB {...rest}>{React.Children.toArray(children)}</ModalTitleRB>
 );
 
-ModalTitle.displayName = 'Modal.Title';
-
 export default ModalTitle;

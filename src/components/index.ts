@@ -19,3 +19,8 @@ export { default as Table } from './Table';
 export { default as Modal } from './Modal';
 export { default as InputGroup } from './InputGroup';
 export { default as ShareWidget } from './ShareWidget';
+export { default as FootnoteLink } from './Footnote/FootnoteLink';
+export { default as FootnoteSection } from './Footnote/FootnoteSection';
+export { default as Quotation } from './Quotation';
+export { default as List } from './List';
+export { default as Grid } from './Grid';
