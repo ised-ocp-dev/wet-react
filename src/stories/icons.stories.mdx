@@ -1,0 +1,55 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShareFromSquare as shareIconRegular } from '@fortawesome/free-regular-svg-icons';
+import { faShareFromSquare as shareIconSolid } from '@fortawesome/free-solid-svg-icons';
+import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
+
+<Meta title="Icons/Font Awesome" />
+
+# Font Awesome
+
+WET-React uses the popular icon library Font Awesome to add various icons to our components. Read more about Font Awesome and discover icons at: https://fontawesome.com/icons
+
+## Font Awesome Icon Packages
+
+WET-React comes with three pre-installed Font Awesome icon packages.
+
+### @fortawesome/free-brands-svg-icons
+
+Free Font Awesome brand icons (e.g., Facebook, Twitter, etc.).
+
+### @fortawesome/free-regular-svg-icons
+
+Free Font Awesome icons with regular thickness.
+
+### @fortawesome/free-solid-svg-icons
+
+Free Font Awesome icons with solid thickness.
+
+## Usage
+
+1. Import the `FontAwesomeIcon` component. For example:
+
+```typescript
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+```
+
+2. Import the IconDefinition of the icon you wish to display from a Font Awesome icon package. For example:
+
+```typescript
+import { faShareFromSquare } from '@fortawesome/free-solid-svg-icons';
+```
+
+3. Initialize the `FontAwesomeIcon` component. Set the `Icon` prop to the IconDefinition from the previous step. For example:
+
+```
+<FontAwesomeIcon icon={faShareFromSquare} />
+```
+
+## Examples
+
+<Canvas>
+  <FontAwesomeIcon icon={shareIconRegular} />
+  <FontAwesomeIcon icon={shareIconSolid} />
+  <FontAwesomeIcon icon={faFacebookSquare} />
+</Canvas>
