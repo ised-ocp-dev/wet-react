@@ -14,17 +14,19 @@ import treesPhoto from '@storybook/react/trees.jpg';
 
 export const TemplateGroup = (args) => {
   return (
-    <Carousel {...args}>
-      <Carousel.Item interval={1000}>
-        <Image style={{ width: '100%' }} src={naturePhoto} />
-      </Carousel.Item>
-      <Carousel.Item>
-        <Image style={{ width: '100%' }} src={fieldPhoto} />
-      </Carousel.Item>
-      <Carousel.Item>
-        <Image style={{ width: '100%' }} src={treesPhoto} />
-      </Carousel.Item>
-    </Carousel>
+    <div style={{ width: 1280 }}>
+      <Carousel {...args}>
+        <Carousel.Item interval={1000}>
+          <Image src={naturePhoto} />
+        </Carousel.Item>
+        <Carousel.Item>
+          <Image src={fieldPhoto} />
+        </Carousel.Item>
+        <Carousel.Item>
+          <Image src={treesPhoto} />
+        </Carousel.Item>
+      </Carousel>
+    </div>
   );
 };
 
