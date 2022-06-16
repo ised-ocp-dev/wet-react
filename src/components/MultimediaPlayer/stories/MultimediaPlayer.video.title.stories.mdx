@@ -1,8 +1,20 @@
-import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 
 import { MultimediaPlayer } from '../..';
 
 import puppies from '@storybook/react/puppies.mp4';
+
+export const Template = (args) => (
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp4',
+        source: puppies,
+      },
+    ]}
+    {...args}
+  />
+);
 
 <Meta
   title="Components/MultimediaPlayer/Video/Title"
@@ -13,18 +25,12 @@ import puppies from '@storybook/react/puppies.mp4';
 
 ## Title
 
-Add a `title` attribute to the video element with the value being the title of the video, for screen readers
+Add a `title` attribute to the video element with the value being the title of the video. It will be visible as a mouseover tooltip
 
 ## Example
 
 <Canvas>
-  <MultimediaPlayer
-    sources={[
-      {
-        type: 'mp4',
-        source: puppies,
-      },
-    ]}
-    title="this is the title"
-  />
+  <Story name="Title" args={{ title: 'this is the title' }}>
+    {Template.bind({})}
+  </Story>
 </Canvas>

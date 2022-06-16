@@ -1,8 +1,25 @@
-import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 
 import { MultimediaPlayer } from '../..';
 
 import puppies from '@storybook/react/puppies.mp4';
+
+export const Template = (args) => (
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp4',
+        source: puppies,
+      },
+    ]}
+    cuePoints={[
+      { name: 'End of Intro', time: '15s' },
+      { name: 'Second topic', time: '00:30' },
+      { name: '', time: '00:45' },
+    ]}
+    {...args}
+  />
+);
 
 <Meta
   title="Components/MultimediaPlayer/Video/cuePoints"
@@ -20,18 +37,7 @@ Specify the cue point position in seconds (ex. 75s) or time notation (01:15)
 ## Example
 
 <Canvas>
-  <MultimediaPlayer
-    sources={[
-      {
-        type: 'mp4',
-        source: puppies,
-      },
-    ]}
-    cuePoints={[
-      { name: 'End of Intro', time: '15s' },
-      { name: 'Second topic', time: '00:30' },
-      { name: '', time: '00:45' },
-    ]}
-    figCaption={<p>Example Video</p>}
-  />
+  <Story name="cuePoints" args={{ figCaption: <p>Example Video</p> }}>
+    {Template.bind({})}
+  </Story>
 </Canvas>

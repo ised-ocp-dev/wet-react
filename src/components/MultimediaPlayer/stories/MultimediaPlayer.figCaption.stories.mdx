@@ -1,8 +1,20 @@
-import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 
 import { MultimediaPlayer } from '../..';
 
 import puppies from '@storybook/react/puppies.mp4';
+
+export const Template = (args) => (
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp4',
+        source: puppies,
+      },
+    ]}
+    {...args}
+  />
+);
 
 <Meta
   title="Components/MultimediaPlayer/figCaption"
@@ -13,19 +25,18 @@ import puppies from '@storybook/react/puppies.mp4';
 
 ## figCaption
 
-Add a `figcaption` with the title of the video or audio file. If a transcript is required, then also include either a link to
+Add a `figCaption` with the title of the video or audio file. If a transcript is required, then also include either a link to
 the transcript or a details/summary containing the transcript.
 
 ## Example
 
 <Canvas>
-  <MultimediaPlayer
-    sources={[
-      {
-        type: 'mp4',
-        source: puppies,
-      },
-    ]}
-    figCaption={<p>This is the figCaption</p>}
-  />
+  <Story
+    name="figCaption"
+    args={{
+      figCaption: <p>This is the figCaption</p>,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
 </Canvas>

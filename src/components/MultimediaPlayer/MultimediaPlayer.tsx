@@ -30,7 +30,7 @@ export interface MultimediaPlayerProps
   /** array of source links, each containing source (url) and type (MIME) ('mp4', 'webm', 'youtube', 'mp3', 'ogg') */
   sources?: sourceType[];
   /** captions language shortform (en, fr, sp...) */
-  trackSrclang?: string;
+  trackSrcLang?: string;
   /** captions language longform for displaying to user */
   trackLabel?: string;
   /** track source URL */
@@ -49,7 +49,7 @@ const MultimediaPlayer = ({
   poster = '',
   title = '',
   sources = [{ type: null, source: '' }],
-  trackSrclang = '',
+  trackSrcLang = '',
   trackLabel = '',
   trackSrc = '',
   trackDataType = 'text/html',
@@ -76,7 +76,7 @@ const MultimediaPlayer = ({
             src={trackSrc}
             kind="captions"
             data-type={trackDataType}
-            srcLang={trackSrclang}
+            srcLang={trackSrcLang}
             label={trackLabel}
           />
         </video>
