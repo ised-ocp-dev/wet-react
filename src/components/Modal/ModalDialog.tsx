@@ -42,5 +42,5 @@ const ModalDialog = ({
     {React.Children.toArray(children)}
   </ModalRB>
 );
-ModalDialog.displayName = 'ModalDialog';
+
 export default ModalDialog;
