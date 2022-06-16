@@ -15,11 +15,11 @@ Each `Tabs` component can have a `mainPanel` attribute, which contains the id of
     id="unique1"
     mainPanel="text2"
     panels={[
-      { title: 'tab one', content: <p>Tab Content</p>, id: 'text1' },
-      { title: 'tab two', content: <p>Second Tab Content</p>, id: 'text2' },
+      { title: 'Tab 1', content: <p>Content 1</p>, id: 'text1' },
+      { title: 'Tab 2', content: <p>Content 2</p>, id: 'text2' },
       {
-        title: 'tab three',
-        content: <p>Third Tab Content</p>,
+        title: 'Tab 3',
+        content: <p>Content 3</p>,
         id: 'text3',
       },
     ]}
@@ -34,18 +34,18 @@ If `mainPanel` is not specified, it will default to the first tab
   <Tabs
     id="unique1"
     panels={[
-      { title: 'tab one', content: <p>Tab Content</p>, id: 'text1' },
-      { title: 'tab two', content: <p>Second Tab Content</p>, id: 'text2' },
+      { title: 'Tab 1', content: <p>Content 1</p>, id: 'text1' },
+      { title: 'Tab 2', content: <p>Content 2</p>, id: 'text2' },
       {
-        title: 'tab three',
-        content: <p>Third Tab Content</p>,
+        title: 'Tab 3',
+        content: <p>Content 3</p>,
         id: 'text3',
       },
     ]}
   />
 </Canvas>
 
-If `mainpanel` is an id that does not exist, no panels will be open by default. (this is an intentional feature)
+If `mainPanel` is an id that does not exist, no panels will be open by default. (this is an intentional feature)
 
 ## Example
 
@@ -54,11 +54,11 @@ If `mainpanel` is an id that does not exist, no panels will be open by default. 
     id="unique1"
     mainPanel="non-existant"
     panels={[
-      { title: 'tab one', content: <p>Tab Content</p>, id: 'text1' },
-      { title: 'tab two', content: <p>Second Tab Content</p>, id: 'text2' },
+      { title: 'Tab 1', content: <p>Content 1</p>, id: 'text1' },
+      { title: 'Tab 2', content: <p>Content 2</p>, id: 'text2' },
       {
-        title: 'tab three',
-        content: <p>Third Tab Content</p>,
+        title: 'Tab 3',
+        content: <p>Content 3</p>,
         id: 'text3',
       },
     ]}
