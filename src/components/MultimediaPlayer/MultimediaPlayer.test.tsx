@@ -3,6 +3,10 @@ import { render, screen, fireEvent } from '@testing-library/react';
 
 import MultimediaPlayer from '@components/MultimediaPlayer';
 
+window.HTMLMediaElement.prototype.load = () => {
+  /* do nothing */
+};
+
 describe('MultimediaPlayer Tests', () => {
   const MultimediaPlayerMessage = 'Hello World';
   describe('MultimediaPlayer source Tests', () => {
@@ -14,6 +18,16 @@ describe('MultimediaPlayer Tests', () => {
       );
       expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
       expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('source')[0]
+      ).toHaveAttribute('src', 'https://hi.mp4');
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('source')[0]
+      ).toHaveAttribute('type', 'video/mp4');
     });
     test('webm', () => {
       render(
@@ -26,6 +40,16 @@ describe('MultimediaPlayer Tests', () => {
       );
       expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
       expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('source')[0]
+      ).toHaveAttribute('src', 'https://hi.webm');
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('source')[0]
+      ).toHaveAttribute('type', 'video/webm');
     });
     test('invalid', () => {
       render(
@@ -41,20 +65,52 @@ describe('MultimediaPlayer Tests', () => {
       );
       expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
       expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('source')[0]
+      ).toHaveAttribute('src', 'https://hi.webm');
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('source')[0]
+      ).toHaveAttribute('type', 'video/webm');
     });
     test('mp3', () => {
       render(
-        <MultimediaPlayer sources={[{ type: 'mp3', source: 'https://hi.mp3' }]}>
+        <MultimediaPlayer
+          sources={[
+            {
+              type: 'mp3',
+              source:
+                'https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.mp3',
+            },
+          ]}
+        >
           {MultimediaPlayerMessage}
         </MultimediaPlayer>
       );
       expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
       expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('audio')[0]
+      ).toHaveAttribute(
+        'src',
+        'https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.mp3'
+      );
     });
     test('ogg', () => {
       render(
         <MultimediaPlayer
-          sources={[{ type: 'mp3', source: 'https://hi.ogg' }]}
+          sources={[
+            {
+              type: 'mp3',
+              source:
+                'https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.ogg',
+            },
+          ]}
           shareURL="thisIsALink"
         >
           {MultimediaPlayerMessage}
@@ -62,6 +118,14 @@ describe('MultimediaPlayer Tests', () => {
       );
       expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
       expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('audio')[0]
+      ).toHaveAttribute(
+        'src',
+        'https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.ogg'
+      );
     });
     test('youtube', () => {
       render(
@@ -74,6 +138,11 @@ describe('MultimediaPlayer Tests', () => {
       );
       expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
       expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('iframe')[0]
+      ).toHaveAttribute('src', 'https://hi.youtube');
     });
     test('youtube no shareURL', () => {
       render(
@@ -85,6 +154,11 @@ describe('MultimediaPlayer Tests', () => {
       );
       expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
       expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('iframe')[0]
+      ).toHaveAttribute('src', 'https://hi.youtube');
     });
     test('empty', () => {
       render(<MultimediaPlayer>{MultimediaPlayerMessage}</MultimediaPlayer>);
@@ -109,6 +183,9 @@ describe('MultimediaPlayer Tests', () => {
       expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
       expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
       fireEvent.click(screen.getByText('Cue point - 01:10'));
+      expect(
+        screen.getByText('Hello World').getElementsByTagName('button')[3]
+      ).toBeInTheDocument();
     });
     test('click cue point button, no video player error', () => {
       render(
@@ -129,6 +206,9 @@ describe('MultimediaPlayer Tests', () => {
       expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
       // document.getElementsByTagName('video')[0].remove();
       fireEvent.click(screen.getByText('Cue point - -1'));
+      expect(
+        screen.getByText('Hello World').getElementsByTagName('button')[3]
+      ).toBeInTheDocument();
     });
   });
 });
