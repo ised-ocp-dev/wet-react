@@ -1,8 +1,14 @@
-import { Story, Canvas, Meta } from '@storybook/addon-docs';
+import { Story, Canvas, Meta, ArgsTable } from '@storybook/addon-docs';
 
 import { Form, Alert } from '../..';
 
-<Meta title="Components/Form/Form Text" component={Form} />
+<Meta
+  title="Components/Form/Form Text"
+  component={Form}
+  subcomponents={{
+    'Form.Text': Form.Text,
+  }}
+/>
 
 # Forms
 
@@ -65,19 +71,6 @@ The `isMuted` prop can be used to mute the text styling. It defaults to `true`.
   </Story>
 </Canvas>
 
-### Form.Text Props
+Available props can be seen below.
 
-**We are working to display the props in a table. Until then, you can find the props below:**
-
-```typescript
-export interface FormTextProps {
-  /** Content of button */
-  children?: React.ReactNode;
-  /** A convenience prop for add the text-muted class, since it's so commonly used here. */
-  isMuted?: boolean;
-  /** Hides the label visually while still allowing it to be read by assistive technologies */
-  visuallyHidden?: boolean;
-  /** Additional custom classNames */
-  className?: string;
-}
-```
+<ArgsTable of={Form.Text} />

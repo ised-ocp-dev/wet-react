@@ -74,7 +74,7 @@ const FormControl = React.forwardRef(
   (
     {
       placeholder,
-      value = '',
+      value,
       defaultValue,
       as,
       type = 'text',
@@ -122,7 +122,5 @@ const FormControl = React.forwardRef(
     );
   }
 );
-
-FormControl.displayName = 'Form.Control';
 
 export default FormControl;
