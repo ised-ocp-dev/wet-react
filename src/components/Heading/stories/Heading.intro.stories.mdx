@@ -1,0 +1,28 @@
+import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+
+import { Heading } from '../..';
+
+<Meta title="Typography/Heading/Intro" component={Heading} />
+
+## Heading Levels
+
+Generate headings to structure a webpage. You can select the heading levels `h1-h6` by using the `level` prop. It will auto generate html tags `<h1>`to`<h6>`.
+
+**The default level is `h1`.**
+
+## Example
+
+<Canvas>
+  <span>
+    <Heading level="h1" text="h1 heading" />
+    <Heading level="h2" text="h2 heading" />
+    <Heading level="h3" text="h3 heading" />
+    <Heading level="h4" text="h4 heading" />
+    <Heading level="h5" text="h5 heading" />
+    <Heading level="h6" text="h6 heading" />
+  </span>
+</Canvas>
+
+## Available Props
+
+<ArgsTable />
