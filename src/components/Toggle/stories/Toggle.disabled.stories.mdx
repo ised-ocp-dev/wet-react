@@ -1,0 +1,88 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Toggle } from '../..';
+
+<Meta title="Components/Toggle/Disabled" component={Toggle} />
+
+export const Template = (args) => <Toggle {...args} />;
+
+# Toggle
+
+## Disabled state
+
+All styling variations in the `disabled` state:
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      disabled: true,
+      children: 'Disabled toggle',
+      id: 'id',
+      value: 'value',
+      variant: 'default',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="Primary"
+    args={{
+      disabled: true,
+      children: 'Disabled toggle',
+      id: 'id',
+      value: 'value',
+      variant: 'primary',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="Success"
+    args={{
+      disabled: true,
+      children: 'Disabled toggle',
+      id: 'id',
+      value: 'value',
+      variant: 'success',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="Warning"
+    args={{
+      disabled: true,
+      children: 'Disabled toggle',
+      id: 'id',
+      value: 'value',
+      variant: 'warning',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="Danger"
+    args={{
+      disabled: true,
+      children: 'Disabled toggle',
+      id: 'id',
+      value: 'value',
+      variant: 'danger',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+  <Story
+    name="Info"
+    args={{
+      disabled: true,
+      children: 'Disabled toggle',
+      id: 'id',
+      value: 'value',
+      variant: 'info',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
