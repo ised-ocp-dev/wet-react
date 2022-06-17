@@ -1,0 +1,27 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Archived } from '../..';
+
+<Meta
+  title="Components/Archived/Language"
+  component={Archived}
+  subcomponents={{ 'Archived.Button': Archived.Button }}
+/>
+
+export const ArchivedTemplate = (args) => {
+  return <Archived {...args}></Archived>;
+};
+
+# Archived
+
+## Language
+
+Using the `french` prop it is possible to set the language of the Archived to french
+
+## Example
+
+<Canvas>
+  <Story name="Language" args={{ french: true }}>
+    {ArchivedTemplate.bind({})}
+  </Story>
+</Canvas>
