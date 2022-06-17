@@ -32,6 +32,10 @@ describe('Lightbox', () => {
       expect(screen.getByText('children')).toBeInTheDocument();
       expect(screen.getByText('children')).toHaveAttribute('hidden', '');
     });
+    test('renders the Lightbox component with french', () => {
+      render(<Lightbox french>children</Lightbox>);
+      expect(screen.getByText('children')).toBeInTheDocument();
+    });
   });
   describe('Test Lightbox functionality', () => {
     test('click basic lightbox', () => {
@@ -140,6 +144,30 @@ describe('Lightbox', () => {
       expect(
         screen.getByText('children').closest('div')?.parentNode
       ).toHaveClass('lbx-gal');
+    });
+    test('Test gallery component with french', () => {
+      render(
+        <Lightbox.Gallery id="id" french>
+          <Lightbox>children</Lightbox>
+          <Lightbox>children2</Lightbox>
+        </Lightbox.Gallery>
+      );
+      expect(screen.getByText('children')).toBeInTheDocument();
+      expect(screen.getByText('children2')).toBeInTheDocument();
+      expect(screen.getByText('children').parentNode).toHaveClass(
+        'lightbox-breezy'
+      );
+      expect(screen.getByText('children2').parentNode).toHaveClass(
+        'lightbox-breezy'
+      );
+      expect(screen.getByText('children').parentNode).toHaveAttribute(
+        'index',
+        '0'
+      );
+      expect(screen.getByText('children2').parentNode).toHaveAttribute(
+        'index',
+        '1'
+      );
     });
   });
   describe('Test gallery functionality', () => {

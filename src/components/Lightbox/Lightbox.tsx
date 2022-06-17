@@ -10,6 +10,8 @@ export interface LightboxProps extends React.HTMLAttributes<HTMLElement> {
   src?: string;
   /** use to hide lightbox, recommended for galleries where you want to only show the first image */
   hidden?: boolean;
+  /** use to convert all lightbox text to french */
+  french?: boolean;
   /** content of Lightbox */
   children?: React.ReactNode;
 }
@@ -18,6 +20,7 @@ const Lightbox = ({
   title = '',
   src = '',
   hidden = false,
+  french = false,
   children,
 }: LightboxProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -48,13 +51,22 @@ const Lightbox = ({
       >
         <ModalRB.Body bsPrefix="bg-darker" style={{ cursor: 'auto' }}>
           <button
-            title="Close overlay (escape key)"
+            title={
+              french
+                ? "Fermer la fenêtre superposée (touche d'échappement)"
+                : 'Close overlay (escape key)'
+            }
             type="button"
             className="mfp-close"
             onClick={() => setIsOpen(false)}
             style={{ width: 'auto' }}
           >
-            ×<span className="wb-inv"> Close overlay (escape key)</span>
+            ×
+            <span className="wb-inv">
+              {french
+                ? " Fermer la fenêtre superposée (touche d'échappement)"
+                : ' Close overlay (escape key)'}
+            </span>
           </button>
           <img className="mfp-img" src={src} alt="alternate" />
           <figcaption>

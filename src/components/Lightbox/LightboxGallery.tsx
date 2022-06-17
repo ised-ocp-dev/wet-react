@@ -11,12 +11,15 @@ export interface LightboxGalleryProps
   tag?: string;
   /** unique custom id for gallery */
   id: string;
+  /** use to convert all gallery text to french */
+  french?: boolean;
 }
 
 const LightboxGallery = ({
   children,
   tag = 'section',
   id,
+  french = false,
   ...rest
 }: LightboxGalleryProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -87,13 +90,22 @@ const LightboxGallery = ({
           style={{ cursor: 'auto' }}
         >
           <button
-            title="Close overlay (escape key)"
+            title={
+              french
+                ? "Fermer la fenêtre superposée (touche d'échappement)"
+                : 'Close overlay (escape key)'
+            }
             type="button"
             className="mfp-close"
             onClick={() => setIsOpen(false)}
             style={{ width: 'auto' }}
           >
-            ×<span className="wb-inv"> Close overlay (escape key)</span>
+            ×
+            <span className="wb-inv">
+              {french
+                ? " Fermer la fenêtre superposée (touche d'échappement)"
+                : ' Close overlay (escape key)'}
+            </span>
           </button>
           <img
             className="mfp-img"
@@ -119,29 +131,41 @@ const LightboxGallery = ({
                   : ''}
               </div>
               <div className="mfp-counter">
-                Item {index + 1} of {numImages}
+                {french
+                  ? `Article ${index + 1} de ${numImages}`
+                  : `Item ${index + 1} of ${numImages}`}
               </div>
             </div>
           </figcaption>
           <button
-            title="Previous (left arrow key)"
+            title={
+              french ? 'Précédent (touche gauche)' : 'Previous (left arrow key)'
+            }
             type="button"
             className="mfp-arrow mfp-arrow-left mfp-prevent-close"
             onClick={() => {
               setIndex(index === 0 ? numImages - 1 : index - 1);
             }}
           >
-            <span className="wb-inv"> Previous (left arrow key)</span>
+            <span className="wb-inv">
+              {french
+                ? ' Précédent (touche gauche)'
+                : ' Previous (left arrow key)'}
+            </span>
           </button>
           <button
-            title="Next (right arrow key)"
+            title={
+              french ? 'Suivant (touche droite)' : 'Next (right arrow key)'
+            }
             type="button"
             className="mfp-arrow mfp-arrow-right mfp-prevent-close"
             onClick={() => {
               setIndex((index + 1) % numImages);
             }}
           >
-            <span className="wb-inv"> Next (right arrow key)</span>
+            <span className="wb-inv">
+              {french ? ' Suivant (touche droite)' : ' Next (right arrow key)'}
+            </span>
           </button>
         </ModalRB.Body>
       </ModalRB>
