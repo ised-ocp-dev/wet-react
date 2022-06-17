@@ -18,6 +18,7 @@ export { default as Jumbotron } from './Jumbotron';
 export { default as Table } from './Table';
 export { default as Modal } from './Modal';
 export { default as InputGroup } from './InputGroup';
+export { default as KeyboardKey } from './KeyboardKey';
 export { default as PrettyPrint } from './PrettyPrint';
 export { default as Heading } from './Heading';
 export { default as Archived } from './Archived';
