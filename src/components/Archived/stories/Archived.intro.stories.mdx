@@ -1,0 +1,106 @@
+import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+
+import { Archived } from '../..';
+
+<Meta title="Components/Archived/Intro" component={Archived} />
+
+# Archived
+
+Helps users identify Web pages that have been archived online.
+
+## Use When
+
+This approach is mandatory for Government of Canada Web pages that have been archived online.
+
+A Web page can be archived online if it is:<br/>
+--maintained for reference, research or record keeping purposes;<br/>
+--will not be altered or updated after the date of archiving; and<br/>
+--stored in a digital repository.<br/>
+Examples include; a new policy that has replaced an old policy, older versions of reports, events that have happened in the past (such as conferences).
+
+## English pages
+
+Add the following markup at the start of the content area of the page (after the h1)
+
+<Canvas>
+  <Archived />
+</Canvas>
+
+## Optional
+
+Add a paragraph after the first h2 providing a link to a replacement (if one exists) and explaining why the current page was archived.
+
+<Canvas>
+  <Archived
+    children={
+      <p>
+        The{' '}
+        <a href="https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=24227">
+          {' '}
+          Standard on Web Usability{' '}
+        </a>{' '}
+        replaces this content. This content is archived because Common Look and
+        Feel 2.0 Standards have been rescinded.
+      </p>
+    }
+  />
+</Canvas>
+
+## French pages
+
+Add the following markup at the start of the content area of the page (after the h1)
+
+<Canvas>
+  <Archived french />
+</Canvas>
+
+## Optional
+
+Add a paragraph after the first h2 providing a link to a replacement (if one exists) and explaining why the current page was archived.
+
+<Canvas>
+  <Archived
+    french
+    children={
+      <p>
+        The{' '}
+        <a href="https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=24227">
+          {' '}
+          Standard on Web Usability{' '}
+        </a>{' '}
+        replaces this content. This content is archived because Common Look and
+        Feel 2.0 Standards have been rescinded.
+      </p>
+    }
+  />
+</Canvas>
+
+## Available Props
+
+<ArgsTable />
+
+## CSS
+
+Configure the display of the archived message through CSS as needed
+
+```#archived-bnr {
+background-color: #fd0;
+}
+
+#archived-bnr p {
+margin: 0;
+text-align: center;
+}
+
+#archived-bnr a {
+color: #000;
+display: block;
+font-weight: 700;
+padding: 0.75em 44px;
+text-decoration: underline;
+}
+
+#archived-bnr .overlay-close {
+color: #000;
+}
+```
