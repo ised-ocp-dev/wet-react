@@ -25,5 +25,6 @@ export { default as FootnoteLink } from './Footnote/FootnoteLink';
 export { default as FootnoteSection } from './Footnote/FootnoteSection';
 export { default as Quotation } from './Quotation';
 export { default as List } from './List';
+export { default as DetailSummary } from './DetailSummary';
 export { default as SecondaryMenu } from './SecondaryMenu';
 export { default as Grid } from './Grid';
