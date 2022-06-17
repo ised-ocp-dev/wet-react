@@ -1,0 +1,49 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { PrettyPrint } from '../..';
+
+<Meta title="Components/PrettyPrint/LineNums" component={PrettyPrint} />
+
+export const Template = (args) => (
+  <span>
+    <PrettyPrint initialize />
+    <PrettyPrint {...args} prettyprinted>
+      <ol>
+        <li>line 1</li>
+        <li>line 2</li>
+        <li>line 3</li>
+        <li>line 4</li>
+        <li>line 5</li>
+      </ol>
+    </PrettyPrint>
+  </span>
+);
+
+# PrettyPrint
+
+## Line Numbers
+
+Use the `lineNums` attribute to add line numbers to code. Note you need to put your code in an ordered list `<ol>`
+
+## Example
+
+<Canvas>
+  <Story name="Line Numbers" args={{ lineNums: true }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Whole Page
+
+Use the `wholePage` and `lineNums` attributes to add line numbers to all `<pre>` and `<code>` elements in the page
+
+## Example
+
+<Canvas>
+  <PrettyPrint wholePage lineNums />
+  <PrettyPrint>
+    <ol>
+      <li>Hey, this code was numbered!</li>
+    </ol>
+  </PrettyPrint>
+</Canvas>
