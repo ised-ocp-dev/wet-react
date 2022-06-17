@@ -1,0 +1,47 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { PrettyPrint } from '../..';
+
+<Meta title="Components/PrettyPrint/General" component={PrettyPrint} />
+
+export const Template = (args) => (
+  <PrettyPrint {...args}>
+    <p>line 1</p>
+    <p>line 2</p>
+    <p>line 3</p>
+    <p>line 4</p>
+    <p>line 5</p>
+  </PrettyPrint>
+);
+
+# PrettyPrint
+
+## Initialize
+
+Use the `initialize` attribute to initialize the PrettyPrint component once per page
+
+## Example
+
+<Canvas>
+  <PrettyPrint initialize>{`<PrettyPrint initialize />`}</PrettyPrint>
+</Canvas>
+
+## Tag Type
+
+Use the `tagType` attribute to set the tag to either `<pre>` or `<code>`
+
+## Example Pre
+
+<Canvas>
+  <Story name="Pre" args={{ tagType: 'pre' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Example Code
+
+<Canvas>
+  <Story name="Code" args={{ tagType: 'code' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
