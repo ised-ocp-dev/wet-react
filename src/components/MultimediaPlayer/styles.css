@@ -39,6 +39,7 @@
   width: 16px;
   height: 16px;
   top: 2px;
+  box-shadow: none;
 }
 .rhap_progress-filled {
   height: 16px;
