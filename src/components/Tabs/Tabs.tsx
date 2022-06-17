@@ -68,7 +68,7 @@ const Tabs = ({ mainPanel, id = '', panels }: TabsProps) => {
                 title={item.title}
                 key={item.id}
               >
-                <summary>hi</summary>
+                <summary> </summary>
                 {item.content}
               </TabPaneRB>
             ))}
