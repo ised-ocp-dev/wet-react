@@ -1,0 +1,27 @@
+import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+
+import { List } from '../..';
+import { DetailSummary } from '../..';
+
+<Meta title="Components/DetailSummary/Intro" component={DetailSummary} />
+
+# DetailSummary
+
+Use within `<li>` elements in a `<List unstyled>` to allow content to be expanded and collapsed
+
+## Example
+
+<Canvas>
+  <List unstyled>
+    <li>
+      <DetailSummary
+        title="expand 1"
+        children={<p>expanded text, image or other content</p>}
+      />
+    </li>
+  </List>
+</Canvas>
+
+## Available Props
+
+<ArgsTable />
