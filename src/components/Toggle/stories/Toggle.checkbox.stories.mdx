@@ -1,0 +1,27 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Toggle } from '../..';
+
+<Meta title="Components/Toggle/Checkbox" component={Toggle} />
+
+export const Template = (args) => <Toggle {...args} />;
+
+# Toggle
+
+## Checkbox Toggle
+
+A label that styles a checkbox input element like a button.
+
+<Canvas>
+  <Story
+    name="Checkbox"
+    args={{
+      children: 'Checkbox toggle',
+      id: 'id',
+      value: 'value',
+      type: 'checkbox',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
