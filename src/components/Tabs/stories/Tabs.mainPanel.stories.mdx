@@ -1,0 +1,66 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Tabs } from '../..';
+
+<Meta title="Components/Tabs/mainPanel" component={Tabs} />
+
+# Tabs
+
+Each `Tabs` component can have a `mainPanel` attribute, which contains the id of the tab to have open by default
+
+## Example
+
+<Canvas>
+  <Tabs
+    id="unique1"
+    mainPanel="text2"
+    panels={[
+      { title: 'Tab 1', content: <p>Content 1</p>, id: 'text1' },
+      { title: 'Tab 2', content: <p>Content 2</p>, id: 'text2' },
+      {
+        title: 'Tab 3',
+        content: <p>Content 3</p>,
+        id: 'text3',
+      },
+    ]}
+  />
+</Canvas>
+
+If `mainPanel` is not specified, it will default to the first tab
+
+## Example
+
+<Canvas>
+  <Tabs
+    id="unique1"
+    panels={[
+      { title: 'Tab 1', content: <p>Content 1</p>, id: 'text1' },
+      { title: 'Tab 2', content: <p>Content 2</p>, id: 'text2' },
+      {
+        title: 'Tab 3',
+        content: <p>Content 3</p>,
+        id: 'text3',
+      },
+    ]}
+  />
+</Canvas>
+
+If `mainPanel` is an id that does not exist, no panels will be open by default. (this is an intentional feature)
+
+## Example
+
+<Canvas>
+  <Tabs
+    id="unique1"
+    mainPanel="non-existant"
+    panels={[
+      { title: 'Tab 1', content: <p>Content 1</p>, id: 'text1' },
+      { title: 'Tab 2', content: <p>Content 2</p>, id: 'text2' },
+      {
+        title: 'Tab 3',
+        content: <p>Content 3</p>,
+        id: 'text3',
+      },
+    ]}
+  />
+</Canvas>
