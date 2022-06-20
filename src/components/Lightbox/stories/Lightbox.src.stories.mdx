@@ -1,0 +1,37 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Lightbox } from '../..';
+import cat1 from '@storybook/react/cat_1.jpg';
+import cat2 from '@storybook/react/cat_2.jpg';
+import cat3 from '@storybook/react/cat_3.jpg';
+
+<Meta
+  title="Components/Lightbox/Src"
+  component={Lightbox}
+  subcomponents={{
+    'Lightbox.Gallery': Lightbox.Gallery,
+  }}
+/>
+
+export const Template = (args) => <Lightbox {...args} />;
+
+# Lightbox
+
+## Src
+
+Use the `src` attribute to set the link to the image you want to display in the lightbox
+
+## Example
+
+<Canvas>
+  <Story
+    name="Src"
+    args={{
+      title: 'Example lightbox',
+      src: cat2,
+      children: <p>Alter my src!</p>,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

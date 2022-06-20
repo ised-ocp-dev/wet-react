@@ -26,18 +26,6 @@ const Archived = ({ children, french = false }: ArchivedProps) =>
           available.
         </p>
       </section>
-
-      <section
-        id="archived-bnr"
-        className="wb-overlay modal-content overlay-def wb-bar-t"
-      >
-        <header>
-          <h2 className="wb-inv">Archived</h2>
-        </header>
-        <p>
-          <a href="#archived">This page has been archived on the Web.</a>
-        </p>
-      </section>
     </span>
   ) : (
     <span>
@@ -55,18 +43,6 @@ const Archived = ({ children, french = false }: ArchivedProps) =>
           n’a pas été modifiée ou mise à jour depuis son archivage. Pour obtenir
           cette information dans un autre format, veuillez communiquer avec
           nous.
-        </p>
-      </section>
-
-      <section
-        id="archived-bnr"
-        className="wb-overlay modal-content overlay-def wb-bar-t"
-      >
-        <header>
-          <h2 className="wb-inv">Archivée</h2>
-        </header>
-        <p>
-          <a href="#archived">Cette page Web a été archivée dans le Web.</a>
         </p>
       </section>
     </span>

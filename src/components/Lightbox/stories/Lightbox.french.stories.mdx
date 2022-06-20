@@ -1,0 +1,57 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Lightbox } from '../..';
+import cat1 from '@storybook/react/cat_1.jpg';
+import cat2 from '@storybook/react/cat_2.jpg';
+import cat3 from '@storybook/react/cat_3.jpg';
+
+<Meta
+  title="Components/Lightbox/French"
+  component={Lightbox}
+  subcomponents={{
+    'Lightbox.Gallery': Lightbox.Gallery,
+  }}
+/>
+
+# Lightbox
+
+## French
+
+Use the `french` attribute to set a Gallery or Lightbox component to french. This will convert both the visible and invisible text to french
+
+## Example Lightbox
+
+<Lightbox
+  title="Example lightbox 1"
+  src={cat1}
+  children={<img src={cat1} width="300px" />}
+  french
+/>
+
+## Example Gallery
+
+<Canvas>
+  <Lightbox.Gallery id="uniqueID" french>
+    <li>
+      <Lightbox
+        title="Example lightbox 1"
+        src={cat1}
+        children={<img src={cat1} width="300px" />}
+      />
+    </li>
+    <li>
+      <Lightbox
+        title="Example lightbox 2"
+        src={cat2}
+        children={<img src={cat2} width="300px" />}
+      />
+    </li>
+    <li>
+      <Lightbox
+        title="Example lightbox 3"
+        src={cat3}
+        children={<img src={cat3} width="300px" />}
+      />
+    </li>
+  </Lightbox.Gallery>
+</Canvas>
