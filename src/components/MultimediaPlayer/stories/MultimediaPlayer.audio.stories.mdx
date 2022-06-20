@@ -1,0 +1,39 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { MultimediaPlayer } from '../..';
+import valkyries from '@storybook/react/ride_of_the_valkyries.mp3';
+
+export const Template = (args) => (
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp3',
+        source: valkyries,
+      },
+    ]}
+    {...args}
+  />
+);
+
+<Meta title="Components/MultimediaPlayer/Audio" component={MultimediaPlayer} />
+
+# Multimedia Player
+
+## Audio
+
+Embed an audio element by adding a single source element with `type: mp3` or `type: ogg`<br/>
+
+## Example
+
+<Canvas>
+  <Story
+    name="Audio"
+    args={{
+      figCaption: <p>Ride of the Valkyries</p>,
+      share:
+        'https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.mp3',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
