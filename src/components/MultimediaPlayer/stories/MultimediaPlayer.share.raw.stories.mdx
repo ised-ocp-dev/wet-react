@@ -1,0 +1,147 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { MultimediaPlayer } from '../..';
+
+import puppies from '@storybook/react/puppies.mp4';
+import valkyries from '@storybook/react/ride_of_the_valkyries.mp3';
+import ShareWidget from '../../ShareWidget';
+
+export const vidTemplate = (args) => (
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp4',
+        source: puppies,
+      },
+    ]}
+    {...args}
+  />
+);
+
+export const audTemplate = (args) => (
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp3',
+        source: valkyries,
+      },
+    ]}
+    {...args}
+  />
+);
+
+export const youTemplate = (args) => (
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'youtube',
+        source: 'https://www.youtube.com/embed/a3ICNMQW7Ok',
+      },
+    ]}
+    {...args}
+  />
+);
+
+<Meta
+  title="Components/MultimediaPlayer/Share/Advanced"
+  component={MultimediaPlayer}
+/>
+
+# MultimediaPlayer
+
+## shareURL Custom ShareWidget
+
+For more control you can send a full custom `ShareWidget` component as the `share` attribute
+
+## Example Video Raw ShareWidget
+
+<Canvas>
+  <Story
+    name="Video Raw ShareWidget"
+    args={{
+      share: (
+        <ShareWidget
+          shareLinkText="Share this video"
+          modalTitle="Share this video"
+          url="https://www.youtube.com/watch?v=YLslsZuEaNE"
+          filter={[
+            'Email',
+            'Facebook',
+            'Blogger',
+            'LinkedIn',
+            'Pinterest',
+            'reddit',
+            'tumblr',
+            'WhatsApp',
+            'Yahoo Mail',
+            'Twitter',
+          ]}
+        />
+      ),
+    }}
+  >
+    {vidTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Example Audio Raw ShareWidget
+
+<Canvas>
+  <Story
+    name="Audio Raw ShareWidget"
+    args={{
+      share: (
+        <ShareWidget
+          shareLinkText="Share this audio file"
+          modalTitle="Share this audio file"
+          url="https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.mp3"
+          filter={[
+            'Email',
+            'Facebook',
+            'Blogger',
+            'LinkedIn',
+            'Pinterest',
+            'reddit',
+            'tumblr',
+            'WhatsApp',
+            'Yahoo Mail',
+            'Twitter',
+          ]}
+        />
+      ),
+    }}
+  >
+    {audTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Example Youtube Raw ShareWidget
+
+<Canvas>
+  <Story
+    name="Youtube Raw ShareWidget"
+    args={{
+      share: (
+        <ShareWidget
+          shareLinkText="Share this video"
+          modalTitle="Share this video"
+          url="https://www.youtube.com/watch?v=a3ICNMQW7Ok"
+          filter={[
+            'Email',
+            'Facebook',
+            'Blogger',
+            'LinkedIn',
+            'Pinterest',
+            'reddit',
+            'tumblr',
+            'WhatsApp',
+            'Yahoo Mail',
+            'Twitter',
+          ]}
+        />
+      ),
+    }}
+  >
+    {youTemplate.bind({})}
+  </Story>
+</Canvas>

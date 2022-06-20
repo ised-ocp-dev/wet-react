@@ -4,6 +4,8 @@ import 'react-h5-audio-player/lib/styles.css';
 import '../../style.css';
 import './styles.css';
 
+import ShareWidget from '../ShareWidget';
+
 type videoType = 'mp4' | 'webm' | 'youtube';
 type audioType = 'mp3' | 'ogg';
 type captionType = 'text/html' | 'application/ttml+xml';
@@ -19,8 +21,10 @@ type cuePointType = {
 
 export interface MultimediaPlayerProps
   extends React.HTMLAttributes<HTMLElement> {
-  /** optional url to share multimedia */
-  shareURL?: string;
+  /** optional button to share multimedia, either a url to share the video or a full custom shareWidget element */
+  share?: string | React.ReactNode;
+  /** language selector, mostly for shareWidget */
+  french?: boolean;
   /** title of video/audio. Can contain link or summary of transcript, if available */
   figCaption?: React.ReactNode;
   /** URL for video poster */
@@ -44,7 +48,8 @@ export interface MultimediaPlayerProps
 }
 
 const MultimediaPlayer = ({
-  shareURL = '',
+  share = '',
+  french = false,
   figCaption = '',
   poster = '',
   title = '',
@@ -60,10 +65,35 @@ const MultimediaPlayer = ({
   return sources[0].type === 'mp4' || sources[0].type === 'webm' ? (
     <span>
       {children}
-      <figure
-        className="wb-mltmd"
-        data-wb-mltmd={shareURL === '' ? '' : `{"shareUrl": "${shareURL}"}`}
-      >
+      <figure className="wb-mltmd">
+        {typeof share === 'string' ? (
+          share === '' ? (
+            <span />
+          ) : (
+            <ShareWidget
+              shareLinkText={
+                french ? 'Partagez cette vidéo' : 'Share this video'
+              }
+              modalTitle={french ? 'Partagez cette vidéo' : 'Share this video'}
+              url={share}
+              filter={[
+                'Email',
+                'Facebook',
+                'Blogger',
+                'LinkedIn',
+                'Pinterest',
+                'reddit',
+                'tumblr',
+                'WhatsApp',
+                'Yahoo Mail',
+                'Twitter',
+              ]}
+              french={french}
+            />
+          )
+        ) : (
+          share
+        )}
         <video poster={poster} title={title} controls ref={videoPlayer}>
           {sources.map(({ type, source }) =>
             type === 'mp4' || type === 'webm' ? (
@@ -115,10 +145,37 @@ const MultimediaPlayer = ({
   ) : sources[0].type === 'mp3' || sources[0].type === 'ogg' ? (
     <span>
       {children}
-      <figure
-        className="wb-mltmd"
-        data-wb-mltmd={shareURL === '' ? '' : `{"shareUrl": "${shareURL}"}`}
-      >
+      <figure className="wb-mltmd">
+        {typeof share === 'string' ? (
+          share === '' ? (
+            <span />
+          ) : (
+            <ShareWidget
+              shareLinkText={
+                french ? 'Partagez ce fichier audio' : 'Share this audio file'
+              }
+              modalTitle={
+                french ? 'Partagez ce fichier audio' : 'Share this audio file'
+              }
+              url={share}
+              filter={[
+                'Email',
+                'Facebook',
+                'Blogger',
+                'LinkedIn',
+                'Pinterest',
+                'reddit',
+                'tumblr',
+                'WhatsApp',
+                'Yahoo Mail',
+                'Twitter',
+              ]}
+              french={french}
+            />
+          )
+        ) : (
+          share
+        )}
         <AudioPlayer
           src={sources[0].source}
           showJumpControls={false}
@@ -166,10 +223,35 @@ const MultimediaPlayer = ({
   ) : sources[0].type === 'youtube' ? (
     <span>
       {children}
-      <figure
-        className="wb-mltmd"
-        data-wb-mltmd={shareURL === '' ? '' : `{"shareUrl": "${shareURL}"}`}
-      >
+      <figure className="wb-mltmd">
+        {typeof share === 'string' ? (
+          share === '' ? (
+            <span />
+          ) : (
+            <ShareWidget
+              shareLinkText={
+                french ? 'Partagez cette vidéo' : 'Share this video'
+              }
+              modalTitle={french ? 'Partagez cette vidéo' : 'Share this video'}
+              url={share}
+              filter={[
+                'Email',
+                'Facebook',
+                'Blogger',
+                'LinkedIn',
+                'Pinterest',
+                'reddit',
+                'tumblr',
+                'WhatsApp',
+                'Yahoo Mail',
+                'Twitter',
+              ]}
+              french={french}
+            />
+          )
+        ) : (
+          share
+        )}
         <iframe
           title={title}
           src={sources[0].source}

@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import MultimediaPlayer from '@components/MultimediaPlayer';
+import ShareWidget from '@components/ShareWidget';
 
 window.HTMLMediaElement.prototype.load = () => {
   /* do nothing */
@@ -33,7 +34,7 @@ describe('MultimediaPlayer Tests', () => {
       render(
         <MultimediaPlayer
           sources={[{ type: 'webm', source: 'https://hi.webm' }]}
-          shareURL="thisIsALink"
+          share="thisIsALink"
         >
           {MultimediaPlayerMessage}
         </MultimediaPlayer>
@@ -58,7 +59,6 @@ describe('MultimediaPlayer Tests', () => {
             { type: 'webm', source: 'https://hi.webm' },
             { type: 'mp3', source: 'https://hi.mp3' },
           ]}
-          shareURL="thisIsALink"
         >
           {MultimediaPlayerMessage}
         </MultimediaPlayer>
@@ -111,7 +111,7 @@ describe('MultimediaPlayer Tests', () => {
                 'https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.ogg',
             },
           ]}
-          shareURL="thisIsALink"
+          share="thisIsALink"
         >
           {MultimediaPlayerMessage}
         </MultimediaPlayer>
@@ -131,7 +131,7 @@ describe('MultimediaPlayer Tests', () => {
       render(
         <MultimediaPlayer
           sources={[{ type: 'youtube', source: 'https://hi.youtube' }]}
-          shareURL="thisIsALink"
+          share="thisIsALink"
         >
           {MultimediaPlayerMessage}
         </MultimediaPlayer>
@@ -159,6 +159,228 @@ describe('MultimediaPlayer Tests', () => {
           .getByText(MultimediaPlayerMessage)
           .getElementsByTagName('iframe')[0]
       ).toHaveAttribute('src', 'https://hi.youtube');
+    });
+    test('empty', () => {
+      render(<MultimediaPlayer>{MultimediaPlayerMessage}</MultimediaPlayer>);
+    });
+  });
+  describe('MultimediaPlayer shareWidget Tests', () => {
+    test('mp4 raw', () => {
+      render(
+        <MultimediaPlayer
+          sources={[{ type: 'mp4', source: 'https://hi.mp4' }]}
+          share={
+            <ShareWidget
+              shareLinkText="Share this video"
+              modalTitle="Share this video"
+              url="hello"
+              filter={[
+                'Email',
+                'Facebook',
+                'Blogger',
+                'LinkedIn',
+                'Pinterest',
+                'reddit',
+                'tumblr',
+                'WhatsApp',
+                'Yahoo Mail',
+                'Twitter',
+              ]}
+            />
+          }
+        >
+          {MultimediaPlayerMessage}
+        </MultimediaPlayer>
+      );
+      expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
+      expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('source')[0]
+      ).toHaveAttribute('src', 'https://hi.mp4');
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('source')[0]
+      ).toHaveAttribute('type', 'video/mp4');
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('button')[0].innerHTML
+      ).toContain('Share this video');
+    });
+    test('webm french', () => {
+      render(
+        <MultimediaPlayer
+          sources={[{ type: 'webm', source: 'https://hi.webm' }]}
+          share="thisIsALink"
+          french
+        >
+          {MultimediaPlayerMessage}
+        </MultimediaPlayer>
+      );
+      expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
+      expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('source')[0]
+      ).toHaveAttribute('src', 'https://hi.webm');
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('source')[0]
+      ).toHaveAttribute('type', 'video/webm');
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('button')[0].innerHTML
+      ).toContain('Partagez cette vidéo');
+    });
+    test('mp3 raw', () => {
+      render(
+        <MultimediaPlayer
+          sources={[
+            {
+              type: 'mp3',
+              source:
+                'https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.mp3',
+            },
+          ]}
+          share={
+            <ShareWidget
+              shareLinkText="Share this audio file"
+              modalTitle="Share this audio file"
+              url="hello"
+              filter={[
+                'Email',
+                'Facebook',
+                'Blogger',
+                'LinkedIn',
+                'Pinterest',
+                'reddit',
+                'tumblr',
+                'WhatsApp',
+                'Yahoo Mail',
+                'Twitter',
+              ]}
+            />
+          }
+        >
+          {MultimediaPlayerMessage}
+        </MultimediaPlayer>
+      );
+      expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
+      expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('audio')[0]
+      ).toHaveAttribute(
+        'src',
+        'https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.mp3'
+      );
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('button')[0].innerHTML
+      ).toContain('Share this audio file');
+    });
+    test('ogg french', () => {
+      render(
+        <MultimediaPlayer
+          sources={[
+            {
+              type: 'mp3',
+              source:
+                'https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.ogg',
+            },
+          ]}
+          share="thisIsALink"
+          french
+        >
+          {MultimediaPlayerMessage}
+        </MultimediaPlayer>
+      );
+      expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
+      expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('audio')[0]
+      ).toHaveAttribute(
+        'src',
+        'https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.ogg'
+      );
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('button')[0].innerHTML
+      ).toContain('Partagez ce fichier audio');
+    });
+    test('youtube raw', () => {
+      render(
+        <MultimediaPlayer
+          sources={[{ type: 'youtube', source: 'https://hi.youtube' }]}
+          share={
+            <ShareWidget
+              shareLinkText="Share this video"
+              modalTitle="Share this video"
+              url="hello"
+              filter={[
+                'Email',
+                'Facebook',
+                'Blogger',
+                'LinkedIn',
+                'Pinterest',
+                'reddit',
+                'tumblr',
+                'WhatsApp',
+                'Yahoo Mail',
+                'Twitter',
+              ]}
+            />
+          }
+        >
+          {MultimediaPlayerMessage}
+        </MultimediaPlayer>
+      );
+      expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
+      expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('iframe')[0]
+      ).toHaveAttribute('src', 'https://hi.youtube');
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('button')[0].innerHTML
+      ).toContain('Share this video');
+    });
+    test('youtube french', () => {
+      render(
+        <MultimediaPlayer
+          sources={[{ type: 'youtube', source: 'https://hi.youtube' }]}
+          share="thisIsALink"
+          french
+        >
+          {MultimediaPlayerMessage}
+        </MultimediaPlayer>
+      );
+      expect(screen.getByText(MultimediaPlayerMessage)).toBeTruthy();
+      expect(screen.getByText(MultimediaPlayerMessage)).toBeInTheDocument();
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('iframe')[0]
+      ).toHaveAttribute('src', 'https://hi.youtube');
+      expect(
+        screen
+          .getByText(MultimediaPlayerMessage)
+          .getElementsByTagName('button')[0].innerHTML
+      ).toContain('Partagez cette vidéo');
     });
     test('empty', () => {
       render(<MultimediaPlayer>{MultimediaPlayerMessage}</MultimediaPlayer>);

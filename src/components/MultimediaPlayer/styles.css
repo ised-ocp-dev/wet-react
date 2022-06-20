@@ -1,3 +1,4 @@
+/* custom css by Alex Breeze for audio player component. Last one is for shareWidget. */
 .rhap_container {
   background: #333;
 }
@@ -26,7 +27,6 @@
 .rhap_progress-bar-show-download {
   background: #ffffff;
 }
-
 .rhap_progress-bar {
   height: 20px;
   border-radius: 10px;
@@ -50,4 +50,8 @@
 }
 .rhap_progress-container {
   margin: 0 15px;
+}
+
+figure.wb-mltmd > button.btn-link {
+  float: right;
 }
