@@ -19,6 +19,8 @@ export { default as Table } from './Table';
 export { default as Modal } from './Modal';
 export { default as InputGroup } from './InputGroup';
 export { default as MultimediaPlayer } from './MultimediaPlayer';
+export { default as Tabs } from './Tabs';
+export { default as Pagination } from './Pagination';
 export { default as ShareWidget } from './ShareWidget';
 export { default as Carousel } from './Carousel';
 export { default as Toggle } from './Toggle';
