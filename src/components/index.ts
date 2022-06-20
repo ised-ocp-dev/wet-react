@@ -18,6 +18,7 @@ export { default as Jumbotron } from './Jumbotron';
 export { default as Table } from './Table';
 export { default as Modal } from './Modal';
 export { default as InputGroup } from './InputGroup';
+export { default as Carousel } from './Carousel';
 export { default as Toggle } from './Toggle';
 export { default as ToggleGroup } from './ToggleGroup';
 export { default as Slider } from './Slider';
