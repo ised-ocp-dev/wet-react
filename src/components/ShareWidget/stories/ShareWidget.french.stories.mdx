@@ -1,0 +1,64 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import ShareWidget from '../ShareWidget';
+
+<Meta title="Components/ShareWidget/French" component={ShareWidget} />
+
+export const TemplateGroup = (args) => {
+  return <ShareWidget {...args} />;
+};
+
+# Default (No Translation)
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      shareLinkText: 'Share this page',
+      modalTitle: 'Share this page',
+      url: 'http://example.com',
+      filter: [
+        'Email',
+        'Facebook',
+        'Blogger',
+        'LinkedIn',
+        'Pinterest',
+        'reddit',
+        'tumblr',
+        'WhatsApp',
+        'Yahoo Mail',
+        'Twitter',
+      ],
+    }}
+  >
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>
+
+# French Translation
+
+<Canvas>
+  <Story
+    name="French"
+    args={{
+      shareLinkText: 'Partagez cette page',
+      modalTitle: 'Partagez cette page',
+      url: 'http://example.com',
+      french,
+      filter: [
+        'Email',
+        'Facebook',
+        'Blogger',
+        'LinkedIn',
+        'Pinterest',
+        'reddit',
+        'tumblr',
+        'WhatsApp',
+        'Yahoo Mail',
+        'Twitter',
+      ],
+    }}
+  >
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>
