@@ -1,0 +1,96 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { MultimediaPlayer } from '../..';
+
+import puppies from '@storybook/react/puppies.mp4';
+import valkyries from '@storybook/react/ride_of_the_valkyries.mp3';
+
+export const vidTemplate = (args) => (
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp4',
+        source: puppies,
+      },
+    ]}
+    {...args}
+  />
+);
+
+export const audTemplate = (args) => (
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp3',
+        source: valkyries,
+      },
+    ]}
+    {...args}
+  />
+);
+
+export const youTemplate = (args) => (
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'youtube',
+        source: 'https://www.youtube.com/embed/a3ICNMQW7Ok',
+      },
+    ]}
+    {...args}
+  />
+);
+
+<Meta
+  title="Components/MultimediaPlayer/Share/French"
+  component={MultimediaPlayer}
+/>
+
+# MultimediaPlayer
+
+## shareURL French
+
+Add the `french` attribute to convert the `share` button and modal to french
+
+## Example Video French
+
+<Canvas>
+  <Story
+    name="Video French"
+    args={{
+      share: 'https://www.youtube.com/watch?v=YLslsZuEaNE',
+      french: true,
+    }}
+  >
+    {vidTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Example Audio French
+
+<Canvas>
+  <Story
+    name="Audio French"
+    args={{
+      share:
+        'https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.mp3',
+      french: true,
+    }}
+  >
+    {audTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Example Youtube French
+
+<Canvas>
+  <Story
+    name="Youtube French"
+    args={{
+      share: 'https://www.youtube.com/watch?v=a3ICNMQW7Ok',
+      french: true,
+    }}
+  >
+    {youTemplate.bind({})}
+  </Story>
+</Canvas>

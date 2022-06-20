@@ -1,0 +1,45 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { MultimediaPlayer } from '../..';
+
+import puppies from '@storybook/react/puppies.mp4';
+
+export const Template = (args) => (
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp4',
+        source: puppies,
+      },
+    ]}
+    cuePoints={[
+      { name: 'End of Intro', time: '15s' },
+      { name: 'Second topic', time: '00:30' },
+      { name: '', time: '00:45' },
+    ]}
+    {...args}
+  />
+);
+
+<Meta
+  title="Components/MultimediaPlayer/Video/cuePoints"
+  component={MultimediaPlayer}
+/>
+
+# MultimediaPlayer
+
+## cuePoints
+
+**Optional:** Add buttons to link to cue points within your video. Add a position and optional (recommended) title for each cuePoint.
+
+Specify the cue point position in seconds (75s) or time notation (45), (1:15), (9:30:50)
+
+Time notation will be displayed to the user as-entered, and will link to position (Seconds) or (Minutes:Seconds) or (Hours:Minutes:Seconds)
+
+## Example
+
+<Canvas>
+  <Story name="cuePoints" args={{ figCaption: <p>Example Video</p> }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
