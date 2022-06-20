@@ -1,0 +1,54 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Pagination } from '../..';
+
+<Meta
+  title="Components/Pagination/Sizing"
+  component={Pagination}
+  subcomponents={{ 'Pagination.Button': Pagination.Button }}
+/>
+
+export const PaginationTemplate = (args) => {
+  return (
+    <Pagination {...args}>
+      <Pagination.Button value="prev" />
+      <Pagination.Button value="1" />
+      <Pagination.Button value="2" />
+      <Pagination.Button value="next" />
+    </Pagination>
+  );
+};
+
+# Pagination
+
+using the `size` prop it is possible to set the size of the pagination to large `lg` or small `sm`
+
+## Default
+
+Use for typical pagination
+
+<Canvas>
+  <Story name="Default" args={{ children: '' }}>
+    {PaginationTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Large
+
+Use when the pagination needs additional prominence on the page. <br/>Since the default buttons already create prominence and a call to action, there is limited value/need to increasing their size
+
+<Canvas>
+  <Story name="Large" args={{ children: '', size: 'lg' }}>
+    {PaginationTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Small
+
+Use when the pagination appears in a small section of space. This reduces the button size to maximize the amount of buttons that appear in a single row
+
+<Canvas>
+  <Story name="Small" args={{ children: '', size: 'sm' }}>
+    {PaginationTemplate.bind({})}
+  </Story>
+</Canvas>
