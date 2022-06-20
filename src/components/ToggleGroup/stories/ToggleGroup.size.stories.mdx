@@ -1,0 +1,48 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import ToggleGroup from '../ToggleGroup';
+import { Toggle } from '../../';
+
+<Meta title="Components/ToggleGroup/Size" component={ToggleGroup} />
+
+export const Template = (args) => (
+  <ToggleGroup {...args}>
+    <Toggle name="sizeToggles" id="id-1" value="1">
+      Toggle 1
+    </Toggle>
+    <Toggle name="sizeToggles" id="id-2" value="2">
+      Toggle 2
+    </Toggle>
+    <Toggle name="sizeToggles" id="id-3" value="3">
+      Toggle 3
+    </Toggle>
+  </ToggleGroup>
+);
+
+# Toggle Group
+
+## Toggle sizing variants
+
+### Default size
+
+<Canvas>
+  <Story name="Default" args={{ type: 'radio', name: 'sizeToggles' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Large size
+
+<Canvas>
+  <Story name="Large" args={{ type: 'radio', name: 'sizeToggles', size: 'lg' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Small size
+
+<Canvas>
+  <Story name="Small" args={{ type: 'radio', name: 'sizeToggles', size: 'sm' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
