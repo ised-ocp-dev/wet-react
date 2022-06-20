@@ -1,0 +1,42 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+
+import ShareWidget from '../ShareWidget';
+
+<Meta
+  title="Components/ShareWidget/CustomShareButtons"
+  component={ShareWidget}
+/>
+
+export const TemplateGroup = (args) => {
+  return <ShareWidget {...args} />;
+};
+
+# Custom Share Buttons
+
+Provide a list of objects containing the following properties: **name** of type string, **icon** of type IconDefinition, and **url** of type string. **url** should be a functional sharable link rahter than a link to content you wish to share.
+
+<Canvas>
+  <Story
+    name="CustomShareButton"
+    args={{
+      shareLinkText: 'Share this page',
+      modalTitle: 'Share this page',
+      customShareButtonsProps: [
+        {
+          name: 'Platform 1',
+          icon: faGlobe,
+          url: 'http://example.com',
+        },
+        {
+          name: 'Platform 2',
+          icon: faGlobe,
+          url: 'http://example.com',
+        },
+      ],
+    }}
+  >
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>
