@@ -7,7 +7,6 @@ describe('DatePicker Test', () => {
   test('Label test', () => {
     render(
       <>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label htmlFor="date-picker-id">Date</label>
         <DatePicker
           name="date"
