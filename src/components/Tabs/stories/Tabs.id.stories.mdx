@@ -1,0 +1,31 @@
+import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+
+import { Tabs } from '../..';
+
+<Meta title="Components/Tabs/Id" component={Tabs} />
+
+# Tabs
+
+Each `Tabs` component can have a unique custom id
+
+# TabPanel
+
+Each `TabPanel` **must** have a unique custom id, which is used for the mainPanel attribute in Tabs
+
+## Example
+
+<Canvas>
+  <Tabs
+    id="uniquevalue"
+    mainPanel="text2"
+    panels={[
+      { title: 'Tab 1', content: <p>Content 1</p>, id: 'text1' },
+      { title: 'Tab 2', content: <p>Content 2</p>, id: 'text2' },
+      {
+        title: 'Tab 3',
+        content: <p>Content 3</p>,
+        id: 'text3',
+      },
+    ]}
+  />
+</Canvas>
