@@ -1,0 +1,35 @@
+import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+
+import { ShareWidget } from '../..';
+
+<Meta title="Components/ShareWidget/Intro" component={ShareWidget} />
+
+# ShareWidget
+
+Use to provide links that share content on various platforms (e.g., Twitter, Facebook, etc.)
+
+## Example
+
+<Canvas>
+  <ShareWidget
+    shareLinkText="Share this page"
+    modalTitle="Share this page"
+    url="http://example.com"
+    filter={[
+      'Email',
+      'Facebook',
+      'Blogger',
+      'LinkedIn',
+      'Pinterest',
+      'reddit',
+      'tumblr',
+      'WhatsApp',
+      'Yahoo Mail',
+      'Twitter',
+    ]}
+  />
+</Canvas>
+
+## Available Props
+
+<ArgsTable />
