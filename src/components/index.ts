@@ -37,3 +37,4 @@ export { default as Lightbox } from './Lightbox';
 export { default as DetailSummary } from './DetailSummary';
 export { default as SecondaryMenu } from './SecondaryMenu';
 export { default as Grid } from './Grid';
+export { default as SessionTimeout } from './SessionTimeout';
