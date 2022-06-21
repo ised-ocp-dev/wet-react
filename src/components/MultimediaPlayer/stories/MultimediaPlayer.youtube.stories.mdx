@@ -1,0 +1,50 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { MultimediaPlayer } from '../..';
+
+export const Template = (args) => (
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'youtube',
+        source: 'https://www.youtube.com/embed/a3ICNMQW7Ok',
+      },
+    ]}
+    {...args}
+  />
+);
+
+<Meta
+  title="Components/MultimediaPlayer/Youtube"
+  component={MultimediaPlayer}
+/>
+
+# MultimediaPlayer
+
+## Youtube
+
+Embed a youtube video by adding a single source element with `type: 'youtube', source: <URL>`<br/>
+
+**IMPORTANT:** You must alter the `source` URL by replacing `watch?v=` with `embed/`<br/>
+
+<font size="15px">
+  https://<span></span>www.<span></span>youtube.com/
+  <font color="red">watch?v=</font>a3ICNMQW7Ok
+  <br />
+  https://<span></span>www.<span></span>youtube.com/
+  <font color="#228b22">embed/</font>a3ICNMQW7Ok
+</font>
+
+**IMPORTANT:** You must **NOT** alter the `shareURL`
+
+<Canvas>
+  <Story
+    name="Youtube"
+    args={{
+      figCaption: <p>Placeholder Youtube Video</p>,
+      share: 'https://www.youtube.com/watch?v=a3ICNMQW7Ok',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

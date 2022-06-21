@@ -1,0 +1,66 @@
+import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
+
+import { MultimediaPlayer } from '../..';
+
+import puppies from '@storybook/react/puppies.mp4';
+import valkyries from '@storybook/react/ride_of_the_valkyries.mp3';
+
+<Meta title="Components/MultimediaPlayer/Intro" component={MultimediaPlayer} />
+
+# MultimediaPlayer
+
+Provides an accessible multimedia player for embedding video and audio into web pages.
+
+## Example
+
+<Canvas>
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp4',
+        source: puppies,
+      },
+    ]}
+    cuePoints={[
+      { name: 'End of Intro', time: '15s' },
+      { name: '', time: '00:30' },
+    ]}
+    figCaption={<p>Example Video</p>}
+    share="https://www.youtube.com/watch?v=YLslsZuEaNE"
+  />
+</Canvas>
+
+<Canvas>
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp3',
+        source: valkyries,
+      },
+      {
+        type: 'ogg',
+        source:
+          'https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.ogg',
+      },
+    ]}
+    figCaption={<p>Ride of the Valkyries</p>}
+    share="https://www.archive.org/download/RideOfTheValkyries/ride_of_the_valkyries_2.mp3"
+  />
+</Canvas>
+
+<Canvas>
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'youtube',
+        source: 'https://www.youtube.com/embed/a3ICNMQW7Ok',
+      },
+    ]}
+    figCaption={<p>Placeholder Youtube Video</p>}
+    share="https://www.youtube.com/watch?v=a3ICNMQW7Ok"
+  />
+</Canvas>
+
+## Available Props
+
+<ArgsTable />
