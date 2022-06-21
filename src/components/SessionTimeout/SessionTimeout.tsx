@@ -28,6 +28,13 @@ const SessionTimeout = ({
   let sessionTimer: NodeJS.Timeout;
   let reactionTimer: NodeJS.Timeout;
 
+  function resetInactivity() {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(() => {
+      setShow(true);
+    }, inactivityTime * 1000);
+  }
+
   React.useEffect(() => {
     clearTimeout(reactionTimer);
     if (show) {
@@ -35,21 +42,12 @@ const SessionTimeout = ({
         window.location.href = logoutURL;
       }, reactionTime * 1000);
     } else {
-      inactivityTimer = setTimeout(() => {
-        setShow(true);
-      }, inactivityTime * 1000);
+      resetInactivity();
       sessionTimer = setTimeout(() => {
         setShow(true);
       }, sessionTime * 1000);
     }
   }, [show]);
-
-  function resetInactivity() {
-    clearTimeout(inactivityTimer);
-    inactivityTimer = setTimeout(() => {
-      setShow(true);
-    }, inactivityTime * 1000);
-  }
 
   React.useEffect(() => {
     document.onmousemove = () => resetInactivity();
@@ -61,7 +59,7 @@ const SessionTimeout = ({
       document.removeEventListener('mousemove', resetInactivity);
       document.removeEventListener('keydown', resetInactivity);
     };
-  }, []);
+  }, [resetInactivity]);
 
   return (
     <Modal
