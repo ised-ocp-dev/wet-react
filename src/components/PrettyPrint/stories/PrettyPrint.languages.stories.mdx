@@ -1,0 +1,46 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { PrettyPrint } from '../..';
+
+<Meta title="Components/PrettyPrint/Language" component={PrettyPrint} />
+
+export const Template = (args) => (
+  <PrettyPrint {...args}>
+    <p>line 1</p>
+    <p>line 2</p>
+    <p>line 3</p>
+    <p>line 4</p>
+    <p>line 5</p>
+  </PrettyPrint>
+);
+
+# PrettyPrint
+
+## Languages
+
+Use the `language` attribute to set the language of the code
+
+## Example
+
+<Canvas>
+  <Story name="Language" args={{ language: 'css' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Whole Page Language
+
+Use the `wholePage` and `language` attributes to set the language of all `<pre>` and `<code>` elements on the page
+
+## Example
+
+<Canvas>
+  <PrettyPrint wholePage language="java" />
+  <PrettyPrint>
+    <p>line 1</p>
+    <p>line 2</p>
+    <p>line 3</p>
+    <p>line 4</p>
+    <p>line 5</p>
+  </PrettyPrint>
+</Canvas>

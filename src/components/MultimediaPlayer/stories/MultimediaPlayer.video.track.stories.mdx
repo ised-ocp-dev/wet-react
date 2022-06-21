@@ -1,0 +1,48 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { MultimediaPlayer } from '../..';
+
+import puppies from '@storybook/react/puppies.mp4';
+
+export const Template = (args) => (
+  <MultimediaPlayer
+    sources={[
+      {
+        type: 'mp4',
+        source: puppies,
+      },
+    ]}
+    {...args}
+  />
+);
+
+<Meta
+  title="Components/MultimediaPlayer/Video/Track"
+  component={MultimediaPlayer}
+/>
+
+# MultimediaPlayer
+
+## Track
+
+Add a track element by setting <br/>
+`trackSrcLang` to a shortform (2-character) language indentifier, such as `en` or `fr`<br/>
+`trackLabel` to some shortform descriptive text for displaying to the user<br/>
+`trackSrc` to the URL leading to the captions track<br/>
+`trackDataType` to the type of captions provided, either `text/html` or `application/ttml+xml`
+
+## Example
+
+<Canvas>
+  <Story
+    name="Track"
+    args={{
+      trackSrcLang: 'fr',
+      trackLabel: 'Captions Français pour les Franco-Canadiens',
+      trackSrc: 'urlHere',
+      trackDataType: 'text/html',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

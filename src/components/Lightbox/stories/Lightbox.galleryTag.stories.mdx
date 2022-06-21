@@ -1,0 +1,50 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Lightbox } from '../..';
+import cat1 from '@storybook/react/cat_1.jpg';
+import cat2 from '@storybook/react/cat_2.jpg';
+import cat3 from '@storybook/react/cat_3.jpg';
+
+<Meta
+  title="Components/Lightbox/Gallery Tag"
+  component={Lightbox}
+  subcomponents={{
+    'Lightbox.Gallery': Lightbox.Gallery,
+  }}
+/>
+
+# Lightbox
+
+## Tag
+
+Use the `tag` attribute to set the HTML element that will act as the gallery (default is `'section'`)
+
+For example: an unordered list `ul` of lightboxes with `className='list-inline'`
+
+## Example
+
+<Canvas>
+  <Lightbox.Gallery tag="ul" className="list-inline" id="uniqueID">
+    <li>
+      <Lightbox
+        title="Example lightbox 1"
+        src={cat1}
+        children={<img src={cat1} width="300px" />}
+      />
+    </li>
+    <li>
+      <Lightbox
+        title="Example lightbox 2"
+        src={cat2}
+        children={<img src={cat2} width="300px" />}
+      />
+    </li>
+    <li>
+      <Lightbox
+        title="Example lightbox 3"
+        src={cat3}
+        children={<img src={cat3} width="300px" />}
+      />
+    </li>
+  </Lightbox.Gallery>
+</Canvas>

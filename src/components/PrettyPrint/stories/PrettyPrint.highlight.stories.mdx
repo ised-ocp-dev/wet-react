@@ -1,0 +1,32 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { PrettyPrint } from '../..';
+
+<Meta title="Components/PrettyPrint/Highlight" component={PrettyPrint} />
+
+export const Template = (args) => <PrettyPrint {...args}>line 1</PrettyPrint>;
+
+# PrettyPrint
+
+## Highlight
+
+Apply the default prettyPrint component to highlight contained text
+
+## Example
+
+<Canvas>
+  <Story name="Highlighting" args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Whole Page
+
+Use the `wholePage` and `highlight` attributes to highlight all `<pre>` elements in the page
+
+## Example
+
+<Canvas>
+  <PrettyPrint wholePage highlight />
+  <PrettyPrint>Hey, this code was highlighted!</PrettyPrint>
+</Canvas>
