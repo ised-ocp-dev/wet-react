@@ -33,7 +33,6 @@ const SessionTimeout = ({
     if (show) {
       reactionTimer = setTimeout(() => {
         window.location.href = logoutURL;
-        console.log('bwah');
       }, reactionTime * 1000);
     } else {
       inactivityTimer = setTimeout(() => {
@@ -45,23 +44,22 @@ const SessionTimeout = ({
     }
   }, [show]);
 
+  function resetInactivity() {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(() => {
+      setShow(true);
+    }, inactivityTime * 1000);
+  }
+
   React.useEffect(() => {
-    document.onmousemove = () => {
-      clearTimeout(inactivityTimer);
-      inactivityTimer = setTimeout(() => {
-        setShow(true);
-      }, inactivityTime * 1000);
-    };
-    document.onkeypress = () => {
-      clearTimeout(inactivityTimer);
-      inactivityTimer = setTimeout(() => {
-        setShow(true);
-      }, inactivityTime * 1000);
-    };
+    document.onmousemove = () => resetInactivity();
+    document.onkeydown = () => resetInactivity();
     return () => {
       clearTimeout(inactivityTimer);
       clearTimeout(sessionTimer);
       clearTimeout(reactionTimer);
+      document.removeEventListener('mousemove', resetInactivity);
+      document.removeEventListener('keydown', resetInactivity);
     };
   }, []);
 
@@ -70,9 +68,6 @@ const SessionTimeout = ({
       show={show}
       centered
       animation={false}
-      onHide={() => {
-        setShow(false);
-      }}
       backdrop="static"
       keyboard={false}
     >
