@@ -1,0 +1,34 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { SessionTimeout } from '../..';
+
+<Meta title="Components/SessionTimeout/LogoutURL" component={SessionTimeout} />
+
+export const Template = (args) => (
+  <span>
+    <p>Once the modal pops up, click "End session now" to be redirected</p>
+    <SessionTimeout {...args} />
+  </span>
+);
+
+# SessionTimeout
+
+## LogoutURL
+
+Use the `logoutURL` attribute to redirect the user to another page when their session times out. It is important to set this value,
+as the default is the empty string, e.g. the current page reloaded.
+
+Note that once the session is timed out the user **will** be redirected to the logoutURL. No popup will appear telling the user what happened,
+as that would require leaving the user on the current page, at which point they could simply delete the popup to regain access.
+It is recommended that you redirect the user to a page which can tell them that their session timed out, and offer a link to the login page.
+
+## Example
+
+<Canvas>
+  <Story
+    name="LogoutURL"
+    args={{ sessionTime: 10, logoutURL: 'https://google.com' }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
