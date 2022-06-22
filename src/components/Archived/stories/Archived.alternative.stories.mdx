@@ -1,0 +1,42 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Archived } from '../..';
+
+<Meta
+  title="Components/Archived/Alternative"
+  component={Archived}
+  subcomponents={{ 'Archived.Button': Archived.Button }}
+/>
+
+export const ArchivedTemplate = (args) => {
+  return <Archived {...args}></Archived>;
+};
+
+# Archived
+
+## Alternative link
+
+Using the `content` prop it is possible to add a link to a replacement page (if one exists) and explain why the current page was archived
+
+## Example
+
+<Canvas>
+  <Story
+    name="Alternative"
+    args={{
+      children: (
+        <p>
+          The{' '}
+          <a href="https://www.tbs-sct.gc.ca/pol/doc-eng.aspx?id=24227">
+            {' '}
+            Standard on Web Usability{' '}
+          </a>{' '}
+          replaces this content. This content is archived because Common Look
+          and Feel 2.0 Standards have been rescinded.
+        </p>
+      ),
+    }}
+  >
+    {ArchivedTemplate.bind({})}
+  </Story>
+</Canvas>

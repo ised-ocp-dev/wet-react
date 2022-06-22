@@ -1,0 +1,55 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import ShareWidget from '../ShareWidget';
+
+<Meta title="Components/ShareWidget/Filter" component={ShareWidget} />
+
+export const TemplateGroup = (args) => {
+  return <ShareWidget {...args} />;
+};
+
+# Filter
+
+Provide a list of the default share buttons you wish display. The list can include: Email, Facebook, Blogger, LinkedIn, Pinterest, reddit, tumblr, WhatsApp, Yahoo Mail, Twitter. Filter names are case sensitive.
+
+## Default (No Filter)
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      shareLinkText: 'Share this page',
+      modalTitle: 'Share this page',
+      url: '',
+    }}
+  >
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>
+
+## Filter Defined
+
+<Canvas>
+  <Story
+    name="Filter"
+    args={{
+      shareLinkText: 'Share this page',
+      modalTitle: 'Share this page',
+      url: 'http://example.com',
+      filter: [
+        'Email',
+        'Facebook',
+        'Blogger',
+        'LinkedIn',
+        'Pinterest',
+        'reddit',
+        'tumblr',
+        'WhatsApp',
+        'Yahoo Mail',
+        'Twitter',
+      ],
+    }}
+  >
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>

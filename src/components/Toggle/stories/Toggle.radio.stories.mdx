@@ -1,0 +1,27 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Toggle } from '../..';
+
+<Meta title="Components/Toggle/Radio" component={Toggle} />
+
+export const Template = (args) => <Toggle {...args} />;
+
+# Toggle
+
+## Radio Toggle
+
+A label that styles a radio input element like a button.
+
+<Canvas>
+  <Story
+    name="Radio"
+    args={{
+      children: 'Radio toggle',
+      id: 'id',
+      value: 'value',
+      type: 'radio',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

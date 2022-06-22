@@ -1,0 +1,32 @@
+import { Canvas, Meta, ArgsTable, Story } from '@storybook/addon-docs';
+
+import { DatePicker, Label } from '../../';
+
+<Meta title="Components/DatePicker" component={DatePicker} />
+
+export const Template = (args) => (
+  <>
+    <label htmlFor="date-picker-id">Date</label>
+    <DatePicker {...args} />
+  </>
+);
+
+# DatePicker
+
+## Example
+
+Example of a label linked to a DatePicker component with the `id` "date-picker-id". `min` is set to "2020-01-01". `max` is set to "2029-12-31".
+
+<Canvas>
+  <Story
+    name="Example"
+    args={{
+      name: 'date',
+      id: 'date-picker-id',
+      min: '2020-01-01',
+      max: '2029-12-31',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
