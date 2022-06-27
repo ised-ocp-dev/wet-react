@@ -52,4 +52,17 @@ describe('Test DataTable', () => {
     render(<DataTable rows={rows} columns={columns} pageSize={5} autoHeight />);
     expect(screen.getAllByRole('row')).toHaveLength(6);
   });
+
+  test('Testing rowsPerPageOptions prop', async () => {
+    render(
+      <DataTable
+        rows={rows}
+        columns={columns}
+        pageSize={10}
+        autoHeight
+        rowsPerPageOptions={[10, 20, 30]}
+      />
+    );
+    expect(screen.getAllByRole('row')).toHaveLength(10);
+  });
 });
