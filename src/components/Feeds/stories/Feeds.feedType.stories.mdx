@@ -1,0 +1,104 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import Feeds from '../Feeds';
+
+<Meta title="Components/Feeds/Feed Type" component={Feeds} />
+
+export const Template = (args) => <Feeds {...args} />;
+
+# `feedType` Prop
+
+What the ATOM/RSS feed is writtin in ("XML" or "JSON"). Otherwise, define prop as "Tabs" to display Flickr and/or YouTube content in tab feed.
+
+## ATOM (XML File) Feed Example
+
+The default value for the `feedType` prop is `"XML"` because the ATOM or RSS feed, provided as a link using the `url` prop, is typically written in XML.
+
+<Canvas>
+  <Story
+    name="ATOM (XML File) Feed Example"
+    args={{
+      url: '/feeds-demo/manitoba-en.atom.xml',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## ATOM (JSON File) Feed Example
+
+Define the `feedType` prop as `"JSON"` when the ATOM or RSS feed, provided as a link using the `url` prop, is written in JSON.
+
+<Canvas>
+  <Story
+    name="ATOM (JSON File) Feed Example"
+    args={{
+      url: '/feeds-demo/manitoba-en.atom.json',
+      feedType: 'JSON',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Tab Feed Example
+
+Define the `feedType` prop as `"Tabs"` to display Flickr and/or YouTube content. Example of the format to define the `url`:
+
+```
+{
+  flickr: [
+    {
+      name: 'Environment Canada Flickr',
+      url: 'https://www.flickr.com/photos/environmentcan',
+    },
+    {
+      name: 'Parliament of Canada',
+      url: 'https://www.flickr.com/photos/parlcanada/',
+    },
+  ],
+  youtube: [
+    {
+      name: 'Learn to Set up a Tent',
+      url: 'https://www.youtube.com/embed/ZwgEH-Szk0k',
+    },
+    {
+      name: 'Camping with Wildlife',
+      url: 'https://www.youtube.com/embed/w5gpKajD8E0',
+    },
+  ],
+}
+```
+
+<Canvas>
+  <Story
+    name="Tab Feed Example"
+    args={{
+      url: {
+        flickr: [
+          {
+            name: 'Environment Canada Flickr',
+            url: 'https://www.flickr.com/photos/environmentcan',
+          },
+          {
+            name: 'Parliament of Canada',
+            url: 'https://www.flickr.com/photos/parlcanada/',
+          },
+        ],
+        youtube: [
+          {
+            name: 'Learn to Set up a Tent',
+            url: 'https://www.youtube.com/embed/ZwgEH-Szk0k',
+          },
+          {
+            name: 'Camping with Wildlife',
+            url: 'https://www.youtube.com/embed/w5gpKajD8E0',
+          },
+        ],
+      },
+      feedType: 'Tabs',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

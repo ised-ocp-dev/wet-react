@@ -38,9 +38,11 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@types/xml2js": "^0.4.11",
     "react-bootstrap": "^2.1.1",
     "react-h5-audio-player": "^3.8.4",
-    "react-syntax-highlighter": "^15.0.0"
+    "react-syntax-highlighter": "^15.0.0",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "@babel/core": "^7.17.2",
