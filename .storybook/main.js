@@ -12,6 +12,9 @@ module.exports = {
     '@storybook/addon-a11y',
   ],
   framework: '@storybook/react',
+  features: {
+    emotionAlias: false,
+  },
   webpackFinal: async (config) => {
     config.resolve.plugins = [
       ...(config.resolve.plugins || []),
