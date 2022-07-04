@@ -13,6 +13,9 @@ module.exports = {
   ],
   framework: '@storybook/react',
   staticDirs: ['../public'],
+  features: {
+    emotionAlias: false,
+  },
   webpackFinal: async (config) => {
     config.resolve.plugins = [
       ...(config.resolve.plugins || []),
