@@ -3,6 +3,7 @@ import Modal from '@components/Modal';
 import MultimediaPlayer from '@components/MultimediaPlayer';
 import Button from '@components/Button';
 import Tabs from '@components/Tabs';
+import axios, { AxiosResponse } from 'axios';
 import xml2js from 'xml2js';
 import '../../style.css';
 import './Feeds.css';
@@ -16,7 +17,7 @@ interface TabFeedEntry {
 
 interface TabFeedProps {
   flickr?: TabFeedEntry[];
-  youtube?: string[];
+  youtube?: TabFeedEntry[];
 }
 
 export interface FeedsProps extends React.HTMLAttributes<HTMLElement> {
@@ -61,31 +62,35 @@ const Feeds = ({
       : '/assets/YouTube Default Thumbnail.jpg';
   };
 
+  const getData = async (link: string) => {
+    const response: AxiosResponse<unknown, unknown> = await axios.get(link);
+    return response;
+  };
+
   useEffect(() => {
     if (typeof url === 'string') {
       if (feedType === 'JSON') {
-        fetch(url)
-          .then((res) => res.json())
-          .then((content) => {
-            setFeed(content.feed);
-          });
-      } else if (feedType === 'XML') {
-        fetch(url)
-          .then((res) => res.text())
-          .then((text) => {
+        const response: Promise<AxiosResponse<unknown, unknown>> = getData(url);
+        response.then((res) => res.data).then((data) => setFeed(data.feed));
+      }
+
+      if (feedType === 'XML') {
+        const response: Promise<AxiosResponse<unknown, unknown>> = getData(url);
+        response
+          .then((res) => res.data)
+          .then((data) => {
             let content;
-            parsers.parseString(text, (error, result) => {
+            parsers.parseString(data, (error, result) => {
               content = result;
             });
-            return content;
-          })
-          .then((content) => {
             if (content && content.feed) {
               setFeed(content.feed);
             }
           });
       }
-    } else if (feedType === 'Tabs') {
+    }
+
+    if (typeof url !== 'string' && feedType === 'Tabs') {
       const panels = [];
 
       if (url.flickr) {
@@ -128,6 +133,7 @@ const Feeds = ({
                 backgroundColor: index % 2 === 0 ? 'white' : undefined,
               }}
               key={entry.name}
+              aria-label={entry.name}
             >
               <img
                 src={getYouTubeThumbnailURL(entry.url)}
@@ -162,7 +168,7 @@ const Feeds = ({
             feedType === 'JSON' ? `${entry.updated}` : `${entry.updated[0]}`;
 
           items.push(
-            <li key={entry.id} style={{ marginBottom: 10 }}>
+            <li key={link} style={{ marginBottom: 10 }}>
               <a href={link}>{title}</a>
               <small className="feeds-date" style={{ display: 'block' }}>
                 <time>{date}</time>
@@ -181,7 +187,7 @@ const Feeds = ({
         feedType === 'JSON' ? `${feed.updated}` : `${feed.updated[0]}`;
 
       items.push(
-        <li key={feed.id} style={{ marginBottom: 10 }}>
+        <li key={link} style={{ marginBottom: 10 }}>
           <a href={link}>{title}</a>
           <small className="feeds-date" style={{ display: 'block' }}>
             <time>{date}</time>
