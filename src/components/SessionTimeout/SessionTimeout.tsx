@@ -14,6 +14,8 @@ export interface SessionTimeoutProps extends React.HTMLAttributes<HTMLElement> {
   logoutURL?: string;
   /** Makes the session timeout modal popup french */
   french?: boolean;
+  /** Disables timers, allowing for custom logic to control popup */
+  disableLogic?: boolean;
 }
 
 const SessionTimeout = ({
@@ -22,6 +24,7 @@ const SessionTimeout = ({
   reactionTime = 3 * 60,
   logoutURL = '',
   french = false,
+  disableLogic = false,
 }: SessionTimeoutProps) => {
   const [show, setShow] = React.useState(false);
   let inactivityTimer: NodeJS.Timeout;
@@ -35,31 +38,33 @@ const SessionTimeout = ({
     }, inactivityTime * 1000);
   }
 
-  React.useEffect(() => {
-    clearTimeout(reactionTimer);
-    if (show) {
-      reactionTimer = setTimeout(() => {
-        window.location.href = logoutURL;
-      }, reactionTime * 1000);
-    } else {
-      resetInactivity();
-      sessionTimer = setTimeout(() => {
-        setShow(true);
-      }, sessionTime * 1000);
-    }
-  }, [show]);
-
-  React.useEffect(() => {
-    document.onmousemove = () => resetInactivity();
-    document.onkeydown = () => resetInactivity();
-    return () => {
-      clearTimeout(inactivityTimer);
-      clearTimeout(sessionTimer);
+  if (!disableLogic) {
+    React.useEffect(() => {
       clearTimeout(reactionTimer);
-      document.removeEventListener('mousemove', resetInactivity);
-      document.removeEventListener('keydown', resetInactivity);
-    };
-  }, [resetInactivity]);
+      if (show) {
+        reactionTimer = setTimeout(() => {
+          window.location.href = logoutURL;
+        }, reactionTime * 1000);
+      } else {
+        resetInactivity();
+        sessionTimer = setTimeout(() => {
+          setShow(true);
+        }, sessionTime * 1000);
+      }
+    }, [show]);
+
+    React.useEffect(() => {
+      document.onmousemove = () => resetInactivity();
+      document.onkeydown = () => resetInactivity();
+      return () => {
+        clearTimeout(inactivityTimer);
+        clearTimeout(sessionTimer);
+        clearTimeout(reactionTimer);
+        document.removeEventListener('mousemove', resetInactivity);
+        document.removeEventListener('keydown', resetInactivity);
+      };
+    }, [resetInactivity]);
+  }
 
   return (
     <Modal

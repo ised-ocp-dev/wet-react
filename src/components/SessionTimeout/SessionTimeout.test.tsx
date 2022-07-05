@@ -145,4 +145,20 @@ describe('SessionTimeout', () => {
       expect(document.getElementsByClassName('modal-title').length).toEqual(1);
     });
   });
+  test('disabled', () => {
+    render(
+      <span>
+        <SessionTimeout
+          inactivityTime={0.001}
+          reactionTime={0.001}
+          disableLogic
+        />
+      </span>
+    );
+    expect(document.getElementsByClassName('modal-title').length).toEqual(0);
+    act(() => {
+      jest.advanceTimersByTime(3);
+    });
+    expect(document.getElementsByClassName('modal-title').length).toEqual(0);
+  });
 });
