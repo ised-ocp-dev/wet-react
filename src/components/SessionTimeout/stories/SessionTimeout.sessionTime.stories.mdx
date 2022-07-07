@@ -1,0 +1,29 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { SessionTimeout } from '../..';
+
+<Meta
+  title="Components/SessionTimeout/SessionTime"
+  component={SessionTimeout}
+/>
+
+export const Template = (args) => (
+  <span>
+    <p>This modal will popup every 5 seconds, regardless of user activity</p>
+    <SessionTimeout {...args} />
+  </span>
+);
+
+# SessionTimeout
+
+## SessionTime
+
+Use the `sessionTime` attribute to set the time in seconds before the `SessionTimeout` modal will popup regardless of user interaction.
+
+## Example
+
+<Canvas>
+  <Story name="SessionTime" args={{ sessionTime: 5 }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
