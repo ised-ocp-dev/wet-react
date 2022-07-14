@@ -1,0 +1,30 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { SessionTimeout } from '../..';
+
+<Meta
+  title="Components/SessionTimeout/InactivityTime"
+  component={SessionTimeout}
+/>
+
+export const Template = (args) => (
+  <span>
+    <p>This modal will popup after 5 seconds of inactivity</p>
+    <SessionTimeout {...args} />
+  </span>
+);
+
+# SessionTimeout
+
+## InactivityTime
+
+Use the `inactivityTime` attribute to set the time in seconds whereby, if no mouse movement or keypresses were detected,
+the `SessionTimeout` modal will popup.
+
+## Example
+
+<Canvas>
+  <Story name="InactivityTime" args={{ inactivityTime: 5 }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

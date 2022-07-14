@@ -1,0 +1,38 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { SessionTimeout } from '../..';
+
+<Meta title="Components/SessionTimeout/Intro" component={SessionTimeout} />
+
+# SessionTimeout
+
+Create a session inactivity timeout that warns users when their session is about to expire.
+
+When a user requests a page with this plugin implemented their session will begin. After the specified session period,
+they will be notified that their session is about to timeout. At this point, they will have the option to remain logged in by clicking
+"Continue session", or signing out by clicking "End session now".
+
+At any time during the session, if the user remains idle for a specified amount of time, they will be notified that their session is
+about to timeout. If the user does not respond to the timeout notification within a specified amount of time, or if they click
+"End session now" they will be automatically redirected to the sign out page.
+
+Note that once the session is timed out the user **will** be redirected to the logoutURL. No popup will appear telling the user what happened,
+as that would require leaving the user on the current page, at which point they could simply delete the popup to regain access.
+It is recommended that you redirect the user to a page which can tell them that their session timed out, and offer a link to the login page.
+
+## Example
+
+<Canvas>
+  <span>
+    <p>
+      The SessionTimeout in this example has default parameters, so it will take
+      a while to activate.
+    </p>
+    <p>To see it in action, we recommend going to other stories</p>
+    <SessionTimeout />
+  </span>
+</Canvas>
+
+### Available Props
+
+<ArgsTable />
