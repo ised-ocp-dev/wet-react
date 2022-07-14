@@ -1,0 +1,26 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { SessionTimeout } from '../..';
+
+<Meta title="Components/SessionTimeout/French" component={SessionTimeout} />
+
+export const Template = (args) => (
+  <span>
+    <p>This french modal will popup every 5 seconds</p>
+    <SessionTimeout {...args} />
+  </span>
+);
+
+# SessionTimeout
+
+## French
+
+Use the `french` attribute to convert the `SessionTimeout` popup modal text to french.
+
+## Example
+
+<Canvas>
+  <Story name="French" args={{ french: true, sessionTime: 5 }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
