@@ -17,7 +17,7 @@ describe('ShareWidget Tests', () => {
       expect(screen.getAllByRole('button')).toHaveLength(3);
     });
     test('ShareWidget filter test', () => {
-      render(
+      const { container } = render(
         <ShareWidget
           shareLinkText="Share link text"
           modalTitle="Modal title"
@@ -33,10 +33,22 @@ describe('ShareWidget Tests', () => {
             'Yahoo Mail',
             'Twitter',
           ]}
-          show
         />
       );
+      fireEvent.click(screen.getByText('Share link text'));
       expect(screen.getAllByRole('button')).toHaveLength(13);
+      fireEvent.click(screen.getAllByRole('button')[1]);
+      expect(screen.getAllByRole('button')).toHaveLength(1);
+      fireEvent.click(screen.getByText('Share link text'));
+      expect(screen.getAllByRole('button')).toHaveLength(13);
+      // screen.getByText('k');
+      fireEvent.click(
+        (
+          screen.getAllByRole('button')[1]?.parentNode?.parentNode?.parentNode
+            ?.parentNode?.parentNode as Element
+        ).childNodes[1]
+      );
+      expect(screen.getAllByRole('button')).toHaveLength(1);
     });
 
     describe('ShareWidget Custom Share Buttons', () => {
