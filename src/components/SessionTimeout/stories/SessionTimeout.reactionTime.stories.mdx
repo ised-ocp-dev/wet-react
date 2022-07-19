@@ -1,0 +1,33 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { SessionTimeout } from '../..';
+
+<Meta
+  title="Components/SessionTimeout/ReactionTime"
+  component={SessionTimeout}
+/>
+
+export const Template = (args) => (
+  <span>
+    <p>
+      This modal will popup every 5 seconds, and redirect you 5 seconds after
+      popping up, unless you select "Continue session"
+    </p>
+    <SessionTimeout {...args} />
+  </span>
+);
+
+# SessionTimeout
+
+## ReactionTime
+
+Use the `reactionTime` attribute to set the time in seconds that the user will have to close the `SessionTimeout`
+popup modal before they are automatically redirected to the logoutURL.
+
+## Example
+
+<Canvas>
+  <Story name="ReactionTime" args={{ reactionTime: 5, sessionTime: 5 }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

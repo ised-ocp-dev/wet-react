@@ -1,0 +1,25 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { SessionTimeout } from '../..';
+
+<Meta
+  title="Components/SessionTimeout/DisableLogic"
+  component={SessionTimeout}
+/>
+
+# SessionTimeout
+
+## Disable Logic
+
+Use the `disableLogic` attribute to disable all the logic in the `SessionTimeout` component. <br/>
+This will cause it to never pop up on its own, and the timers will not consume any computing power in the background. <br/>
+You can then use other code to control the pre-formatted popup.
+
+## Example
+
+<Canvas>
+  <span>
+    <p>This SessionTimeout will never activate automatically</p>
+    <SessionTimeout sessionTime={5} disableLogic />
+  </span>
+</Canvas>
