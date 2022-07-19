@@ -8,16 +8,14 @@ describe('ShareWidget Tests', () => {
   describe('ShareWidget Filter', () => {
     test('ShareWidget no filter test', () => {
       render(
-        <ShareWidget
-          shareLinkText="Share link text"
-          modalTitle="Modal title"
-          show
-        />
+        <ShareWidget shareLinkText="Share link text" modalTitle="Modal title" />
       );
+      expect(screen.getAllByRole('button')).toHaveLength(1);
+      fireEvent.click(screen.getByText('Share link text'));
       expect(screen.getAllByRole('button')).toHaveLength(3);
     });
     test('ShareWidget filter test', () => {
-      const { container } = render(
+      render(
         <ShareWidget
           shareLinkText="Share link text"
           modalTitle="Modal title"
@@ -41,7 +39,6 @@ describe('ShareWidget Tests', () => {
       expect(screen.getAllByRole('button')).toHaveLength(1);
       fireEvent.click(screen.getByText('Share link text'));
       expect(screen.getAllByRole('button')).toHaveLength(13);
-      // screen.getByText('k');
       fireEvent.click(
         (
           screen.getAllByRole('button')[1]?.parentNode?.parentNode?.parentNode
@@ -69,9 +66,9 @@ describe('ShareWidget Tests', () => {
                 url: 'http://example.com',
               },
             ]}
-            show
           />
         );
+        fireEvent.click(screen.getByText('Share link text'));
         expect(screen.getAllByRole('button')).toHaveLength(5);
       });
     });
@@ -82,9 +79,9 @@ describe('ShareWidget Tests', () => {
           <ShareWidget
             shareLinkText="Share link text"
             modalTitle="Modal title"
-            show
           />
         );
+        fireEvent.click(screen.getByText('Share link text'));
         expect(
           screen.getByText(
             'No endorsement of any products or services is expressed or implied.'
@@ -98,9 +95,9 @@ describe('ShareWidget Tests', () => {
             french
             shareLinkText="Share link text"
             modalTitle="Modal title"
-            show
           />
         );
+        fireEvent.click(screen.getByText('Share link text'));
         expect(
           screen.getByText(
             'Aucun appui n’est accordé, soit de façon expresse ou tacite, à aucun produit ou service.'
@@ -140,7 +137,7 @@ describe('ShareWidget Tests', () => {
           expect(screen.getByRole('dialog')).toHaveClass('modal');
         });
 
-        fireEvent.click(screen.getByLabelText('Close'));
+        fireEvent.click(screen.getByText('Close'));
         await waitFor(() => {
           expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
         });
