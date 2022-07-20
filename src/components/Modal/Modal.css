@@ -1,0 +1,7 @@
+/* css for X close button, taken from react-bootstrap */
+.btn-close {
+  background: transparent
+    url('https://cdn-icons-png.flaticon.com/512/75/75519.png') 50%/1em auto
+    no-repeat;
+  border-width: 0px;
+}
