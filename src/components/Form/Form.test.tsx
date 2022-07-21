@@ -462,6 +462,23 @@ describe('Form Tests', () => {
           'text'
         );
       });
+      test('text type maxLength', () => {
+        const target = render(
+          <Form>
+            <Form.Group>
+              <Form.Control type="text" maxLength={10} />
+            </Form.Group>
+          </Form>
+        );
+        expect(target.container.querySelector('input')).toHaveAttribute(
+          'type',
+          'text'
+        );
+        expect(target.container.querySelector('input')).toHaveAttribute(
+          'maxlength',
+          '10'
+        );
+      });
       test('time type', () => {
         const target = render(
           <Form>

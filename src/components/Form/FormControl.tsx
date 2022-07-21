@@ -68,6 +68,8 @@ export interface FormControlProps
   min?: number | string;
   /** Maximum value in a number or date type field */
   max?: number | string;
+  /** Maximum length from a textarea type field */
+  maxLength?: number;
 }
 
 const FormControl = React.forwardRef(
@@ -89,6 +91,7 @@ const FormControl = React.forwardRef(
       className = '',
       min = undefined,
       max = undefined,
+      maxLength = undefined,
       ...rest
     }: FormControlProps,
     ref: React.ForwardedRef<HTMLTextAreaElement>
@@ -117,6 +120,7 @@ const FormControl = React.forwardRef(
         // @ts-expect-error React-bootstrap is actually expecting it
         min={min}
         max={max}
+        maxLength={maxLength}
         {...rest}
       />
     );

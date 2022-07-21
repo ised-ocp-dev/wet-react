@@ -29,7 +29,7 @@ export interface ToggleGroupProps extends BaseToggleGroupProps {
   /** Initial prop of value */
   defaultValue?: string | number | string[] | number[];
   /** Callback fired when a toggle is pressed. Called with the active value if type is 'radio', or an array of active values if type is 'checkbox' */
-  onChange?: onChangeRadio | onChangeCheckbox;
+  onChange?: onChangeCheckbox | onChangeRadio;
 }
 
 const ToggleGroup = ({
@@ -43,19 +43,20 @@ const ToggleGroup = ({
   vertical = false,
   ...rest
 }: ToggleGroupProps) => {
-  if (
-    type === 'radio' &&
-    name &&
-    !Array.isArray(value) &&
-    !Array.isArray(defaultValue)
-  ) {
+  if (type === 'radio' && name) {
     return (
       <ToggleButtonGroupRB
         name={name}
         size={size}
         type="radio"
         vertical={vertical}
-        onChange={onChange}
+        defaultValue={
+          defaultValue && !Array.isArray(defaultValue)
+            ? defaultValue
+            : undefined
+        }
+        value={value && !Array.isArray(value) ? value : undefined}
+        onChange={onChange as onChangeRadio}
         {...rest}
       >
         {children}
@@ -69,6 +70,11 @@ const ToggleGroup = ({
       size={size}
       type="checkbox"
       vertical={vertical}
+      defaultValue={
+        defaultValue && Array.isArray(defaultValue) ? defaultValue : undefined
+      }
+      value={value && Array.isArray(value) ? value : undefined}
+      onChange={onChange as onChangeCheckbox}
       {...rest}
     >
       {children}

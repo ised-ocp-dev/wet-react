@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShareFromSquare as shareIconRegular } from '@fortawesome/free-regular-svg-icons';
 import { faShareFromSquare as shareIconSolid } from '@fortawesome/free-solid-svg-icons';
 import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
+import ShareWidget from '@components/ShareWidget';
 
 <Meta title="Icons/Font Awesome" />
 
@@ -28,6 +29,8 @@ Free Font Awesome icons with solid thickness.
 
 ## Usage
 
+### General
+
 1. Import the `FontAwesomeIcon` component. For example:
 
 ```typescript
@@ -44,6 +47,28 @@ import { faShareFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 ```
 <FontAwesomeIcon icon={faShareFromSquare} />
+```
+
+### ShareWidget Example
+
+Some WET-React UI components require an IconDefinition to be provided in order to display some desired icon. For example, here is a code snippet of the `ShareWidget` component with custom share buttons:
+
+```typescript
+import ShareWidget from 'ShareWidget';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+return (
+  <ShareWidget
+    shareLinkText="Share this page"
+    modalTitle="Share this page"
+    customShareButtonsProps={[
+      {
+        name: 'Example',
+        icon: faGlobe,
+        url: 'http://example.com',
+      },
+    ]}
+  />
+);
 ```
 
 ## Examples
