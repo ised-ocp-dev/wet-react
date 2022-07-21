@@ -1,0 +1,27 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import Feeds from '../Feeds';
+
+<Meta title="Components/Feeds/Feed Limit" component={Feeds} />
+
+export const Template = (args) => <Feeds {...args} />;
+
+# `feedLimit` Prop
+
+Limit on the number of ATOM or RSS feed entries to display.
+
+## Example
+
+Setting the limit to 2 feed entries.
+
+<Canvas>
+  <Story
+    name="Feed Limit"
+    args={{
+      url: '/feeds-demo/manitoba-en.atom.xml',
+      feedLimit: 2,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
