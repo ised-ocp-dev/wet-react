@@ -206,6 +206,21 @@ The `min` and `max` props can be used to restrict numbers in a number field.
   </Story>
 </Canvas>
 
+### Text Input
+
+The `maxLength` prop can be used to restrict the length of a text field.
+
+<Canvas>
+  <Story name="Text input">
+    <Form>
+      <Form.Group controlId="formText" className="mb-3">
+        <Form.Label>Default maxLength example</Form.Label>
+        <Form.Control type="textarea" maxLength={5} />
+      </Form.Group>
+    </Form>
+  </Story>
+</Canvas>
+
 ### Form.Control Props
 
 <ArgsTable of={Form.Control} />

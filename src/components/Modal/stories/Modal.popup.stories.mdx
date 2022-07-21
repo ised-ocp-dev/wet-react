@@ -1,0 +1,65 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import Modal from '../Modal';
+import Button from '@components/Button';
+
+<Meta title="Components/Modal/Pop-Up Modal" component={Modal.Dialog} />
+
+export const TemplateGroup = (args) => {
+  const [showModal, setShowModal] = React.useState(false);
+  return (
+    <>
+      <Button onClick={() => setShowModal(true)}>Popup Modal Button</Button>
+      <Modal
+        show={showModal}
+        animation={false}
+        centered
+        onHide={() => setShowModal(false)}
+        {...args}
+      >
+        <Modal.Header closeButton closeLabel="goodbye">
+          <Modal.Title> {args.title} </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{args.content} </Modal.Body>
+        <Modal.Footer> {args.footer}</Modal.Footer>
+      </Modal>
+    </>
+  );
+};
+
+# Pop-Up Modal
+
+Here is a code snippet example of how to set up a Modal that pops up:
+
+```
+const [showModal, setShowModal] = React.useState(false);
+return (
+  <>
+    <Button onClick={() => setShowModal(true)}>Popup Modal Button</Button>
+    <Modal
+      show={showModal}
+      animation={false}
+      centered
+      onHide={() => setShowModal(false)}
+    >
+      ...
+    </Modal>
+  </>
+);
+```
+
+## Example
+
+<Canvas>
+  <Story
+    name="Pop-Up Modal"
+    args={{
+      content: 'Use a button to trigger the pop-up modal.',
+      title: 'Pop-Up Modal',
+      footer: 'Footer',
+      centered: false,
+    }}
+  >
+    {TemplateGroup.bind({})}
+  </Story>
+</Canvas>
