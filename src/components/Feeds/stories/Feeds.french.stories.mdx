@@ -1,0 +1,61 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import Feeds from '../Feeds';
+
+<Meta title="Components/Feeds/French" component={Feeds} />
+
+export const Template = (args) => <Feeds {...args} />;
+
+# `french` Prop
+
+Translates the component's text to French.
+
+## French Tab Feed Example
+
+<Canvas>
+  <Story
+    name="French Tab Feed Example"
+    args={{
+      url: {
+        flickr: [
+          {
+            name: 'Environment Canada Flickr',
+            url: 'https://www.flickr.com/photos/environmentcan',
+          },
+          {
+            name: 'Parliament of Canada',
+            url: 'https://www.flickr.com/photos/parlcanada/',
+          },
+        ],
+        youtube: [
+          {
+            name: 'Learn to Set up a Tent',
+            url: 'https://www.youtube.com/embed/ZwgEH-Szk0k',
+          },
+          {
+            name: 'Camping with Wildlife',
+            url: 'https://www.youtube.com/embed/w5gpKajD8E0',
+          },
+        ],
+      },
+      feedType: 'Tabs',
+      french: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## French Error Message Example
+
+<Canvas>
+  <Story
+    name="French Error Message Example"
+    args={{
+      url: '',
+      french: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
