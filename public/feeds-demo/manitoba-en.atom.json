@@ -1,0 +1,33 @@
+{
+  "feed": {
+    "title": "Canada News Centre - Manitoba",
+    "subtitle": "Canada News Centre",
+    "updated": "2018-10-25T08:50:38-04:00",
+    "link": "https://www.canada.ca/en/news/web-feeds/manitoba",
+    "id": "https://www.canada.ca/en/news.html",
+    "logo": "https://www.canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg",
+
+    "entry": [
+      {
+        "title": "Government of Canada recognizes Eagle Urban Transition Centre in supporting First Nations children off-reserve through Jordan's Principle",
+        "updated": "2018-10-19T12:06:29-04:00",
+        "link": "https://www.canada.ca/en/indigenous-services-canada/news/2018/10/government-of-canada-recognizes-eagle-urban-transition-centre-in-supporting-first-nations-children-off-reserve-through-jordans-principle.html"
+      },
+      {
+        "title": "Robert Falcon-Ouellette, Member of Parliament for Winnipeg Centre, to highlight success of Eagle Urban Transition Centre in supporting First Nations children in Winnipeg",
+        "updated": "2018-10-18T12:20:46-04:00",
+        "link": "https://www.canada.ca/en/indigenous-services-canada/news/2018/10/robert-falcon-ouellette-member-of-parliament-for-winnipeg-centre-to-highlight-success-of-eagle-urban-transition-centre-in-supporting-first-nations-.html"
+      },
+      {
+        "title": "Government of Canada recognizes the National Historic Significance of the Dominion Exhibition Display Building No. 2",
+        "updated": "2018-10-18T10:15:00-04:00",
+        "link": "https://www.canada.ca/en/parks-canada/news/2018/10/government-of-canada-recognizes-the-national-historic-significance-of-the-dominion-exhibition-display-building-no-2.html"
+      },
+      {
+        "title": "Dominion Exhibition Display Building No. 2, Brandon, Manitoba",
+        "updated": "2018-10-18T10:15:00-04:00",
+        "link": "https://www.canada.ca/en/parks-canada/news/2018/10/dominion-exhibition-display-building-no-2-brandon-manitoba.html"
+      }
+    ]
+  }
+}

@@ -12,6 +12,7 @@ module.exports = {
     '@storybook/addon-a11y',
   ],
   framework: '@storybook/react',
+  staticDirs: ['../public'],
   features: {
     emotionAlias: false,
   },
@@ -22,6 +23,10 @@ module.exports = {
         extensions: config.resolve.extensions,
       }),
     ];
+    config.module.rules.push({
+      test: /\.xml$/i,
+      use: 'raw-loader',
+    });
     return config;
   },
 };
