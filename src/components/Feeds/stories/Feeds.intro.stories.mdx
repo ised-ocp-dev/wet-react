@@ -1,0 +1,51 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import Feeds from '../Feeds';
+
+<Meta title="Components/Feeds/Intro" component={Feeds} />
+
+export const Template = (args) => <Feeds {...args} />;
+
+# Feeds
+
+A component for aggregating and displaying the entries from one or more Web feeds on a Web page.
+
+## ATOM Feed Example
+
+<Canvas>
+  <Feeds url="/feeds-demo/manitoba-en.atom.xml" />
+</Canvas>
+
+## Tab Feed Example
+
+<Canvas>
+  <Feeds
+    url={{
+      flickr: [
+        {
+          name: 'Environment Canada Flickr',
+          url: 'https://www.flickr.com/photos/environmentcan',
+        },
+        {
+          name: 'Parliament of Canada',
+          url: 'https://www.flickr.com/photos/parlcanada/',
+        },
+      ],
+      youtube: [
+        {
+          name: 'Learn to Set up a Tent',
+          url: 'https://www.youtube.com/embed/ZwgEH-Szk0k',
+        },
+        {
+          name: 'Camping with Wildlife',
+          url: 'https://www.youtube.com/embed/w5gpKajD8E0',
+        },
+      ],
+    }}
+    feedType="Tabs"
+  />
+</Canvas>
+
+## Available Props
+
+<ArgsTable />
