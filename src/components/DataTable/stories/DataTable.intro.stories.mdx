@@ -1,16 +1,61 @@
-import { ArgsTable, Canvas, Meta } from '@storybook/addon-docs';
-import { DataTable } from '../..';
+import { Canvas, Meta } from '@storybook/addon-docs';
 
-<Meta title="Components/DataTable/Intro" component={DataTable} />
+<Meta title="Components/DataTable/Intro" />
 
 # DataTable
 
-This component is based off of Material UI's Data Grid component. To read more about Material UI's component, visit: https://mui.com/x/react-data-grid/
+This is a Material UI component that requires installation.
 
-## Example
+## Installation
 
-<Canvas>
-  <DataTable
+1. Install the MUI Data Grid component using the following command:
+
+```
+// with npm
+npm install @mui/x-data-grid
+
+// with yarn
+yarn add @mui/x-data-grid
+```
+
+2. Install the component's peer dependencies using the following command:
+
+```
+// with npm
+npm install @mui/material @emotion/react @emotion/styled
+
+// with yarn
+yarn add @mui/material @emotion/react @emotion/styled
+
+```
+
+To get further details on installation, visit: https://mui.com/x/react-data-grid/getting-started/#installation
+
+## Configuration
+
+Material UI offer a vast number of configuration options. To explore them, visit: https://mui.com/x/react-data-grid/
+
+### Example Configuration
+
+```typescript
+import Box from '@mui/material/Box';
+
+import { DataGrid, GridToolbarQuickFilter } from '@mui/x-data-grid';
+
+const QuickSearchToolbar = () => (
+  <Box
+    sx={{
+      p: 0.5,
+      pb: 0,
+    }}
+  >
+    <GridToolbarQuickFilter />
+  </Box>
+);
+
+return (
+  <DataGrid
+    sx={{ '*': { fontSize: '16px' } }}
     rows={[
       { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
       { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
@@ -43,11 +88,17 @@ This component is based off of Material UI's Data Grid component. To read more a
     ]}
     pageSize={5}
     rowsPerPageOptions={[5, 10]}
-    stripped
     autoHeight
+    components={{
+      Toolbar: QuickSearchToolbar,
+    }}
   />
-</Canvas>
+);
+```
 
-## Available Props
+### Image of the Example Configuration Rendered
 
-<ArgsTable />
+<img
+  src="/assets/Image of the Example Configuration Rendered.PNG"
+  alt="Image of the Example Configuration Rendered"
+/>

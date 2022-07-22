@@ -35,3 +35,20 @@ legend.required:before {
 * .token.plain-text {
   color: #ffffff !important;
 }
+
+.MuiDataGrid-columnHeaderTitle {
+  font-weight: bold;
+}
+
+.MuiDataGrid-columnHeader--sorted {
+  background-color: #f9f9f9;
+}
+
+.MuiDataGrid-footerContainer {
+  display: flex;
+  align-items: center;
+}
+
+.MuiTablePagination-selectLabel .MuiTablePagination-displayedRows {
+  margin: 0;
+}
