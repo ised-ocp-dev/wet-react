@@ -37,18 +37,18 @@ legend.required:before {
 }
 
 .MuiDataGrid-columnHeaderTitle {
-  font-weight: bold
+  font-weight: bold;
 }
 
 .MuiDataGrid-columnHeader--sorted {
-  background-color: #f9f9f9
+  background-color: #f9f9f9;
 }
 
 .MuiDataGrid-footerContainer {
   display: flex;
-  align-items: center
+  align-items: center;
 }
 
 .MuiTablePagination-selectLabel .MuiTablePagination-displayedRows {
-  margin: 0
+  margin: 0;
 }
