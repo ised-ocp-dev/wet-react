@@ -9,6 +9,88 @@ describe('Toggle Group', () => {
   const toggleText2 = 'Toggle 2';
   const toggleText3 = 'Toggle 3';
 
+  describe('ToggleGroup Default Value(s)', () => {
+    test('ToggleGroup radio defaultValue', () => {
+      render(
+        <ToggleGroup name="toggles" defaultValue="value">
+          <Toggle name="toggles" value={1}>
+            {toggleText1}
+          </Toggle>
+          <Toggle name="toggles" value={2}>
+            {toggleText2}
+          </Toggle>
+          <Toggle name="toggles" value={3}>
+            {toggleText3}
+          </Toggle>
+        </ToggleGroup>
+      );
+      expect(screen.getByRole('group')).toHaveClass('btn-group');
+      expect(screen.getByText(toggleText1)).toHaveClass('btn');
+      expect(screen.getByText(toggleText2)).toHaveClass('btn');
+      expect(screen.getByText(toggleText3)).toHaveClass('btn');
+    });
+
+    test('ToggleGroup radio value', () => {
+      render(
+        <ToggleGroup name="toggles" value="value">
+          <Toggle name="toggles" value={1}>
+            {toggleText1}
+          </Toggle>
+          <Toggle name="toggles" value={2}>
+            {toggleText2}
+          </Toggle>
+          <Toggle name="toggles" value={3}>
+            {toggleText3}
+          </Toggle>
+        </ToggleGroup>
+      );
+      expect(screen.getByRole('group')).toHaveClass('btn-group');
+      expect(screen.getByText(toggleText1)).toHaveClass('btn');
+      expect(screen.getByText(toggleText2)).toHaveClass('btn');
+      expect(screen.getByText(toggleText3)).toHaveClass('btn');
+    });
+
+    test('ToggleGroup checkbox defaultValue', () => {
+      render(
+        <ToggleGroup name="toggles" defaultValue={[1, 2, 3]} type="checkbox">
+          <Toggle name="toggles" value={1}>
+            {toggleText1}
+          </Toggle>
+          <Toggle name="toggles" value={2}>
+            {toggleText2}
+          </Toggle>
+          <Toggle name="toggles" value={3}>
+            {toggleText3}
+          </Toggle>
+        </ToggleGroup>
+      );
+      expect(screen.getByRole('group')).toHaveClass('btn-group');
+      expect(screen.getByText(toggleText1)).toHaveClass('btn');
+      expect(screen.getByText(toggleText2)).toHaveClass('btn');
+      expect(screen.getByText(toggleText3)).toHaveClass('btn');
+    });
+
+    test('ToggleGroup checkbox value', () => {
+      render(
+        <ToggleGroup name="toggles" value={[1, 2, 3]} type="checkbox">
+          <Toggle name="toggles" value={1}>
+            {toggleText1}
+          </Toggle>
+          <Toggle name="toggles" value={2}>
+            {toggleText2}
+          </Toggle>
+          <Toggle name="toggles" value={3}>
+            {toggleText3}
+          </Toggle>
+        </ToggleGroup>
+      );
+      expect(screen.getByRole('group')).toHaveClass('btn-group');
+      expect(screen.getByText(toggleText1)).toHaveClass('btn');
+      expect(screen.getByText(toggleText2)).toHaveClass('btn');
+      expect(screen.getByText(toggleText3)).toHaveClass('btn');
+    });
+  });
+
   describe('ToggleGroup Orientation', () => {
     test('Default ToggleGroup orientation', () => {
       render(
