@@ -5,3 +5,13 @@
     no-repeat;
   border-width: 0px;
 }
+
+.blueStyle .btn-close {
+  filter: invert(100%);
+}
+
+.blueStyle {
+  background: #2e5274;
+  border-width: 0px;
+  color: white;
+}
