@@ -1,0 +1,44 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { Modal } from '../..';
+
+<Meta
+  title="Components/Modal/BlueStyle"
+  component={Modal}
+  subcomponents={{
+    'Modal.Body': Modal.Body,
+    'Modal.Dialog': Modal.Dialog,
+    'Modal.Footer': Modal.Footer,
+    'Modal.Header': Modal.Header,
+    'Modal.Title': Modal.Title,
+  }}
+/>
+
+export const template = (args) => {
+  return (
+    <Modal.Dialog>
+      <Modal.Header closeButton closeLabel="goodbye" {...args}>
+        <Modal.Title> Modal Title </Modal.Title>
+      </Modal.Header>
+      <Modal.Body> Modal Content </Modal.Body>
+      <Modal.Footer> Modal Footer </Modal.Footer>
+    </Modal.Dialog>
+  );
+};
+
+# BlueStyle
+
+By default, WET-REACT modals have a blue header with white X button. <br/>To use a more basic white header with black X button, set the Modal.Header `blueStyle` attribute to false.
+
+## Example
+
+<Canvas>
+  <Story
+    name="BlueStyle"
+    args={{
+      blueStyle: false,
+    }}
+  >
+    {template.bind({})}
+  </Story>
+</Canvas>
