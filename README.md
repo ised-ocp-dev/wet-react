@@ -43,18 +43,18 @@ This project has 3 main goals:
 
 ### Installation
 
-The best way to consume React-Bootstrap is via the npm package which you can install with npm (or yarn if you prefer).
+The best way to consume React-Bootstrap is via the <a href="https://www.npmjs.com/package/wet-react" target="_blank">npm package</a> which you can install with npm (or yarn if you prefer).
 
 ```shell
-npm install @dynamic11/wet-react
+npm i wet-react
 ```
 
 ### Importing Components
 
-You can import the desired component form `@dynamic11/wet-react` as shown below
+You can import the desired component form `@wet-react` as shown below
 
 ```typescript
-import { Button } from '@dynamic11/wet-react';
+import { Button } from '@wet-react';
 ```
 
 ### Stylesheet
