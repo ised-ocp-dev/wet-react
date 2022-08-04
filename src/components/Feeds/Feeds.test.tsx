@@ -205,6 +205,32 @@ describe('Feeds Test', () => {
     });
   });
 
+  describe('feedLimit prop test', () => {
+    test('feedLimit prop test (atomXMLFeed)', async () => {
+      axios.get.mockImplementation(() =>
+        Promise.resolve({ data: atomXMLFeed })
+      );
+      const result = render(
+        <Feeds url="https://example.atom.xml" feedLimit={1} />
+      );
+      await waitFor(() => {
+        expect(result.container.querySelectorAll('li')).toHaveLength(1);
+      });
+    });
+
+    test('feedLimit prop test (atomJSONFeed)', async () => {
+      axios.get.mockImplementation(() =>
+        Promise.resolve({ data: atomJSONFeed })
+      );
+      const result = render(
+        <Feeds url="https://example.atom.json" feedType="JSON" feedLimit={1} />
+      );
+      await waitFor(() => {
+        expect(result.container.querySelectorAll('li')).toHaveLength(1);
+      });
+    });
+  });
+
   test('french prop test', () => {
     render(<Feeds url="" french />);
     expect(
@@ -212,16 +238,6 @@ describe('Feeds Test', () => {
         "Désolé, nous n'avons pas pu récupérer un fil de syndication de l'URL fournie."
       )
     ).toBeInTheDocument();
-  });
-
-  test('feedLimit prop test', async () => {
-    axios.get.mockImplementation(() => Promise.resolve({ data: atomXMLFeed }));
-    const result = render(
-      <Feeds url="https://example.atom.xml" feedLimit={1} />
-    );
-    await waitFor(() => {
-      expect(result.container.querySelectorAll('li')).toHaveLength(1);
-    });
   });
 
   describe('Feeds Button Actions', () => {
