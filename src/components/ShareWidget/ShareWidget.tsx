@@ -9,6 +9,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import {
   faShareFromSquare as shareIcon,
   faEnvelopeSquare as emailIcon,
+  faX as xMark,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebookSquare as facebookIcon,
@@ -187,10 +188,18 @@ const ShareWidget = ({
         {...rest}
       >
         <Modal.Header
-          closeButton
+          closeButton={false}
           style={{ background: '#2e5274', color: 'white' }}
         >
           <Modal.Title>{modalTitle}</Modal.Title>
+          <button
+            type="button"
+            className="btn-close"
+            style={{ background: 'rgb(46,82,116)', borderWidth: '0px' }}
+            onClick={() => setShowModal(false)}
+          >
+            <FontAwesomeIcon icon={xMark} />
+          </button>
         </Modal.Header>
         <Modal.Body>
           <ContainerRB fluid>
