@@ -20,6 +20,66 @@ interface TabFeedProps {
   youtube?: TabFeedEntry[];
 }
 
+interface Panel {
+  title: string;
+  content: JSX.Element[];
+  id: string;
+}
+
+interface JSONFeed {
+  feed?: {
+    title: string;
+    subtitle?: string;
+    updated: string;
+    link: string;
+    id?: string;
+    logo?: string;
+    entry?: {
+      title: string;
+      updated: string;
+      link: string;
+    }[];
+  };
+}
+
+interface XMLFeed {
+  feed?: {
+    $?: {
+      xmlns?: string;
+    };
+    title: string[];
+    subtitle?: string[];
+    updated: string[];
+    link: {
+      $: {
+        href: string;
+        rel: string;
+      };
+    }[];
+    id?: string[];
+    logo?: string[];
+    entry?: {
+      title: string[];
+      id?: string[];
+      summary?: {
+        _: string;
+        $: {
+          type: string;
+        };
+      }[];
+      author?: {
+        name: string[];
+      }[];
+      updated: string[];
+      link: {
+        $: {
+          href: string;
+        };
+      }[];
+    }[];
+  };
+}
+
 export interface FeedsProps extends React.HTMLAttributes<HTMLElement> {
   /** URL to a ATOM or RSS feed. Otherwise, a list of Flickr and/or YouTube URLs to display in a tab feed. YouTube links must be embedded links (for example: https://www.youtube.com/embed/ZwgEH-Szk0k). */
   url: string | TabFeedProps;
@@ -40,13 +100,14 @@ const Feeds = ({
 }: FeedsProps) => {
   const parsers = new xml2js.Parser();
 
-  const [feed, setFeed] = useState();
+  const [xmlFeed, setXMLFeed] = useState<XMLFeed>({});
+  const [jsonFeed, setJSONFeed] = useState<JSONFeed>({});
   const [liItems, setLiItems] = useState<JSX.Element[]>();
 
-  const [tabFeedPanels, setTabFeedPanels] = useState();
+  const [tabFeedPanels, setTabFeedPanels] = useState<Panel[]>();
   const [showModal, setShowModal] = React.useState(false);
-  const [youTubeModalTitle, setYouTubeModalTitle] = useState();
-  const [youTubeModalURL, setYouTubeModalURL] = useState();
+  const [youTubeModalTitle, setYouTubeModalTitle] = useState<string>();
+  const [youTubeModalURL, setYouTubeModalURL] = useState<string>();
 
   const closeLabel = french ? 'Fermer' : 'Close';
   const errorMessage = french
@@ -62,20 +123,27 @@ const Feeds = ({
       : '/assets/YouTube Default Thumbnail.jpg';
   };
 
-  const getData = async (link: string) => {
-    const response: AxiosResponse<unknown, unknown> = await axios.get(link);
+  const getJSONFeed = async (link: string) => {
+    const response: AxiosResponse<JSONFeed, unknown> = await axios.get(link);
+    return response;
+  };
+
+  const getXMLFeed = async (link: string) => {
+    const response: AxiosResponse<string, unknown> = await axios.get(link);
     return response;
   };
 
   useEffect(() => {
     if (typeof url === 'string') {
       if (feedType === 'JSON') {
-        const response: Promise<AxiosResponse<unknown, unknown>> = getData(url);
-        response.then((res) => res.data).then((data) => setFeed(data.feed));
+        const response: Promise<AxiosResponse<JSONFeed, unknown>> =
+          getJSONFeed(url);
+        response.then((res) => res.data).then((data) => setJSONFeed(data));
       }
 
       if (feedType === 'XML') {
-        const response: Promise<AxiosResponse<unknown, unknown>> = getData(url);
+        const response: Promise<AxiosResponse<string, unknown>> =
+          getXMLFeed(url);
         response
           .then((res) => res.data)
           .then((data) => {
@@ -83,8 +151,8 @@ const Feeds = ({
             parsers.parseString(data, (error, result) => {
               content = result;
             });
-            if (content && content.feed) {
-              setFeed(content.feed);
+            if (content) {
+              setXMLFeed(content);
             }
           });
       }
@@ -157,15 +225,12 @@ const Feeds = ({
 
   useEffect(() => {
     const items: JSX.Element[] = [];
-    if (feed && feed.entry) {
-      feed.entry.forEach((entry, index) => {
+    if (jsonFeed.feed && jsonFeed.feed.entry) {
+      jsonFeed.feed.entry.forEach((entry, index) => {
         if (!feedLimit || index < feedLimit) {
-          const title =
-            feedType === 'JSON' ? `${entry.title}` : `${entry.title[0]}`;
-          const link =
-            feedType === 'JSON' ? `${entry.link}` : `${entry.link[0].$.href}`;
-          const date =
-            feedType === 'JSON' ? `${entry.updated}` : `${entry.updated[0]}`;
+          const title = `${entry.title}`;
+          const link = `${entry.link}`;
+          const date = `${entry.updated}`;
 
           items.push(
             <li key={link} style={{ marginBottom: 10 }}>
@@ -179,12 +244,10 @@ const Feeds = ({
       });
 
       setLiItems(items);
-    } else if (feed) {
-      const title = feedType === 'JSON' ? `${feed.title}` : `${feed.title[0]}`;
-      const link =
-        feedType === 'JSON' ? `${feed.link}` : `${feed.link[0].$.href}`;
-      const date =
-        feedType === 'JSON' ? `${feed.updated}` : `${feed.updated[0]}`;
+    } else if (jsonFeed.feed) {
+      const title = `${jsonFeed.feed.title}`;
+      const link = `${jsonFeed.feed.link}`;
+      const date = `${jsonFeed.feed.updated}`;
 
       items.push(
         <li key={link} style={{ marginBottom: 10 }}>
@@ -197,7 +260,46 @@ const Feeds = ({
 
       setLiItems(items);
     }
-  }, [feed]);
+  }, [jsonFeed]);
+
+  useEffect(() => {
+    const items: JSX.Element[] = [];
+    if (xmlFeed.feed && xmlFeed.feed.entry) {
+      xmlFeed.feed.entry.forEach((entry, index) => {
+        if (!feedLimit || index < feedLimit) {
+          const title = `${entry.title[0]}`;
+          const link = `${entry.link[0].$.href}`;
+          const date = `${entry.updated[0]}`;
+
+          items.push(
+            <li key={link} style={{ marginBottom: 10 }}>
+              <a href={link}>{title}</a>
+              <small className="feeds-date" style={{ display: 'block' }}>
+                <time>{date}</time>
+              </small>
+            </li>
+          );
+        }
+      });
+
+      setLiItems(items);
+    } else if (xmlFeed.feed) {
+      const title = `${xmlFeed.feed.title[0]}`;
+      const link = `${xmlFeed.feed.link[0].$.href}`;
+      const date = `${xmlFeed.feed.updated[0]}`;
+
+      items.push(
+        <li key={link} style={{ marginBottom: 10 }}>
+          <a href={link}>{title}</a>
+          <small className="feeds-date" style={{ display: 'block' }}>
+            <time>{date}</time>
+          </small>
+        </li>
+      );
+
+      setLiItems(items);
+    }
+  }, [xmlFeed]);
 
   if (liItems) {
     return (
