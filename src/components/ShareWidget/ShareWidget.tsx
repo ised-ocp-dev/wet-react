@@ -187,19 +187,8 @@ const ShareWidget = ({
         onHide={() => setShowModal(false)}
         {...rest}
       >
-        <Modal.Header
-          closeButton={false}
-          style={{ background: '#2e5274', color: 'white' }}
-        >
+        <Modal.Header>
           <Modal.Title>{modalTitle}</Modal.Title>
-          <button
-            type="button"
-            className="btn-close"
-            style={{ background: 'rgb(46,82,116)', borderWidth: '0px' }}
-            onClick={() => setShowModal(false)}
-          >
-            <FontAwesomeIcon icon={xMark} />
-          </button>
         </Modal.Header>
         <Modal.Body>
           <ContainerRB fluid>

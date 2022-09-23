@@ -26,6 +26,14 @@ describe('Modal Tests', () => {
       );
       expect(screen.getByText(placeholder)).toHaveClass('modal-header');
     });
+    test('Header class no blueStyle', () => {
+      render(
+        <Modal.Dialog centered>
+          <Modal.Header blueStyle={false}>{placeholder}</Modal.Header>
+        </Modal.Dialog>
+      );
+      expect(screen.getByText(placeholder)).toHaveClass('modal-header');
+    });
   });
   describe('Testing dialog', () => {
     test('Dialog Class', () => {

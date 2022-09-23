@@ -319,10 +319,7 @@ const Feeds = ({
           centered
           onHide={() => setShowModal(false)}
         >
-          <Modal.Header
-            closeButton
-            style={{ background: '#2e5274', color: 'white' }}
-          >
+          <Modal.Header closeButton>
             <Modal.Title>{youTubeModalTitle}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
