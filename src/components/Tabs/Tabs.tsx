@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import TabContainerRB from 'react-bootstrap/TabContainer';
 import TabContentRB from 'react-bootstrap/TabContent';
 import TabPaneRB from 'react-bootstrap/TabPane';
+import TabsRB from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import NavLink from 'react-bootstrap/NavLink';
 import NavItem from 'react-bootstrap/NavItem';
@@ -40,12 +42,20 @@ const Tabs = ({ mainPanel, id = '', panels }: TabsProps) => {
   return panels && panels[0] ? (
     big ? (
       <div className="wb-tabs tabs-acc">
+        <TabsRB defaultActiveKey={openID} id={id} className="mb-3">
+          {panels.map((item) => (
+            <Tab eventKey={item.id} title={item.title}>
+              {item.content}
+            </Tab>
+          ))}
+        </TabsRB>
+        {/* 
         <TabContainerRB id={id} defaultActiveKey={openID}>
           <Nav
             as="ul"
             bsPrefix="generated"
             role="tablist"
-            onSelect={(e) => setOpenID(e)}
+            onSelect={(e) => setOpenID(e || 'null')}
           >
             {panels.map((item) => (
               <NavItem
@@ -73,7 +83,7 @@ const Tabs = ({ mainPanel, id = '', panels }: TabsProps) => {
               </TabPaneRB>
             ))}
           </TabContentRB>
-        </TabContainerRB>
+        </TabContainerRB> */}
       </div>
     ) : (
       <div className="wb-tabs tabs-acc" role="tablist">
