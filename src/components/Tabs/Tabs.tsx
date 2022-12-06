@@ -14,9 +14,16 @@ export interface TabsProps extends React.HTMLAttributes<HTMLElement> {
   id?: string;
   /** array of panels to be displayed, of the form <br />{ [ {title:"...", id:"...", content:<>...</>}, ... ] } */
   panels?: { title: string; id: string; content: React.ReactNode }[];
+  /** disables unsupported warning */
+  disableWarning?: boolean;
 }
 
-const Tabs = ({ mainPanel, id = '', panels }: TabsProps) => {
+const Tabs = ({
+  mainPanel,
+  id = '',
+  panels,
+  disableWarning = false,
+}: TabsProps) => {
   const [big, setBig] = React.useState(window.innerWidth > 991);
   const [openID, setOpenID] = React.useState(
     mainPanel === undefined
@@ -28,6 +35,15 @@ const Tabs = ({ mainPanel, id = '', panels }: TabsProps) => {
   function handleResize() {
     setBig(window.innerWidth > 991);
   }
+
+  useEffect(() => {
+    if (!disableWarning)
+      // eslint-disable-next-line no-console
+      console.warn(
+        'Tabs is an unfinished and unsupported component. Please use with discretion.'
+      );
+  }, []);
+
   useEffect(() => {
     // removes event handlers before unmount
     handleResize();
@@ -36,6 +52,7 @@ const Tabs = ({ mainPanel, id = '', panels }: TabsProps) => {
       setBig(false);
     };
   }, []);
+
   window.addEventListener('resize', handleResize);
   return panels && panels[0] ? (
     big ? (
