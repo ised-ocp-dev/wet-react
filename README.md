@@ -11,7 +11,7 @@ React implementation of the Web Experience Toolkit (WET).
 [![Chromatic Deployment](https://github.com/ised-ocp-dev/wet-react/actions/workflows/chromatic.yaml/badge.svg?branch=master)](https://github.com/ised-ocp-dev/wet-react/actions/workflows/chromatic.yaml)
 [![Linting Check](https://github.com/ised-ocp-dev/wet-react/actions/workflows/ci-tests.yaml/badge.svg?branch=master)](https://github.com/ised-ocp-dev/wet-react/actions/workflows/ci-tests.yaml)
 [![codecov](https://codecov.io/gh/ised-ocp-dev/wet-react/branch/master/graph/badge.svg?token=13E1BGWDHR)](https://codecov.io/gh/ised-ocp-dev/wet-react)
-[![npm version](https://badge.fury.io/js/@dynamic11%2Fwet-react.svg)](https://badge.fury.io/js/@dynamic11%2Fwet-react)
+[![npm version](https://badge.fury.io/js/wet-react.svg)](https://www.npmjs.com/package/wet-react)
 
 ## Storybook deployments
 
@@ -43,18 +43,18 @@ This project has 3 main goals:
 
 ### Installation
 
-The best way to consume React-Bootstrap is via the npm package which you can install with npm (or yarn if you prefer).
+The best way to consume React-Bootstrap is via the <a href="https://www.npmjs.com/package/wet-react">npm package</a> which you can install with npm (or yarn if you prefer).
 
 ```shell
-npm install @dynamic11/wet-react
+npm i wet-react
 ```
 
 ### Importing Components
 
-You can import the desired component form `@dynamic11/wet-react` as shown below
+You can import the desired component form `@wet-react` as shown below
 
 ```typescript
-import { Button } from '@dynamic11/wet-react';
+import { Button } from '@wet-react';
 ```
 
 ### Stylesheet
